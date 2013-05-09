@@ -45,14 +45,14 @@ class Sprite
    * You can provide the [offset] which is a xy [Point] with the offset of the sprite. 
    * If none is provided the default [offset] value is [Point.zero].
    */
-  Sprite.fromImage( ImageElement image, { Point offset: new Point.zero() } )
+  Sprite.fromImage( ImageElement image, { Point offset } )
   {
     if( image != null && image.src != "" )
     {
       this._width   = image.width;
       this._height  = image.height;
-      this.offset   = offset;
     }
+    this.offset = offset != null ? offset : new Point.zero();
   }
   /**
    * Loads the sprite with the image given [imageSrc], which must be an [String]
