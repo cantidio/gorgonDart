@@ -1,0 +1,11 @@
+name: Gorgon
+author: Cantidio Oliveira Fontes
+description: A game development lib.
+homepage: https://github.com/cantidio
+dependencies:
+  js: any
+  browser: any
+  web_ui: any
+  async: any
+dev_dependencies:
+  unittest: any
