@@ -1,5 +1,8 @@
+/**
+ * Copyright (C) 2013 Cantidio Fontes
+ * For conditions of distribution and use, see copyright notice in gorgon.dart
+ */
 part of gorgon;
-
 /**
  * A basic Sprite Element which is composed of an ImageElement and an offset.
  */
@@ -85,7 +88,7 @@ class Sprite
    *
    * This method returns a [Sprite] object referencing this current object.
    */
-  Sprite load( String imageSrc )
+  Future<Sprite> load( String imageSrc )
   {
     Completer completer = new Completer();
     ImageElement   img  = new ImageElement();
@@ -99,6 +102,15 @@ class Sprite
     img.src       = imageSrc;
     this._onLoad  = completer.future;
 
-    return this;
+    return this._onLoad;
+  }
+  
+  void rotate( double angle )
+  {
+    
+  }
+  void flip( Mirroring mirroring )
+  {
+    
   }
 }

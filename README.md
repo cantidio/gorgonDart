@@ -5,3 +5,4 @@ gorgonDart
 [Last Build Documentation](https://drone.io/github.com/cantidio/gorgonDart/files/gorgon_docs.tar)
 
 Gorgon is a game development library for using with Dart.
+It is licensed under the zlib license found in the gorgon.dart file·
