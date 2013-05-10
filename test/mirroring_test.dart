@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) 2013 Cantidio Fontes
+ * For conditions of distribution and use, see copyright notice in gorgon.dart
+ */
 library mirroring_test;
 
 import "package:unittest/unittest.dart";
@@ -86,10 +90,10 @@ void main()
         expect( Mirroring.V     | Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.V     | Mirroring.VH   , equals( Mirroring.VH   ) );
         
-        expect( Mirroring.HV     | Mirroring.H   , equals( Mirroring.HV   ) );
-        expect( Mirroring.HV     | Mirroring.V   , equals( Mirroring.HV   ) );
-        expect( Mirroring.VH     | Mirroring.H   , equals( Mirroring.VH   ) );
-        expect( Mirroring.VH     | Mirroring.V   , equals( Mirroring.VH   ) );
+        expect( Mirroring.HV    | Mirroring.H    , equals( Mirroring.HV   ) );
+        expect( Mirroring.HV    | Mirroring.V    , equals( Mirroring.HV   ) );
+        expect( Mirroring.VH    | Mirroring.H    , equals( Mirroring.VH   ) );
+        expect( Mirroring.VH    | Mirroring.V    , equals( Mirroring.VH   ) );
   });
   
   test
@@ -120,9 +124,9 @@ void main()
         expect( Mirroring.V     & Mirroring.HV   , equals( Mirroring.V    ) );
         expect( Mirroring.V     & Mirroring.VH   , equals( Mirroring.V    ) );
         
-        expect( Mirroring.HV     & Mirroring.H   , equals( Mirroring.H    ) );
-        expect( Mirroring.HV     & Mirroring.V   , equals( Mirroring.V    ) );
-        expect( Mirroring.VH     & Mirroring.H   , equals( Mirroring.H    ) );
-        expect( Mirroring.VH     & Mirroring.V   , equals( Mirroring.V    ) );
+        expect( Mirroring.HV    & Mirroring.H    , equals( Mirroring.H    ) );
+        expect( Mirroring.HV    & Mirroring.V    , equals( Mirroring.V    ) );
+        expect( Mirroring.VH    & Mirroring.H    , equals( Mirroring.H    ) );
+        expect( Mirroring.VH    & Mirroring.V    , equals( Mirroring.V    ) );
   });
 }

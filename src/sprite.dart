@@ -21,6 +21,10 @@ class Sprite
   ImageElement get image => _image;     /// The Sprite image getter.
 
   /**
+   * Method that describes the Sprite Object returning a [String].
+   */
+  String toString() => "Sprite(width: $width, height: $height, offset: ${offset.toString()})";
+  /**
    * Private Method that sets the content of the internal [image] which must be an [ImageElement].
    *
    * This method checks if the provided image is null or not.

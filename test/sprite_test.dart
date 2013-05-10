@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) 2013 Cantidio Fontes
+ * For conditions of distribution and use, see copyright notice in gorgon.dart
+ */
 library sprite_test;
 
 import "package:unittest/unittest.dart";

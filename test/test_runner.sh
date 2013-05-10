@@ -1,3 +1,6 @@
+# Copyright (C) 2013 Cantidio Fontes
+# For conditions of distribution and use, see copyright notice in gorgon.dart
+#
 #!/bin/bash -e
 
 analysis=$(dart_analyzer src/*.dart)

@@ -32,6 +32,7 @@
 library gorgon;
 import 'dart:html';
 import 'dart:async';
+import 'dart:math';
 
 part 'point.dart';
 part 'mirroring.dart';

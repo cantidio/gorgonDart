@@ -19,6 +19,10 @@ class Mirroring
   final String  name;   /// The mirroring name
 
   /**
+   * Method that describes the Mirroring Object returning a [String].
+   */
+  String toString() => "Mirroring:$name";
+  /**
    * Private constructor that generates a const instance of a Mirroring Class.
    */
   const Mirroring._( this.value, this.name );
