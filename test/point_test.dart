@@ -29,7 +29,7 @@ void main()
   });
   test
   (
-      "Point constructor with valid values should keep the reight values in it's member attributes.", (){
+      "Point constructor with valid values should keep the right values in it's member attributes.", (){
         Point zero = new Point(5.0, 10.0);
 
         expect( zero.x, equals( 5.0 ) );
