@@ -1,7 +1,8 @@
-name: Gorgon
+name: gorgon
+version: 0.0.1
 author: Cantidio Oliveira Fontes
 description: A game development lib.
-homepage: https://github.com/cantidio
+homepage: https://github.com/cantidio/gorgonDart
 dependencies:
   js: any
   browser: any

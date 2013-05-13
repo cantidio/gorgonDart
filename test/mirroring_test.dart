@@ -5,7 +5,7 @@
 library mirroring_test;
 
 import "package:unittest/unittest.dart";
-import '../src/gorgon.dart';
+import "package:gorgon/gorgon.dart";
 
 void main()
 {
