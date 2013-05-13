@@ -36,6 +36,7 @@ import 'dart:math';
 
 part 'point.dart';
 part 'mirroring.dart';
+part 'color.dart';
 part 'sprite.dart';
 part 'spritepack.dart';
 

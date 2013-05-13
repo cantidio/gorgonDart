@@ -6,11 +6,13 @@ import 'package:unittest/unittest.dart';
 
 import 'point_test.dart'      as point_test;
 import 'mirroring_test.dart'  as mirroring_test;
+import 'color_test.dart'     as color_test;
 import 'sprite_test.dart'     as sprite_test;
 
 main()
 {
   point_test.main();
   mirroring_test.main();
+  color_test.main();
   sprite_test.main();
 }
