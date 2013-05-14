@@ -191,19 +191,34 @@ class Sprite
     return this.load( canvas.toDataUrl('image/png') );
   }
   /**
+   * Method that flips the current [Sprite] vertically
+   *
+   * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
+   */
+  Future<Sprite> flipHV()
+  {
+    CanvasElement canvas = new CanvasElement(width: width, height: height);
+    canvas.context2d.translate(width, height);
+    canvas.context2d.scale(-1, -1);
+    canvas.context2d.drawImage(_image, 0, 0);
+
+    offset.x = -(width + offset.x);
+    offset.y = -(height + offset.y);
+
+    return this.load( canvas.toDataUrl('image/png') );
+  }
+  /**
    * Method that flips the [Sprite] using the provided [Mirroring].
    *
    * @todo create method that flips horizontally and vertically at the same time instead of just call 2 methods.
    */
-  void flip( Mirroring mirroring )
+  Future<Sprite> flip( Mirroring mirroring )
   {
-    if( mirroring & Mirroring.H )
+    switch( mirroring )
     {
-      flipH();
-    }
-    if( mirroring & Mirroring.V )
-    {
-      flipV();
+      case Mirroring.H:   return flipH();
+      case Mirroring.V:   return flipV();
+      case Mirroring.HV:  return flipHV();
     }
   }
   /**

@@ -26,12 +26,6 @@ class Mirroring
    * Private constructor that generates a const instance of a Mirroring Class.
    */
   const Mirroring._( this.value, this.name );
-  
-  /**
-   * Operator that returns true if the internal values of this [Mirroring] Object are the same
-   * as the provided [Mirroring] [other].
-   */
-  operator ==( Mirroring other ) => value == other.value && name == other.name;
   /**
    * Operator that does the bitwise & operation between two [Mirroring] Objects and returns
    * the correct [Mirroring].
