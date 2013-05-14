@@ -145,6 +145,11 @@ class Sprite
 
     return this.load( canvas.toDataUrl('image/png') );
   }
+  /**
+   * Method that flips the [Sprite] using the provided [Mirroring].
+   *
+   * @todo create method that flips horizontally and vertically at the same time instead of just call 2 methods.
+   */
   void flip( Mirroring mirroring )
   {
     if( mirroring & Mirroring.H )
