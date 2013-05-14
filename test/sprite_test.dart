@@ -20,4 +20,9 @@ void main()
         expect( empty.offset.x, equals( 0 ) );
         expect( empty.offset.y, equals( 0 ) );
   });
+  /*test( "flipH", (){
+    Sprite logo = new Sprite( imageSource: "resources/logo.png");
+
+    expectAsync0(callback
+  });*/
 }

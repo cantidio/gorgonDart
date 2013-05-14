@@ -108,13 +108,53 @@ class Sprite
 
     return this._onLoad;
   }
-  
+
   void rotate( double angle )
   {
-    
+
+  }
+  /**
+   * Method that flips the current [Sprite] horizontally
+   *
+   * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
+   */
+  Future<Sprite> flipH()
+  {
+    CanvasElement canvas = new CanvasElement(width: width, height: height);
+    canvas.context2d.translate(width, 0);
+    canvas.context2d.scale(-1, 1);
+    canvas.context2d.drawImage(_image, 0, 0);
+
+    offset.x = -(width + offset.x);
+
+    return this.load( canvas.toDataUrl('image/png') );
+  }
+  /**
+   * Method that flips the current [Sprite] vertically
+   *
+   * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
+   */
+  Future<Sprite> flipV()
+  {
+    CanvasElement canvas = new CanvasElement(width: width, height: height);
+    canvas.context2d.translate(0, height);
+    canvas.context2d.scale(1, -1);
+    canvas.context2d.drawImage(_image, 0, 0);
+
+    offset.y = -(height + offset.y);
+
+    return this.load( canvas.toDataUrl('image/png') );
   }
   void flip( Mirroring mirroring )
   {
-    
+    if( mirroring & Mirroring.H )
+    {
+      flipH();
+    }
+    if( mirroring & Mirroring.V )
+    {
+      flipV();
+    }
+
   }
 }
