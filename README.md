@@ -1,5 +1,10 @@
 gorgonDart
 ==========
+
+*IMPORTANT NOTICE:* This lib is still under development. Any changes will
+be done without prior notice to consumers of this package.
+
+
 [![Build Status](https://drone.io/github.com/cantidio/gorgonDart/status.png)](https://drone.io/github.com/cantidio/gorgonDart/latest)
 
 [Last Build Documentation](https://drone.io/github.com/cantidio/gorgonDart/files/gorgon_docs.zip)
