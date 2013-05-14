@@ -191,7 +191,7 @@ class Sprite
     return this.load( canvas.toDataUrl('image/png') );
   }
   /**
-   * Method that flips the current [Sprite] vertically
+   * Method that flips the current [Sprite] horizontally and vertically 
    *
    * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
@@ -209,8 +209,8 @@ class Sprite
   }
   /**
    * Method that flips the [Sprite] using the provided [Mirroring].
-   *
-   * @todo create method that flips horizontally and vertically at the same time instead of just call 2 methods.
+   * 
+   * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
   Future<Sprite> flip( Mirroring mirroring )
   {
