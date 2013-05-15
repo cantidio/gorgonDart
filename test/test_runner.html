@@ -2,14 +2,30 @@
 
 <html>
   <head>
-    <title>test</title>
+    <title>Run the unit tests</title>
   </head>
-
   <body>
-    <p id="text"></p>
     <script type="application/dart" src="test_runner.dart"></script>
-    <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
     <script src="packages/browser/dart.js"></script>
     <div id="content"></div>
   </body>
+  <script type='text/javascript'>
+      var testRunner = window.testRunner || window.layoutTestController;
+      if( testRunner )
+      {
+        function handleMessage(m)
+        {
+          if (m.data == 'done')
+          {
+            testRunner.notifyDone();
+          }
+        }
+        testRunner.dumpAsText();
+        testRunner.waitUntilDone();
+        window.addEventListener("message", handleMessage, false);
+      }
+      if (navigator.webkitStartDart) {
+        navigator.webkitStartDart();
+      }
+    </script>
 </html>

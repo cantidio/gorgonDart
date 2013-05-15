@@ -17,9 +17,7 @@ main()
   mirroring_test.main();
   color_test.main();
   sprite_test.main();
-
-  runTests();
-
+  
   /*Sprite logo = new Sprite( imageSource: "resources/logo.png");
 
   logo.onLoad
@@ -28,6 +26,4 @@ main()
     .then((_) => logo.rotateRight())
     .then((_) => logo.rotateRight())
     .then((_) { query("#content").append(logo.image);} );*/
-
-
 }
