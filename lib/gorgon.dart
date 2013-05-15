@@ -7,7 +7,7 @@
  *  \/___L\ \/___/  \/_/ \/___L\ \/___/  \/_/\/_/
  *    /\____/              /\____/
  *    \_/__/               \_/__/
- *    
+ *
  * Copyright (c) 2013 Cantidio Fontes
  *
  * This software is provided 'as-is', without any express or implied warranty.
@@ -17,16 +17,16 @@
  * including commercial applications, and to alter it and redistribute it
  * freely, subject to the following restrictions:
  *
- * 1. The origin of this software must not be misrepresented; you must not 
- * claim that you wrote the original software. If you use this software 
- * in a product, an acknowledgment in the product documentation would be 
+ * 1. The origin of this software must not be misrepresented; you must not
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgment in the product documentation would be
  * appreciated but is not required.
  *
  * 2. Altered source versions must be plainly marked as such, and must not be
  * misrepresented as being the original software.
 
  * 3. This notice may not be removed or altered from any source distribution.
- * 
+ *
  * Cantidio Fontes cantidio.fontes@gmail.com
  */
 library gorgon;
@@ -34,9 +34,9 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math';
 
-part 'point.dart';
-part 'mirroring.dart';
-part 'color.dart';
-part 'sprite.dart';
-part 'spritepack.dart';
+part 'src/graphic/point.dart';
+part 'src/graphic/mirroring.dart';
+part 'src/graphic/color.dart';
+part 'src/graphic/sprite.dart';
+part 'src/graphic/spritepack.dart';
 
