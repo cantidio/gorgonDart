@@ -18,6 +18,10 @@ main()
   color_test.main();
   sprite_test.main();
   
+  
+  //SpritePack ssp = new SpritePack.fromJSON("resources/spritepack.json");
+  //ssp.onLoad.then((_) => print( ssp.length ) );
+  
   /*Sprite logo = new Sprite( imageSource: "resources/logo.png");
 
   logo.onLoad

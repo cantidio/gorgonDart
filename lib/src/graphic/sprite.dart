@@ -134,7 +134,7 @@ class Sprite
     canvas.context2D.rotate( 90 * PI / 180 );
     canvas.context2D.drawImage( _image, 0, 0 );
 
-    double y = offset.y;
+    num    y = offset.y;
     offset.y = offset.x;
     offset.x = -(height + y);
 
@@ -152,7 +152,7 @@ class Sprite
     canvas.context2D.rotate( -90 * PI / 180 );
     canvas.context2D.drawImage( _image, 0, 0 );
 
-    double x = offset.x;
+    num x    = offset.x;
     offset.x = offset.y;
     offset.y = -(width + x);
 

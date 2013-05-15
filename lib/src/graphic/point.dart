@@ -8,17 +8,17 @@ part of gorgon;
  */
 class Point
 {
-  double x; /// the position of the point in the x axis 
-  double y; /// the position of the point in the y axis
+  num x; /// the position of the point in the x axis 
+  num y; /// the position of the point in the y axis
 
   /**
    * Method that describes the Point Object returning a [String].
    */
   String toString() => "Point(x: $x, y: $y)";
   /**
-   * Creates a [Point], setting its [double] [x] axis value and its [double] [y] value.
+   * Creates a [Point], setting its [num] [x] axis value and its [num] [y] value.
    */
-  Point( double x, double y )
+  Point( num x, num y )
   {
     this.x = (x != null) ? x : 0.0;
     this.y = (y != null) ? y : 0.0;
@@ -32,10 +32,10 @@ class Point
   /**
    * Method that returns the distance between two [Point] Objects.
    *  
-   * You must provide the [other] [Point] and the method will return a [double] with the
+   * You must provide the [other] [Point] and the method will return a [num] with the
    * distance between the two.
    */
-  double distance( Point other ) => sqrt( pow(other.x-x,2) + pow(other.y-y,2) );
+  num distance( Point other ) => sqrt( pow(other.x-x,2) + pow(other.y-y,2) );
   /**
    * Operator that returns a [bool] true if the [other] [Point] has the same values as this.
    */

@@ -32,6 +32,7 @@
 library gorgon;
 import 'dart:html';
 import 'dart:async';
+import 'dart:json' as json;
 import 'dart:math';
 
 part 'src/graphic/point.dart';
