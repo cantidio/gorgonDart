@@ -10,10 +10,10 @@ class Sprite
 {
   static final ImageElement emptyImage = new ImageElement();  /// Object that represents an emptyImage
   ImageElement _image;    /// The sprite element.
-  
-  ImageData   _data; /// The ImageData of the sprite                
+
+  ImageData   _data; /// The ImageData of the sprite
   Map         _colorMap = new Map();  /// The ColorMap of the sprite
-  
+
   int _width;             /// The sprite initial width.
   int _height;            /// The sprite initial height.
   Point offset;           /// The sprite offset.
@@ -41,14 +41,14 @@ class Sprite
       this._image   = image;
       this._width   = image.width;
       this._height  = image.height;
-      
+
       if( _width > 0 && _height > 0 )
       {
         CanvasElement canvas = new CanvasElement( width: width, height: height );
-        
+
         canvas.context2D.drawImage( _image, 0, 0 );
-        this._data = canvas.context2d.getImageData(0, 0, width, height);
-        
+        this._data = canvas.context2D.getImageData(0, 0, width, height);
+
         _colorMap.clear();
       }
     }
@@ -124,39 +124,39 @@ class Sprite
   }
   /**
    * Method that rotates the [Sprite] 90 degrees to the right.
-   * 
+   *
    * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
   Future<Sprite> rotateRight()
   {
     CanvasElement canvas = new CanvasElement(width: height, height: width);
-    canvas.context2d.translate( height, 0 );
-    canvas.context2d.rotate( 90 * PI / 180 );
-    canvas.context2d.drawImage( _image, 0, 0 );
-    
+    canvas.context2D.translate( height, 0 );
+    canvas.context2D.rotate( 90 * PI / 180 );
+    canvas.context2D.drawImage( _image, 0, 0 );
+
     double y = offset.y;
     offset.y = offset.x;
     offset.x = -(height + y);
-    
+
     return this.load( canvas.toDataUrl('image/png') );
   }
   /**
    * Method that rotates the [Sprite] to the left.
-   * 
+   *
    * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
   Future<Sprite> rotateLeft()
   {
     CanvasElement canvas = new CanvasElement(width: height, height: width);
-    canvas.context2d.translate( 0, width );
-    canvas.context2d.rotate( -90 * PI / 180 );
-    canvas.context2d.drawImage( _image, 0, 0 );
-    
+    canvas.context2D.translate( 0, width );
+    canvas.context2D.rotate( -90 * PI / 180 );
+    canvas.context2D.drawImage( _image, 0, 0 );
+
     double x = offset.x;
     offset.x = offset.y;
     offset.y = -(width + x);
-    
-    return this.load( canvas.toDataUrl('image/png') );    
+
+    return this.load( canvas.toDataUrl('image/png') );
   }
   /**
    * Method that flips the current [Sprite] horizontally
@@ -166,9 +166,9 @@ class Sprite
   Future<Sprite> flipH()
   {
     CanvasElement canvas = new CanvasElement(width: width, height: height);
-    canvas.context2d.translate(width, 0);
-    canvas.context2d.scale(-1, 1);
-    canvas.context2d.drawImage(_image, 0, 0);
+    canvas.context2D.translate(width, 0);
+    canvas.context2D.scale(-1, 1);
+    canvas.context2D.drawImage(_image, 0, 0);
 
     offset.x = -(width + offset.x);
 
@@ -182,25 +182,25 @@ class Sprite
   Future<Sprite> flipV()
   {
     CanvasElement canvas = new CanvasElement(width: width, height: height);
-    canvas.context2d.translate(0, height);
-    canvas.context2d.scale(1, -1);
-    canvas.context2d.drawImage(_image, 0, 0);
+    canvas.context2D.translate(0, height);
+    canvas.context2D.scale(1, -1);
+    canvas.context2D.drawImage(_image, 0, 0);
 
     offset.y = -(height + offset.y);
 
     return this.load( canvas.toDataUrl('image/png') );
   }
   /**
-   * Method that flips the current [Sprite] horizontally and vertically 
+   * Method that flips the current [Sprite] horizontally and vertically
    *
    * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
   Future<Sprite> flipHV()
   {
     CanvasElement canvas = new CanvasElement(width: width, height: height);
-    canvas.context2d.translate(width, height);
-    canvas.context2d.scale(-1, -1);
-    canvas.context2d.drawImage(_image, 0, 0);
+    canvas.context2D.translate(width, height);
+    canvas.context2D.scale(-1, -1);
+    canvas.context2D.drawImage(_image, 0, 0);
 
     offset.x = -(width + offset.x);
     offset.y = -(height + offset.y);
@@ -209,7 +209,7 @@ class Sprite
   }
   /**
    * Method that flips the [Sprite] using the provided [Mirroring].
-   * 
+   *
    * This method returns a [Future]<[Sprite]> which can be checked for the method completion.
    */
   Future<Sprite> flip( Mirroring mirroring )
@@ -223,9 +223,9 @@ class Sprite
   }
   /**
    * Operator that returns one [line] of [Color]s in a [List].
-   * 
-   * * This operator caches the data for further use. 
-   * 
+   *
+   * * This operator caches the data for further use.
+   *
    * @todo verify why on 8bit images the values returned are different. In javascript are they different as well?
    */
   List<Color> operator []( int line )
@@ -237,22 +237,22 @@ class Sprite
       for( int i = 0; i < width; ++i )
       {
         _colorMap[line].add( new Color(
-            r: _data.data[begin+0], 
+            r: _data.data[begin+0],
             g: _data.data[begin+1],
-            b: _data.data[begin+2], 
-            a: _data.data[begin+3] 
+            b: _data.data[begin+2],
+            a: _data.data[begin+3]
         ));
         begin += 4;
       }
-    }    
+    }
     return _colorMap[line];
   }
   /**
    * Operator that checks if the content of 2 [Sprite]s are the same.
-   * 
+   *
    * * This will check every image pixel.
    */
-  operator == (Sprite other) 
+  operator == (Sprite other)
   {
     if( width == other.width && height == other.height && offset == other.offset )
     {

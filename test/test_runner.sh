@@ -3,12 +3,6 @@
 #
 #!/bin/bash -e
 
-analysis=$(dart_analyzer lib/*.dart lib/src/*/*.dart)
-echo -e "$analysis"
-if [[ "$results" != "" ]]
-  then exit 1
-fi
-
 # run a set of Dart Unit tests
 
 results=$(DumpRenderTree test/test_runner.html)
@@ -19,6 +13,12 @@ echo -e "$results"
 if [[ "$results" == *"Some tests failed"* ]]
 then
   exit 1
+fi
+
+analysis=$(dart_analyzer lib/*.dart lib/src/*/*.dart)
+echo -e "$analysis"
+if [[ "$results" != "" ]]
+  then exit 1
 fi
 
 exit 0
