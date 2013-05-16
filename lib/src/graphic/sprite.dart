@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
 /**
@@ -99,14 +99,14 @@ class Sprite
     this._setImage( image );
   }
   /**
-   * Loads the sprite with the image given [imageSrc], which must be an [String]
+   * Loads the sprite with the image given [imageSource], which must be an [String]
    * containing the url of the image or the base64 image source.
    *
    * For checking when the load is complete you can access the [Future] [onLoad]
    *
    * This method returns a [Sprite] object referencing this current object.
    */
-  Future<Sprite> load( String imageSrc )
+  Future<Sprite> load( String imageSource )
   {
     Completer completer = new Completer();
     ImageElement   img  = new ImageElement();
@@ -117,7 +117,12 @@ class Sprite
       completer.complete( this );
     });
 
-    img.src       = imageSrc;
+    img.onError.listen((e)
+    {
+      completer.completeError(new Exception("Image: $imageSource could not be found."));
+    });
+
+    img.src       = imageSource;
     this._onLoad  = completer.future;
 
     return this._onLoad;

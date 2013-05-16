@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
 /**
  * Class that represents a sprite Mirroring
  */
-class Mirroring 
+class Mirroring
 {
   static const None = const Mirroring._(0, "None");           /// No mirroring is applied
   static const H  = const Mirroring._(1, "H");                /// Horizontal mirroring

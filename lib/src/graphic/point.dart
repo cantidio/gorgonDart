@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
 /**
@@ -8,7 +8,7 @@ part of gorgon;
  */
 class Point
 {
-  num x; /// the position of the point in the x axis 
+  num x; /// the position of the point in the x axis
   num y; /// the position of the point in the y axis
 
   /**
@@ -25,13 +25,13 @@ class Point
   }
   /**
    * Creates a zero point
-   * 
-   * This constructor returns a [Point] with x and y values = 0. 
+   *
+   * This constructor returns a [Point] with x and y values = 0.
    */
   Point.zero() : x = 0.0, y = 0.0;
   /**
    * Method that returns the distance between two [Point] Objects.
-   *  
+   *
    * You must provide the [other] [Point] and the method will return a [num] with the
    * distance between the two.
    */

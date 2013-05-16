@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 library mirroring_test;
 
@@ -45,14 +45,14 @@ void main()
         expect( Mirroring.VH.value, equals( 3 ) );
         expect( Mirroring.VH.name, equals( "HV" ) );
   });
-  
+
   test
   (
       "Mirroring.HV == Mirroring.VH members value check", (){
         expect( Mirroring.HV.value, equals( Mirroring.VH.value ) );
         expect( Mirroring.HV.name, equals( Mirroring.VH.name ) );
   });
-  
+
   test
   (
       "Mirroring Operator ==", (){
@@ -61,7 +61,7 @@ void main()
         expect( Mirroring.HV, equals( Mirroring.HV ) );
         expect( Mirroring.VH, equals( Mirroring.VH ) );
   });
-  
+
   test
   (
       "Mirroring Operator |", (){
@@ -71,31 +71,31 @@ void main()
         expect( Mirroring.V     | Mirroring.V    , equals( Mirroring.V    ) );
         expect( Mirroring.HV    | Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.VH    | Mirroring.VH   , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.None  | Mirroring.H    , equals( Mirroring.H    ) );
         expect( Mirroring.None  | Mirroring.V    , equals( Mirroring.V    ) );
         expect( Mirroring.None  | Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.None  | Mirroring.VH   , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.H     | Mirroring.None , equals( Mirroring.H    ) );
-        expect( Mirroring.V     | Mirroring.None , equals( Mirroring.V    ) );        
+        expect( Mirroring.V     | Mirroring.None , equals( Mirroring.V    ) );
         expect( Mirroring.HV    | Mirroring.None , equals( Mirroring.HV   ) );
         expect( Mirroring.VH    | Mirroring.None , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.H     | Mirroring.V    , equals( Mirroring.HV   ) );
         expect( Mirroring.H     | Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.H     | Mirroring.VH   , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.V     | Mirroring.H    , equals( Mirroring.HV   ) );
         expect( Mirroring.V     | Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.V     | Mirroring.VH   , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.HV    | Mirroring.H    , equals( Mirroring.HV   ) );
         expect( Mirroring.HV    | Mirroring.V    , equals( Mirroring.HV   ) );
         expect( Mirroring.VH    | Mirroring.H    , equals( Mirroring.VH   ) );
         expect( Mirroring.VH    | Mirroring.V    , equals( Mirroring.VH   ) );
   });
-  
+
   test
   (
       "Mirroring Operator &", (){
@@ -105,25 +105,25 @@ void main()
         expect( Mirroring.V     & Mirroring.V    , equals( Mirroring.V    ) );
         expect( Mirroring.HV    & Mirroring.HV   , equals( Mirroring.HV   ) );
         expect( Mirroring.VH    & Mirroring.VH   , equals( Mirroring.VH   ) );
-        
+
         expect( Mirroring.None  & Mirroring.H    , equals( Mirroring.None ) );
         expect( Mirroring.None  & Mirroring.V    , equals( Mirroring.None ) );
         expect( Mirroring.None  & Mirroring.HV   , equals( Mirroring.None ) );
         expect( Mirroring.None  & Mirroring.VH   , equals( Mirroring.None ) );
-        
+
         expect( Mirroring.H     & Mirroring.None , equals( Mirroring.None ) );
-        expect( Mirroring.V     & Mirroring.None , equals( Mirroring.None ) );        
+        expect( Mirroring.V     & Mirroring.None , equals( Mirroring.None ) );
         expect( Mirroring.HV    & Mirroring.None , equals( Mirroring.None ) );
         expect( Mirroring.VH    & Mirroring.None , equals( Mirroring.None ) );
-        
+
         expect( Mirroring.H     & Mirroring.V    , equals( Mirroring.None ) );
         expect( Mirroring.H     & Mirroring.HV   , equals( Mirroring.H    ) );
         expect( Mirroring.H     & Mirroring.VH   , equals( Mirroring.H    ) );
-        
+
         expect( Mirroring.V     & Mirroring.H    , equals( Mirroring.None ) );
         expect( Mirroring.V     & Mirroring.HV   , equals( Mirroring.V    ) );
         expect( Mirroring.V     & Mirroring.VH   , equals( Mirroring.V    ) );
-        
+
         expect( Mirroring.HV    & Mirroring.H    , equals( Mirroring.H    ) );
         expect( Mirroring.HV    & Mirroring.V    , equals( Mirroring.V    ) );
         expect( Mirroring.VH    & Mirroring.H    , equals( Mirroring.H    ) );

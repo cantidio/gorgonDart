@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 import 'package:unittest/unittest.dart';
 import 'package:gorgon/gorgon.dart';
@@ -17,17 +17,24 @@ main()
   mirroring_test.main();
   color_test.main();
   sprite_test.main();
-  
-  
-  //SpritePack ssp = new SpritePack.fromJSON("resources/spritepack.json");
-  //ssp.onLoad.then((_) => print( ssp.length ) );
-  
-  /*Sprite logo = new Sprite( imageSource: "resources/logo.png");
+
+
+  /*SpritePack ssp = new SpritePack.fromJSON("resources/spritepack.json");
+  ssp.onLoad
+    .then((_) => print( ssp.length ) )
+    .catchError((e){
+      print("got error: {$e.error}");
+    });*/
+
+  /*Sprite logo = new Sprite( imageSource: "resources/logo2.png");
 
   logo.onLoad
     .then((_) => logo.flipV())
     .then((_) => logo.flipH())
     .then((_) => logo.rotateRight())
     .then((_) => logo.rotateRight())
-    .then((_) { query("#content").append(logo.image);} );*/
+    .then((_) { query("#content").append(logo.image);} )
+    .catchError((e){
+      print("got error: {$e.error}");
+    });*/
 }

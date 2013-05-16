@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2013 Cantidio Fontes
- * For conditions of distribution and use, see copyright notice in gorgon.dart
+ * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 library point_test;
 
@@ -38,7 +38,7 @@ void main()
   test
   (
       "Point toString should return a string with the correct values", (){
-        
+
         expect( new Point.zero().toString()     , equals("Point(x: 0.0, y: 0.0)") );
         expect( new Point(null,null).toString() , equals("Point(x: 0.0, y: 0.0)") );
         expect( new Point(1.0,2.0).toString()   , equals("Point(x: 1.0, y: 2.0)") );
@@ -50,19 +50,19 @@ void main()
         Point a = new Point( 10.0, 10.0 );
         Point b = new Point( 1.0, 1.0 );
         Point c = new Point( 2.0, 2.0 );
-        
+
         expect( a.distance(a) , equals(0.0) );
         expect( a.distance(b) , equals(12.727922061357855) );
         expect( a.distance(c) , equals(11.313708498984761) );
-        
+
         expect( b.distance(a) , equals(12.727922061357855) );
         expect( b.distance(b) , equals(0.0) );
         expect( b.distance(c) , equals(1.4142135623730951) );
-        
+
         expect( c.distance(a) , equals(11.313708498984761) );
         expect( c.distance(b) , equals(1.4142135623730951) );
         expect( c.distance(c) , equals(0.0) );
-        
+
   });
   test
   (
@@ -70,7 +70,7 @@ void main()
         Point a = new Point( 1.0, 1.0 );
         Point b = new Point( 1.0, 1.0 );
         Point c = new Point( 2.0, 2.0 );
-        
+
         expect( a , equals(a) );
         expect( a , equals(b) );
         expect( b , equals(a) );
@@ -83,12 +83,12 @@ void main()
         Point a = new Point( 5.0, 10.0 );
         Point b = new Point( 1.0, 0.0 );
         Point c = new Point( 0.0, 0.0 );
-        
+
         expect( a + b, equals(new Point( 06.0, 10.0 )) );
         expect( b + a, equals(new Point( 06.0, 10.0 )) );
         expect( a + a, equals(new Point( 10.0, 20.0 )) );
         expect( b + b, equals(new Point( 02.0, 0.0  )) );
-        
+
         expect( a + c, equals( a ) );
         expect( b + c, equals( b ) );
         expect( c + a, equals( a ) );
@@ -101,12 +101,12 @@ void main()
         Point a = new Point( 5.0, 10.0 );
         Point b = new Point( 1.0, 0.0 );
         Point c = new Point( 0.0, 0.0 );
-        
+
         expect( a - b, equals(new Point( 4.0, 10.0 )) );
         expect( b - a, equals(new Point( -4.0, -10.0 )) );
         expect( a - a, equals(new Point.zero()) );
         expect( b - b, equals(new Point.zero()) );
-        
+
         expect( a - c, equals( a ) );
         expect( b - c, equals( b ) );
         expect( c - c, equals( c ) );
@@ -119,7 +119,7 @@ void main()
         Point a = new Point( 5.0, 10.0 );
         Point b = new Point( 1.0, 0.0 );
         Point c = new Point( 0.0, 0.0 );
-        
+
         expect( -a, equals(new Point( -5.0, -10.0 )) );
         expect( -b, equals(new Point( -1.0, 0.0 )) );
         expect( -c, equals(new Point( 0.0, 0.0 )) );
@@ -130,15 +130,15 @@ void main()
         Point a = new Point( 5.0, 10.0 );
         Point b = new Point( 1.0, 0.0 );
         Point c = new Point( 0.0, 0.0 );
-        
+
         expect( a * a, equals(new Point( 25.0, 100.0 )) );
         expect( a * b, equals(new Point( 5.0, 0.0 )) );
         expect( a * c, equals(new Point( 0.0, 0.0 )) );
-        
+
         expect( b * a, equals(new Point( 5.0, 0.0 )) );
         expect( b * b, equals(new Point( 1.0, 0.0 )) );
         expect( b * c, equals(new Point( 0.0, 0.0 )) );
-        
+
         expect( c * a, equals(c) );
         expect( c * b, equals(c) );
         expect( c * c, equals(c) );
@@ -149,16 +149,16 @@ void main()
         Point a = new Point( 5.0, 10.0 );
         Point b = new Point( 1.0, 0.0 );
         Point c = new Point( 0.0, 0.0 );
-        
+
         expect( a / a, equals(new Point( 1.0, 1.0 )) );
         expect( a / b, equals(new Point( 5.0, double.INFINITY )) );
         expect( a / c, equals(new Point( double.INFINITY, double.INFINITY )) );
-        
+
         expect( b / a, equals(new Point( 0.2, 0.0 )) );
         /// @todo Correct these tests Once Dart can evaluate NaN == NaN or thrown an exception.
         /*expect( (b / b).y, equals(double.NAN) );
         expect( b / c, equals(new Point( double.INFINITY, double.INFINITY)) );
-        
+
         expect( c / a, equals(new Point( 0.0, 0.0 )) );
         expect( c / b, equals(new Point( 0.0, double.INFINITY )) );
         expect( c / c, equals(new Point( double.INFINITY, double.INFINITY )) );*/
