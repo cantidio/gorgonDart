@@ -8,15 +8,29 @@ part of gorgon;
  */
 class Mirroring
 {
-  static const None = const Mirroring._(0, "None");           /// No mirroring is applied
-  static const H  = const Mirroring._(1, "H");                /// Horizontal mirroring
-  static const V  = const Mirroring._(2, "V");                /// Vertical mirroring
-  static const HV = const Mirroring._(3, "HV");               /// Horizontal and Vertical mirroring
-  static const VH = const Mirroring._(3, "HV");               /// Horizontal and Vertical mirroring
-  static List<Mirroring> get values => [None, H, V, HV, VH];  /// The list of acceptable Mirroring values
+  /// No mirroring is applied
+  static const None = const Mirroring._(0, "None");
 
-  final int     value;  /// The mirroring value
-  final String  name;   /// The mirroring name
+  /// Horizontal mirroring
+  static const H  = const Mirroring._(1, "H");
+
+  /// Vertical mirroring
+  static const V  = const Mirroring._(2, "V");
+
+  /// Horizontal and Vertical mirroring
+  static const HV = const Mirroring._(3, "HV");
+
+  /// Horizontal and Vertical mirroring
+  static const VH = const Mirroring._(3, "HV");
+
+  /// The list of acceptable Mirroring values
+  static List<Mirroring> get values => [None, H, V, HV, VH];
+
+  /// The mirroring value
+  final int     value;
+
+  /// The mirroring name
+  final String  name;
 
   /**
    * Method that describes the Mirroring Object returning a [String].

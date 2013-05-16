@@ -8,21 +8,30 @@ part of gorgon;
  */
 class Sprite
 {
-  static final ImageElement emptyImage = new ImageElement();  /// Object that represents an emptyImage
-  ImageElement _image;    /// The sprite element.
+  ImageElement    _image;                           // The sprite element.
+  ImageData       _data;                            // The ImageData of the sprite
+  Map             _colorMap = new Map();            // The ColorMap of the sprite
+  Future<Sprite>  _onLoad = new Completer().future; // The sprite onLoad future.
+  int             _width;                           // The sprite initial width.
+  int             _height;                          // The sprite initial height.
 
-  ImageData   _data; /// The ImageData of the sprite
-  Map         _colorMap = new Map();  /// The ColorMap of the sprite
+  /// Object that represents an emptyImage
+  static final ImageElement emptyImage = new ImageElement();
 
-  int _width;             /// The sprite initial width.
-  int _height;            /// The sprite initial height.
-  Point offset;           /// The sprite offset.
-  Future<Sprite> _onLoad; /// The sprite onLoad future.
+  /// The sprite offset.
+  Point offset;
 
-  Future<Sprite> get onLoad => _onLoad; /// The Sprite onLoad future getter.
-  int get width   => _width;            /// The Sprite width getter.
-  int get height  => _height;           /// The Sprite height getter.
-  ImageElement get image => _image;     /// The Sprite image getter.
+  /// The Sprite onLoad future getter.
+  Future<Sprite> get onLoad => _onLoad;
+
+  /// The Sprite width getter.
+  int get width   => _width;
+
+  /// The Sprite height getter.
+  int get height  => _height;
+
+  /// The Sprite image getter.
+  ImageElement get image => _image;
 
   /**
    * Method that describes the Sprite Object returning a [String].
@@ -72,7 +81,6 @@ class Sprite
    */
   Sprite({ String imageSource, Point offset })
   {
-    this._onLoad  = new Completer().future;
     this.offset   = ( offset != null ) ? offset : new Point.zero();
     if( imageSource != null && imageSource != "" )
     {
@@ -94,7 +102,6 @@ class Sprite
    */
   Sprite.fromImage( ImageElement image, { Point offset } )
   {
-    this._onLoad  = new Completer().future;
     this.offset   = ( offset != null ) ? offset : new Point.zero();
     this._setImage( image );
   }
@@ -229,7 +236,7 @@ class Sprite
   /**
    * Operator that returns one [line] of [Color]s in a [List].
    *
-   * * This operator caches the data for further use.
+   * **Note** This operator caches the data for further use.
    *
    * @todo verify why on 8bit images the values returned are different. In javascript are they different as well?
    */
@@ -255,7 +262,7 @@ class Sprite
   /**
    * Operator that checks if the content of 2 [Sprite]s are the same.
    *
-   * * This will check every image pixel.
+   * **Warning** This operator will check every image pixel.
    */
   operator == (Sprite other)
   {

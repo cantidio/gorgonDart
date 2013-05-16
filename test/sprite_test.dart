@@ -21,6 +21,20 @@ void main()
     expect( empty.image     , equals( Sprite.emptyImage ) );
   });
 
+  test( "Sprite load with existent image returns a future with the Sprite", (){
+    Sprite logo = new Sprite();
+
+    logo.load("resources/logo.png").then( expectAsync1((e) { expect(e.image, isNot(equals(Sprite.emptyImage))); } ) );
+  });
+
+  test( "Sprite load with inexistent image returns an exception", (){
+    Sprite logo = new Sprite();
+
+    logo.load("resources/logo_inexistent.png").catchError( expectAsync1((e) {
+      expect( e.toString(), equals( new Exception("Image: resources/logo_inexistent.png could not be found.").toString() ) );
+    }));
+  });
+
   test( "Sprite Operator ==", (){
     Sprite logo1 = new Sprite( imageSource: "resources/logo.png");
     Sprite logo2 = new Sprite( imageSource: "resources/logo.png");

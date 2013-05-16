@@ -4,7 +4,7 @@
  */
 part of gorgon;
 /**
- * Class that represents a color
+ * Class that represents a RGBA color
  */
 class Color
 {
@@ -13,14 +13,28 @@ class Color
   int _b;
   int _a;
 
+  /// The red component getter.
   int get r => _r;
+
+  /// The green component getter.
   int get g => _g;
+
+  /// The blue component getter.
   int get b => _b;
+
+  /// The alpha component getter.
   int get a => _a;
 
+  /// The red component setter.
   set r(int r) => _r = (r >= 0) ? (r <= 255 ) ? r : 255 : 0;
+
+  /// The green component setter.
   set g(int g) => _g = (g >= 0) ? (g <= 255 ) ? g : 255 : 0;
+
+  /// The blue component setter.
   set b(int b) => _b = (b >= 0) ? (b <= 255 ) ? b : 255 : 0;
+
+  /// The alpha component setter.
   set a(int a) => _a = (a >= 0) ? (a <= 255 ) ? a : 255 : 0;
 
   /**
@@ -32,10 +46,10 @@ class Color
    * Constructor
    *
    * You should pass the components you whish to set.
-   * For setting the red component you should set the[r] param as an int
-   * For setting the green component you should set the[g] param as an int
-   * For setting the blue component you should set the[b] param as an int
-   * For setting the alpha component you should set the[a] param as an int
+   * For setting the red component you should set the[r] param as an [int]
+   * For setting the green component you should set the[g] param as an [int]
+   * For setting the blue component you should set the[b] param as an [int]
+   * For setting the alpha component you should set the[a] param as an [int]
    */
   Color({ int r:0, int g:0, int b:0, int a: 255 })
   {
@@ -57,4 +71,3 @@ class Color
    */
   operator ==(Color other) => r == other.r && g == other.g && b == other.b && a == other.a;
 }
-

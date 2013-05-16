@@ -4,13 +4,18 @@
  */
 part of gorgon;
 
-
-
 class SpritePack
 {
-  static final Sprite emptySprite = new Sprite();  /// Object that represents an empty Sprite
-  List<Sprite>    _sprites        = new List<Sprite>();
-  Future<Sprite>  _onLoad         = new Completer().future; /// The spritepack onLoad future.
+  /// Object that represents an empty Sprite.
+  static final Sprite emptySprite = new Sprite();
+  List<Sprite>    _sprites        = new List<Sprite>();     // The Sprite list
+  Future<Sprite>  _onLoad         = new Completer().future; // The spritepack onLoad future.
+
+  /// The SpritePack onLoad future getter.
+  Future<Sprite> get onLoad => _onLoad;
+
+  /// The SpritePack length getter
+  int get length   => _sprites.length;
 
   /**
    * Method that describes the Sprite Object returning a [String].
@@ -59,11 +64,15 @@ class SpritePack
   SpritePack.fromXML(){}
   SpritePack.fromTileSheet(){}
 
-  Future<Sprite> get onLoad => _onLoad; /// The Sprite onLoad future getter.
-  int get length   => _sprites.length;
+  /**
+   * Method that adds a new [Sprite] into the [SpritePack].
+   */
   void add(Sprite sprite) => _sprites.add(sprite);
+
+  /**
+   * Operator that retrieves the requested [i] [Sprite]  in the [SpritePack].
+   *
+   * @todo decide if when trying to get an inexistent sprite it should return an exception or an emptySprite.
+   */
   operator [](int i) => _sprites[i];
-
-
-
 }

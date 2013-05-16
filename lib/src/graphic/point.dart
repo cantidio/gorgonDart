@@ -8,8 +8,10 @@ part of gorgon;
  */
 class Point
 {
-  num x; /// the position of the point in the x axis
-  num y; /// the position of the point in the y axis
+  /// The position of the point in the x axis
+  num x;
+  /// The position of the point in the y axis
+  num y;
 
   /**
    * Method that describes the Point Object returning a [String].
