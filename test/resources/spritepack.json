@@ -5,7 +5,7 @@
     "index"   : 0,
     "xoffset" : 0,
     "yoffset" : 0,
-    "image"   : "resources/logo11.png"
+    "image"   : "logo.png"
   },
   {
     "name"    : "logo_fh",
@@ -13,7 +13,7 @@
     "index"   : 1,
     "xoffset" : 0,
     "yoffset" : 0,
-    "image"   : "resources/logo_fh.png"
+    "image"   : "logo_fh.png"
   },
   {
     "name"    : "logo_fv",
@@ -21,6 +21,6 @@
     "index"   : 2,
     "xoffset" : 0,
     "yoffset" : 0,
-    "image"   : "resources/logo_fv.png"
+    "image"   : "logo_fv.png"
   }
 ]}

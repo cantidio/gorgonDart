@@ -5,9 +5,10 @@
  * This library contains a set of classes that let you create a 2d game.
  */
 library gorgon;
+import 'dart:uri';
 import 'dart:html';
 import 'dart:async';
-import 'dart:json' as json;
+import 'dart:json' as JSON;
 import 'dart:math';
 
 part 'src/graphic/point.dart';
