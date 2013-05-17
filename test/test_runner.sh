@@ -21,4 +21,12 @@ then
   exit 1
 fi
 
+# generate documentation, for this to work zip must be installed
+
+mkdir ./docs
+dartdoc --out=./docs ./lib/gorgon.dart
+cd docs
+#tar -cvf ../gorgon_docs.tar * 
+zip -r ../gorgon_docs *
+
 exit 0
