@@ -5,6 +5,7 @@
 import 'package:unittest/unittest.dart';
 import 'package:gorgon/gorgon.dart';
 import 'dart:html';
+import 'dart:async';
 
 import 'point_test.dart'      as point_test;
 import 'mirroring_test.dart'  as mirroring_test;
@@ -19,6 +20,7 @@ main()
   color_test.main();
   sprite_test.main();
   spritepack_test.main();
+  pollForDone(testCases);
 
   dynamic obj = [
     { "name" : "logo"   , "group" : 100, "index" : 0, "xoffset" : 0, "yoffset" : 0, "image" : "resources/logo.png"     },
@@ -56,4 +58,14 @@ main()
     .catchError((e){
       print("got error: {$e.error}");
     });*/
+}
+
+pollForDone(List tests) {
+  if (tests.every((t)=> t.isComplete)) {
+    window.postMessage('done', window.location.href);
+    return;
+  }
+
+  var wait = new Duration(milliseconds: 100);
+  new Timer(wait, ()=> pollForDone(tests));
 }
