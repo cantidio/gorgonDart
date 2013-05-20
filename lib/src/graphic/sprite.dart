@@ -288,11 +288,18 @@ class Sprite
     throw new UnimplementedError("This method is not implemmented.");
   }
 
-  void draw( Point2D position, {Mirroring mirroring, num rotation, Point2D scale} )
+  /**
+   * Method that draws the [Sprite] in the current [Display.target].
+   *
+   * This method will draws the [Sprite] in the [position] provided of [Display] using the [Display.draw] method.
+   *
+   * You can provide the desired [mirroring], [rotation] and [scale] if needed.
+   */
+  void draw( Point2D position, { alpha: 255 ,Mirroring mirroring: Mirroring.None, num rotation: 0, num scale: 1} )
   {
     if( Display.target != null )
     {
-      Display.target.draw(this, position, mirroring, rotation, scale );
+      Display.target.draw(this, position, mirroring, rotation, scale, alpha );
     }
     else
     {
