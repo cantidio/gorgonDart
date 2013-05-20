@@ -43,8 +43,8 @@ void main()
   });
 
   test( "Sprite Flip horizontal", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point(-390.0, 0.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point2D(-390.0, 0.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
     .then( (_) => logo1.flipH() )
@@ -52,8 +52,8 @@ void main()
   });
 
   test( "Sprite Flip vertical", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point(0.0, -394.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point2D(0.0, -394.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
     .then( (_) => logo1.flipV() )
@@ -61,8 +61,8 @@ void main()
   });
 
   test( "Sprite Flip vertical and horizontal", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point(-390.0, -394.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point2D(-390.0, -394.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
     .then( (_) => logo1.flipHV() )
@@ -70,8 +70,8 @@ void main()
   });
 
   test( "Sprite Flip generic with Mirroring.H", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point(-390.0, 0.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point2D(-390.0, 0.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
     .then( (_) => logo1.flip( Mirroring.H ) )
@@ -79,8 +79,8 @@ void main()
   });
 
   test( "Sprite Flip generic with Mirroring.V", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point(0.0, -394.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point2D(0.0, -394.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
       .then( (_) => logo1.flip( Mirroring.V ) )
@@ -88,8 +88,8 @@ void main()
   });
 
   test( "Sprite Flip generic with Mirroring.HV", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point(-390.0, -394.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point2D(-390.0, -394.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
       .then( (_) => logo1.flip( Mirroring.HV ) )
@@ -97,8 +97,8 @@ void main()
   });
 
   test( "Sprite RotateLeft", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_rl.png"   , offset: new Point(0.0, -390.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_rl.png"   , offset: new Point2D(0.0, -390.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
       .then( (_) => logo1.rotateLeft() )
@@ -106,8 +106,8 @@ void main()
     });
 
   test( "Sprite RotateRight", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_rr.png"   , offset: new Point(-394.0, 0.0) );
+    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
+    Sprite logo2 = new Sprite( imageSource: "resources/logo_rr.png"   , offset: new Point2D(-394.0, 0.0) );
 
     Future.wait([ logo1.onLoad, logo2.onLoad ])
     .then( (_) => logo1.rotateRight() )

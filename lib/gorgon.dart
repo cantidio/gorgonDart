@@ -11,7 +11,8 @@ import 'dart:async';
 import 'dart:json' as JSON;
 import 'dart:math';
 
-part 'src/graphic/point.dart';
+part 'src/graphic/point2d.dart';
+//part 'src/graphic/display.dart';
 part 'src/graphic/mirroring.dart';
 part 'src/graphic/color.dart';
 part 'src/graphic/sprite.dart';

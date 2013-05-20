@@ -19,7 +19,7 @@ class Sprite
   static final ImageElement emptyImage = new ImageElement();
 
   /// The sprite offset.
-  Point offset;
+  Point2D offset;
 
   /// The Sprite onLoad future getter.
   Future<Sprite> get onLoad => _onLoad;
@@ -73,15 +73,15 @@ class Sprite
    * You can provide an [imageSource] which must be a [String] with the image source
    * or the base64 image source.
    *
-   * You can provide the [offset] which is a xy [Point] with the offset of the sprite.
-   * If none is provided the default [offset] value is [Point.zero].
+   * You can provide the [offset] which is a xy [Point2D] with the offset of the sprite.
+   * If none is provided the default [offset] value is [Point2D.zero].
    *
    * If an [imageSource] is provided it is possible to check for the load completion by accessing the
    * [onLoad] [Future] getter.
    */
-  Sprite({ String imageSource, Point offset })
+  Sprite({ String imageSource, Point2D offset })
   {
-    this.offset   = ( offset != null ) ? offset : new Point.zero();
+    this.offset   = ( offset != null ) ? offset : new Point2D.zero();
     if( imageSource != null && imageSource != "" )
     {
       this.load( imageSource );
@@ -97,12 +97,12 @@ class Sprite
    * You must provide a image which must be an [ImageElement]. This Image will be the image used by the sprite.
    * The sprite will not deal with the load method in this case.
    *
-   * You can provide the [offset] which is a xy [Point] with the offset of the sprite.
-   * If none is provided the default [offset] value is [Point.zero].
+   * You can provide the [offset] which is a xy [Point2D] with the offset of the sprite.
+   * If none is provided the default [offset] value is [Point2D.zero].
    */
-  Sprite.fromImage( ImageElement image, { Point offset } )
+  Sprite.fromImage( ImageElement image, { Point2D offset } )
   {
-    this.offset   = ( offset != null ) ? offset : new Point.zero();
+    this.offset   = ( offset != null ) ? offset : new Point2D.zero();
     this._setImage( image );
   }
   /**
@@ -281,5 +281,22 @@ class Sprite
       return true;
     }
     return false;
+  }
+
+  void trim()
+  {
+    throw new UnimplementedError("This method is not implemmented.");
+  }
+
+  void draw( Point2D position, {Mirroring mirroring, num rotation, Point2D scale} )
+  {
+    if( Display.target != null )
+    {
+      Display.target.draw(this, position, mirroring, rotation, scale );
+    }
+    else
+    {
+      throw new AssertionError();
+    }
   }
 }
