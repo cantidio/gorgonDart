@@ -23,6 +23,22 @@ void main()
       content.remove();
     });
 
+    test( "Display.target while no display is created is null.", (){
+      expect( Display.target, equals( null ) );
+    });
+
+    test( "Display.target after a display is created is the first created display.", (){
+      Display display = new Display( content );
+      expect( Display.target, equals( display ) );
+    });
+
+    test( "Display.setAsTarget sets the display as the Display.target.", (){
+      Display display = new Display( content );
+      Display display2 = new Display( content );
+      display2.setAsTarget();
+      expect( Display.target, equals( display2 ) );
+    });
+
     test( "Constructor pushes only one element inside the target content", (){
       Display display = new Display( content );
       expect( content.children.length, equals( 1 ) );
@@ -77,7 +93,28 @@ void main()
       expect( () => new Display( content, height: -100 ), throwsFormatException );
     });
 
+    test( "Constructor with the stretchToFill=true must generate a canvas with the same width of it's container", (){
+      Display display = new Display( content, width:320, height: 240, stretchToFill: true );
+      CanvasElement canvas = content.children[0];
+      expect( canvas.width , equals( 640 ) );
+    });
 
+    test( "Constructor with the stretchToFill=true must generate a canvas with the same height of it's container", (){
+      Display display = new Display( content, width:320, height: 240, stretchToFill: true );
+      CanvasElement canvas = content.children[0];
+      expect( canvas.height , equals( 480 ) );
+    });
+
+    test( "Constructor with the stretchToFill = true must have the correct scale value", (){
+      Display display = new Display( content, width:320, height: 240, stretchToFill: true );
+      expect( display.scale, equals( new Point2D( 2.0, 2.0 ) ) );
+    });
+
+    test( "Constructor with the imageSmoothing=true must generate a canvas with context2D.imageSmoothingEnabled = true.", (){
+      Display display = new Display( content, imageSmoothing: true );
+      CanvasElement canvas = content.children[0];
+      expect( canvas.context2D.imageSmoothingEnabled, equals( true ) );
+    });
 
   });
 
