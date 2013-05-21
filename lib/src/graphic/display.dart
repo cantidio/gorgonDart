@@ -11,10 +11,9 @@ class Display
   static Display _target;                 // The current target display
   Element       _parent;                  // The element where our canvas will be placed
   CanvasElement _canvas;                  // The canvas element of the display
-  Point2D         _scale = new Point2D(1,1);  // The current scale of the display
+  Point2D       _scale = new Point2D(1,1);// The current scale of the display
   int           _originalWidth = 0;       // The original width of the display
   int           _originalHeight = 0;      // The original height of the display
-
 
   /// Return the current display target
   static Display get target => _target;
@@ -38,9 +37,15 @@ class Display
    *
    * The [imageSmoothing] is setted to [false] as default. You can turn it on by setting it to [true].
    */
-  Display( Element target, int width, int height, { bool stretchToFill: false , bool imageSmoothing: false } )
+  Display( Element target, { int width: 300, int height: 150, bool stretchToFill: false , bool imageSmoothing: false } )
   {
     _parent         = target;
+
+    if( width <= 0 || height <= 0 )
+    {
+      throw new FormatException("The Display width and height values must be higher than 0.");
+    }
+
     _originalWidth  = width;
     _originalHeight = height;
 

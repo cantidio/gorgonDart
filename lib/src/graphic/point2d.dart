@@ -16,7 +16,7 @@ class Point2D
   /**
    * Method that describes the Point Object returning a [String].
    */
-  String toString() => "Point(x: $x, y: $y)";
+  String toString() => "Point2D(x: $x, y: $y)";
   /**
    * Creates a [Point2D], setting its [num] [x] axis value and its [num] [y] value.
    */
