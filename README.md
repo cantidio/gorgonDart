@@ -16,4 +16,4 @@ Gorgon is licensed under the zlib license. For conditions of distribution and us
 
 ## Thanks
 
-[Transcends Games](http://openfontlibrary.org/en/font/transcends-games)
+Font File used in the tests - [Transcends Games](http://openfontlibrary.org/en/font/transcends-games)
