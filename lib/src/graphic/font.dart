@@ -17,6 +17,9 @@ class Font
   /// Returns the onLoad future of the font
   Future<Font> get onLoad => _onLoad;
   
+  /// The default color to draw with this font
+  Color color;
+  
   /// The default size of the font
   int size;
   
@@ -36,16 +39,17 @@ class Font
    * 
    * The load completion can be checked using the [onLoad] [Future] getter.
    */
-  Font({String fontUrl, int size: 12, FontAlignment alignment: FontAlignment.left})
+  Font({ String fontUrl, int size: 12, FontAlignment alignment: FontAlignment.left, Color color: null })
   {
     if( fontUrl != null )
     {
-      load( fontUrl, size: size, alignment: alignment );
+      load( fontUrl, size: size, alignment: alignment, color: color );
     }
     else
     {
       this.size      = size;
       this.alignment = alignment;
+      this.color     = (color != null ) ? color : new Color();
     }
   }
 
@@ -54,21 +58,22 @@ class Font
    *
    * This method will created a font-face entry in the [document.head] with the given [fontUrl].
    * 
-   * You can provide along with the [fontUrl] a default [size] and a default [alignment].
+   * You can provide along with the [fontUrl] a default [size], a default [alignment] and a default [color].
    * These will work as default values and will be used for every draw operation that you don't
-   * set another alignment and size by yourself.
+   * set another [alignment], [size] and [color] by yourself.
    *
    * This method returns a [Future]<[Font]> which can be checked for the font load completion.
    *
    * @todo try changing the watchdog checking method for drawing in a canvas.
    */
-  Future<Font> load( String fontUrl, {int size: 12, FontAlignment alignment: FontAlignment.left} )
+  Future<Font> load( String fontUrl, {int size: 12, FontAlignment alignment: FontAlignment.left, Color color: null} )
   {
     Completer completer = new Completer();
     Element style       = new Element.tag("style");
     _family             = fontUrl.substring( fontUrl.lastIndexOf("/") + 1); 
     _family             = _family.replaceAll(".", "") + new DateTime.now().millisecondsSinceEpoch.toString();
     this.size           = size;
+    this.color          = (color != null ) ? color : new Color();
     this.alignment      = alignment;
     
     style.appendHtml( "@font-face{ font-family: '$_family'; src: url('$fontUrl'); }" );
@@ -125,5 +130,29 @@ class Font
     }
     span.remove();
     return false;
+  }
+  /**
+   * Method that writes/draws a [text] into the target [Display].
+   * 
+   * This method will draw the requested [text] into the target [Display].
+   * You should set the [text] and the [position] it should be drawn in the [Display].
+   * 
+   * You can set the [color], the [alignment] and the [size] in pixels of the [text].
+   * If you don't these these values, then the default values will be used.
+   */
+  void drawText( Point2D position, String text, { Color color, FontAlignment alignment, int size })
+  {
+    if( Display.target != null )
+    {
+      size      = ( size      != null ) ? size      : this.size;
+      color     = ( color     != null ) ? color     : this.color;
+      alignment = ( alignment != null ) ? alignment : this.alignment;
+      
+      Display.target.drawText( this, position, text, alignment, color, size );
+    }
+    else
+    {
+      throw new AssertionError();
+    }
   }
 }

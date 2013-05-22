@@ -14,7 +14,7 @@ void main()
     Font font1, font2;
     setUp((){
       font1 = new Font();
-      font2 = new Font(alignment: FontAlignment.center, size: 30);
+      font2 = new Font(alignment: FontAlignment.center, size: 30, color: new Color(r:255) );
     });
     
     test( "Empty Constructor Generates Empty Font.family string", (){
@@ -29,12 +29,20 @@ void main()
       expect( font1.alignment, equals( FontAlignment.left ) );
     });
     
+    test( "Empty Constructor Generates Font.color = new Color()", (){
+      expect( font1.color, equals( new Color() ) );
+    });
+    
     test( "Set the size in the Constructor, returns the desired size",(){
       expect( font2.size, equals( 30 ) );
     });
     
     test( "Set the alignment in the Constructor, returns the desired alignment",(){
       expect( font2.alignment, equals( FontAlignment.center) );
+    });
+    
+    test( "Set the color in the  Constructor, returns the desired color", (){
+      expect( font2.color, equals( new Color(r:255) ) );
     });
     
     test( "loading an existent font, must create a element in the document.head",(){

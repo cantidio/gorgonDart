@@ -153,4 +153,28 @@ class Display
       _canvas.context2D.restore();
     }
   }
+  /**
+   * Method that writes/draws a [text] into the [Display].
+   * 
+   * **Warning**: You don't need to use this method directly, you can use the [Font.drawText] instead.
+   * 
+   * This method will draw the requested [text] into the [Display] using the provided [Font].
+   * You should set the [position] that this text should be drawn, it's [alignment], it's [color]
+   * and it's [size] in pixels.
+   */
+  void drawText( Font font, Point2D position, String text, FontAlignment alignment, Color color, int size )
+  {
+    if( font != null )
+    {
+      size      = ( size      != null ) ? size      : font.size;
+      color     = ( color     != null ) ? color     : font.color;
+      alignment = ( alignment != null ) ? alignment : font.alignment;
+      
+      _canvas.context2D.save();
+      _canvas.context2D.font      = "${size}px ${font.family}";
+      _canvas.context2D.fillStyle = "rgba(${color.r},${color.g},${color.b},${color.a})";
+      _canvas.context2D.fillText( text, position.x, position.y );
+      _canvas.context2D.restore();
+    }
+  }
 }
