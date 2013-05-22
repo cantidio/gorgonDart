@@ -37,6 +37,24 @@ void main()
       expect( font2.alignment, equals( FontAlignment.center) );
     });
     
+    test( "loading an existent font, must create a element in the document.head",(){
+      String file = "resources/TranscendsGames.otf";
+      int child   = document.head.children.length;
+      
+      font2.load( file ).then( expectAsync1((_) {
+        expect( document.head.children.length, equals( child+1 ) );
+      }));      
+    });
+    
+    test( "loading an existent font, must create a element of the type STYLE in the document.head",(){
+      String file = "resources/TranscendsGames.otf";
+      int child   = document.head.children.length;
+      
+      font2.load( file ).then( expectAsync1((_) {
+        expect( document.head.children[child].tagName, equals( "STYLE" ) );
+      }));
+    });
+    
     test( "Try to load an inexistent font returns an exception",(){
       String file = "this_font_donot_exist.ttf";
       font2.load( file ).catchError( expectAsync1((e) {
