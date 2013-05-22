@@ -30,6 +30,10 @@ class Font
   /**
    * Method that creates a [Font] with the [fontUrl] provided.
    *
+   * You can provide along with the [fontUrl] a default [size] and a default [alignment].
+   * These will work as default values and will be used for every draw operation that you don't
+   * set another alignment and size by yourself.
+   * 
    * The load completion can be checked using the [onLoad] [Future] getter.
    */
   Font({String fontUrl, int size: 12, FontAlignment alignment: FontAlignment.left})
@@ -49,6 +53,10 @@ class Font
    * Method that loads a [Font] given its [fontUrl].
    *
    * This method will created a font-face entry in the [document.head] with the given [fontUrl].
+   * 
+   * You can provide along with the [fontUrl] a default [size] and a default [alignment].
+   * These will work as default values and will be used for every draw operation that you don't
+   * set another alignment and size by yourself.
    *
    * This method returns a [Future]<[Font]> which can be checked for the font load completion.
    *
@@ -65,7 +73,7 @@ class Font
     
     style.appendHtml( "@font-face{ font-family: '$_family'; src: url('$fontUrl'); }" );
     document.head.append( style );
-
+    
     //The following code runs until the font is loaded or we get a timeout.
     _watchdog_runs  = 0;
     _watchdog_timer = new Timer.periodic( const Duration(milliseconds: 25), (_) {
@@ -79,7 +87,8 @@ class Font
       {
         _watchdog_timer.cancel();
         _watchdog_timer = null;
-        completer.completeError( new Exception("timeout loading font: "+fontUrl ) );
+        style.remove();
+        completer.completeError( new Exception("Timeout loading font: "+fontUrl ) );
       }
     });
     _onLoad = completer.future;

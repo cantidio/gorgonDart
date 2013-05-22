@@ -13,3 +13,7 @@ Gorgon is a game development library for using with Dart.
 ## License
 
 Gorgon is licensed under the zlib license. For conditions of distribution and use, see copyright notice in [`LICENSE.txt`](LICENSE.txt).
+
+## Thanks
+
+[Transcends Games](http://openfontlibrary.org/en/font/transcends-games)

@@ -4,6 +4,7 @@
  */
 library font_test;
 
+import "dart:html";
 import "package:unittest/unittest.dart";
 import "package:gorgon/gorgon.dart";
 
@@ -34,6 +35,22 @@ void main()
     
     test( "Set the alignment in the Constructor, returns the desired alignment",(){
       expect( font2.alignment, equals( FontAlignment.center) );
+    });
+    
+    test( "Try to load an inexistent font returns an exception",(){
+      String file = "this_font_donot_exist.ttf";
+      font2.load( file ).catchError( expectAsync1((e) {
+        expect( e.toString(), equals( new Exception("Timeout loading font: "+file ).toString() ) );
+      }));      
+    });
+    
+    test( "Try to load an inexistent font, should not leave a style element in the document.head.",(){
+      String file = "this_font_donot_exist.ttf";
+      int child   = document.head.children.length;
+      
+      font2.load( file ).catchError( expectAsync1((e) {
+        expect( document.head.children.length, equals( child ) );
+      }));
     });
     
   });
