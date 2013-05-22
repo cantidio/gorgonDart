@@ -55,6 +55,24 @@ void main()
       }));
     });
     
+    test( "loading an existent font, must create a element of the type @font-face inside the STYLE created",(){
+      String file = "resources/TranscendsGames.otf";
+      int child   = document.head.children.length;
+      
+      font2.load( file ).then( expectAsync1((_) {
+        expect( document.head.children[child].nodes[0].toString().substring(0,10), equals( "@font-face" ) );
+      }));
+    });
+    
+    test( "loading an existent font, must create a element of the type @font-face with the family expected",(){
+      String file = "resources/TranscendsGames.otf";
+      int child   = document.head.children.length;
+      
+      font2.load( file ).then( expectAsync1((_) {
+        expect( document.head.children[child].nodes[0].toString().substring(26,26+font2.family.length), equals( font2.family ) );
+      }));
+    });
+    
     test( "Try to load an inexistent font returns an exception",(){
       String file = "this_font_donot_exist.ttf";
       font2.load( file ).catchError( expectAsync1((e) {
