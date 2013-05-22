@@ -36,7 +36,7 @@ class Font
   {
     if( fontUrl != null )
     {
-      load( fontUrl, size );
+      load( fontUrl, size: size, alignment: alignment );
     }
     else
     {
