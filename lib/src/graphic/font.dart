@@ -9,26 +9,39 @@ part of gorgon;
 class Font
 {
   Future<Font> _onLoad = new Completer().future;
-  String _family;
-
-
+  String _family = "";
+  
+  /// Returns the family name generated for the font
+  String get family => _family;
+    
   /// Returns the onLoad future of the font
   Future<Font> get onLoad => _onLoad;
+  
+  /// The default size of the font
+  int size;
+  
+  /// The default alignment used by the font
+  FontAlignment alignment = FontAlignment.left;
 
   Timer _watchdog_timer;  // The watchdog timer
   int _watchdog_runs;     // How many times the watchdog has run
-  int _watchdog_max = 10; // The max number the watchdog is granted to run
+  int _watchdog_max = 20; // The max number the watchdog is granted to run
 
   /**
    * Method that creates a [Font] with the [fontUrl] provided.
    *
    * The load completion can be checked using the [onLoad] [Future] getter.
    */
-  Font({String fontUrl})
+  Font({String fontUrl, int size: 12, FontAlignment alignment: FontAlignment.left})
   {
     if( fontUrl != null )
     {
-      load( fontUrl );
+      load( fontUrl, size );
+    }
+    else
+    {
+      this.size      = size;
+      this.alignment = alignment;
     }
   }
 
@@ -41,15 +54,17 @@ class Font
    *
    * @todo try changing the watchdog checking method for drawing in a canvas.
    */
-  Future<Font> load( String fontUrl )
+  Future<Font> load( String fontUrl, {int size: 12, FontAlignment alignment: FontAlignment.left} )
   {
     Completer completer = new Completer();
-    Element style = new Element.tag("style");
-    _family = fontUrl.substring( fontUrl.lastIndexOf("/") + 1) + new DateTime.now().millisecondsSinceEpoch.toString();
-    _family = _family.replaceAll(".", "");
+    Element style       = new Element.tag("style");
+    _family             = fontUrl.substring( fontUrl.lastIndexOf("/") + 1); 
+    _family             = _family.replaceAll(".", "") + new DateTime.now().millisecondsSinceEpoch.toString();
+    this.size           = size;
+    this.alignment      = alignment;
     
     style.appendHtml( "@font-face{ font-family: '$_family'; src: url('$fontUrl'); }" );
-    document.head.append(style);
+    document.head.append( style );
 
     //The following code runs until the font is loaded or we get a timeout.
     _watchdog_runs  = 0;
@@ -70,6 +85,7 @@ class Font
     _onLoad = completer.future;
     return onLoad;
   }
+  
   /**
    * Method that checks if the [Font] has loaded.
    * 

@@ -13,9 +13,9 @@ import 'dart:math';
 
 part 'src/graphic/point2d.dart';
 part 'src/graphic/display.dart';
+part 'src/graphic/font_alignment.dart';
 part 'src/graphic/font.dart';
 part 'src/graphic/mirroring.dart';
 part 'src/graphic/color.dart';
 part 'src/graphic/sprite.dart';
 part 'src/graphic/spritepack.dart';
-

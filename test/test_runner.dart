@@ -8,12 +8,14 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:math';
 
-import 'point2d_test.dart'    as point2d_test;
-import 'mirroring_test.dart'  as mirroring_test;
-import 'color_test.dart'      as color_test;
-import 'sprite_test.dart'     as sprite_test;
-import 'spritepack_test.dart' as spritepack_test;
-import 'display_test.dart'    as display_test;
+import 'point2d_test.dart'        as point2d_test;
+import 'mirroring_test.dart'      as mirroring_test;
+import 'color_test.dart'          as color_test;
+import 'sprite_test.dart'         as sprite_test;
+import 'spritepack_test.dart'     as spritepack_test;
+import 'display_test.dart'        as display_test;
+import 'font_alignment_test.dart' as font_alignment_test;
+import 'font_test.dart'           as font_test;
 
 main()
 {
@@ -21,6 +23,8 @@ main()
   mirroring_test.main();
   color_test.main();
   display_test.main();
+  font_alignment_test.main();
+  font_test.main();
   sprite_test.main();
   spritepack_test.main();
   pollForDone(testCases);
