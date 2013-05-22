@@ -15,11 +15,9 @@ class Font
   /// Returns the onLoad future of the font
   Future<Font> get onLoad => _onLoad;
 
-
   Timer _watchdog_timer;  // The watchdog timer
   int _watchdog_runs;     // How many times the watchdog has run
   int _watchdog_max = 10; // The max number the watchdog is granted to run
-
 
   /**
    * Method that creates a [Font] with the [fontUrl] provided.
@@ -49,38 +47,58 @@ class Font
     Element style = new Element.tag("style");
     _family = fontUrl.substring( fontUrl.lastIndexOf("/") + 1) + new DateTime.now().millisecondsSinceEpoch.toString();
     _family = _family.replaceAll(".", "");
-
+    
     style.appendHtml( "@font-face{ font-family: '$_family'; src: url('$fontUrl'); }" );
     document.head.append(style);
 
     //The following code runs until the font is loaded or we get a timeout.
-    _watchdog_runs = 0;
+    _watchdog_runs  = 0;
     _watchdog_timer = new Timer.periodic( const Duration(milliseconds: 25), (_) {
-      Element span = new Element.tag("span");
-      document.body.append(span);
-
-      span.style.fontSize   = "10px";
-      span.style.position   = "absolute";
-      span.style.top        = "-100px";
-      span.style.left       = "-100px";
-      span.text             = "text";
-      int before            = span.clientWidth;
-      span.style.fontFamily = _family;
-      int after             = span.clientWidth;
-      span.remove();
-
-      if( before != after )
+      if( _isFontLoaded() )
       {
         _watchdog_timer.cancel();
+        _watchdog_timer = null;
         completer.complete(this);
       }
       else if( _watchdog_runs++ > _watchdog_max )
       {
         _watchdog_timer.cancel();
+        _watchdog_timer = null;
         completer.completeError( new Exception("timeout loading font: "+fontUrl ) );
       }
     });
     _onLoad = completer.future;
     return onLoad;
+  }
+  /**
+   * Method that checks if the [Font] has loaded.
+   * 
+   * The method will return [true] if the [Font] is loaded or [false] otherwise. 
+   */
+  bool _isFontLoaded()
+  {
+    int width, height;
+    List<String> fonts  = ["monospace","sans-serif","serif",""];
+    Element span        = new Element.tag("span");
+    document.body.append( span );
+    
+    span.style.fontSize   = "72px";
+    span.text             = "wwwiii";
+    
+    for( String font in fonts )
+    {
+      span.style.fontFamily = "$_family, $font";
+      width                 = span.offsetWidth;
+      height                = span.offsetHeight;
+      span.style.fontFamily = font;
+      
+      if( span.offsetWidth != width && span.offsetHeight != height )
+      {
+        span.remove();
+        return true;
+      }
+    }
+    span.remove();
+    return false;
   }
 }
