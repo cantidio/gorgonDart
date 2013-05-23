@@ -3,6 +3,99 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
+
+abstract class Filter
+{
+  static CanvasElement canvas = new CanvasElement();
+  ImageData apply(ImageData data);
+}
+class FilterGrayscale extends Filter
+{
+  ImageData apply(ImageData data)
+  {
+    for( int i = 0; i < data.data.length; i= i+4 )
+    {
+      // CIE luminance for the RGB
+      double v = data.data[i] * 0.2126 + data.data[i+1] * 0.7152 + data.data[i+2] * 0.0722;
+      data.data[i] = data.data[i+1] = data.data[i+2] = v.toInt();
+    }
+    return data;
+  }
+}
+class FilterConvolute extends Filter 
+{  
+  List<int> weights;
+  bool opaque;
+  
+  FilterConvolute( this.weights, [this.opaque=false]);
+  
+  ImageData apply( ImageData data )
+  {
+    int side          = sqrt(weights.length).round();
+    int halfSide      = (side/2).floor();
+    ImageData output  = Filter.canvas.context2D.createImageData( data.width, data.height );
+    
+    // go through the destination image pixels
+    int alphaFac = opaque ? 1 : 0;
+    for( int y = 0; y <  data.height; y++ )
+    {
+      for( int x = 0; x < data.width; x++ )
+      {
+        int dstOff = ( y * data.width + x) * 4;
+        // calculate the weighed sum of the source image pixels that
+        // fall under the convolution matrix
+        int r=0, g=0, b=0, a=0;
+        for( int cy = 0; cy < side; cy++ )
+        {
+          for( int cx = 0; cx < side; cx++ )
+          {
+            var scy = y + cy - halfSide;
+            var scx = x + cx - halfSide;
+            if( scy >= 0 && scy < data.height && scx >= 0 && scx < data.width )
+            {
+              var srcOff = (scy*data.width+scx)*4;
+              var wt = weights[cy*side+cx];
+              r += data.data[srcOff] * wt;
+              g += data.data[srcOff+1] * wt;
+              b += data.data[srcOff+2] * wt;
+              a += data.data[srcOff+3] * wt;
+            }
+          }
+        }
+        output.data[dstOff]   = r;
+        output.data[dstOff+1] = g;
+        output.data[dstOff+2] = b;
+        output.data[dstOff+3] = a + alphaFac*(255-a);
+      }
+    }
+    return output;
+  }
+}
+  
+class FilterSolbel extends Filter
+{
+  ImageData apply(ImageData data)
+  {
+    data                  = new FilterGrayscale().apply(data);
+    ImageData vertical    = new FilterConvolute([-1,0,1,-2,0,2,-1,0,1]).apply(data);
+    ImageData horizontal  = new FilterConvolute([-1,-2,-1,0,0,0,1,2,1]).apply(data);
+    
+    for( int i=0; i<data.data.length; i+=4 )
+    {
+      int v = vertical.data[i].abs();
+      int h = horizontal.data[i].abs();
+      
+      data.data[i]    = v;        // make the vertical gradient red
+      data.data[i+1]  = h;        // make the horizontal gradient green
+      data.data[i+2]  = ((v+h)/4).toInt();  // and mix in some blue for aesthetics
+      data.data[i+3]  = 255;      // opaque alpha
+    }
+    print("aqui");
+    
+    return data;
+  }
+}
+
 /**
  * Class that represents a display
  */
@@ -179,5 +272,10 @@ class Display
       _canvas.context2D.fillText( text, position.x, position.y );
       _canvas.context2D.restore();
     }
+  }
+  void filter( Filter filter )
+  {
+    ImageData data = filter.apply( _canvas.context2D.getImageData(0, 0, width, height) );
+    _canvas.context2D.putImageData( data, 0, 0 );    
   }
 }
