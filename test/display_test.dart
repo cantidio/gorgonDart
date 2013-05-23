@@ -12,16 +12,22 @@ void main()
 {
   group("Display", (){
     Element content;
+    Element content2;
 
     setUp((){
       content  = new Element.tag("div");
       content.style.width   = "640px";
       content.style.height  = "480px";
       document.body.append(content);
+      
+      content2 = new Element.tag("div");
+      document.body.append(content2);
+      
     });
     
     tearDown((){
       content.remove();
+      content2.remove();
     });
 
     test( "Display.target while no display is created is null.", (){
@@ -109,6 +115,18 @@ void main()
     test( "Constructor with the stretchToFill = true must have the correct scale value", (){
       Display display = new Display( content, width:320, height: 240, stretchToFill: true );
       expect( display.scale, equals( new Point2D( 2.0, 2.0 ) ) );
+    });
+    
+    test( "Constructor with the stretchToFill=true and a container without width or height set, ignores the stretchToFill option and set the display width.", (){
+      Display display = new Display( content2, width:320, height: 240, stretchToFill: true );
+      CanvasElement canvas = content2.children[0];
+      expect( canvas.width , equals( 320 ) );
+    });
+    
+    test( "Constructor with the stretchToFill=true and a container without width or height set, ignores the stretchToFill option and set the display height.", (){
+      Display display = new Display( content2, width:320, height: 240, stretchToFill: true );
+      CanvasElement canvas = content2.children[0];
+      expect( canvas.height , equals( 240 ) );
     });
 
     test( "Constructor with the imageSmoothing=true must generate a canvas with context2D.imageSmoothingEnabled = true.", (){

@@ -34,6 +34,9 @@ class Display
    *
    * If you set the [stretchToFill] as [true] then the display will be stretched to fill the provided [target].
    * For that it will set the scale to the canvas for matching the size of the [target].
+   * 
+   * **Warning** If you set the [stretchToFill] as [true] and the provided [target] doesn't have a defined width or height.
+   * Then this option will be ignored. 
    *
    * The [imageSmoothing] is setted to [false] as default. You can turn it on by setting it to [true].
    */
@@ -49,7 +52,7 @@ class Display
     _originalWidth  = width;
     _originalHeight = height;
 
-    if( stretchToFill )
+    if( stretchToFill && _parent.clientWidth != 0 &&  _parent.clientHeight != 0 )
     {
       width     = _parent.clientWidth;
       height    = _parent.clientHeight;
