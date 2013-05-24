@@ -22,19 +22,19 @@ class FilterGrayscale extends Filter
     return data;
   }
 }
-class FilterConvolute extends Filter 
-{  
+class FilterConvolute extends Filter
+{
   List<int> weights;
   bool opaque;
-  
+
   FilterConvolute( this.weights, [this.opaque=false]);
-  
+
   ImageData apply( ImageData data )
   {
     int side          = sqrt(weights.length).round();
     int halfSide      = (side/2).floor();
     ImageData output  = Filter.canvas.context2D.createImageData( data.width, data.height );
-    
+
     // go through the destination image pixels
     int alphaFac = opaque ? 1 : 0;
     for( int y = 0; y <  data.height; y++ )
@@ -71,7 +71,7 @@ class FilterConvolute extends Filter
     return output;
   }
 }
-  
+
 class FilterSolbel extends Filter
 {
   ImageData apply(ImageData data)
@@ -79,19 +79,17 @@ class FilterSolbel extends Filter
     data                  = new FilterGrayscale().apply(data);
     ImageData vertical    = new FilterConvolute([-1,0,1,-2,0,2,-1,0,1]).apply(data);
     ImageData horizontal  = new FilterConvolute([-1,-2,-1,0,0,0,1,2,1]).apply(data);
-    
+
     for( int i=0; i<data.data.length; i+=4 )
     {
       int v = vertical.data[i].abs();
       int h = horizontal.data[i].abs();
-      
+
       data.data[i]    = v;        // make the vertical gradient red
       data.data[i+1]  = h;        // make the horizontal gradient green
       data.data[i+2]  = ((v+h)/4).toInt();  // and mix in some blue for aesthetics
       data.data[i+3]  = 255;      // opaque alpha
     }
-    print("aqui");
-    
     return data;
   }
 }
@@ -127,9 +125,9 @@ class Display
    *
    * If you set the [stretchToFill] as [true] then the display will be stretched to fill the provided [target].
    * For that it will set the scale to the canvas for matching the size of the [target].
-   * 
+   *
    * **Warning** If you set the [stretchToFill] as [true] and the provided [target] doesn't have a defined width or height.
-   * Then this option will be ignored. 
+   * Then this option will be ignored.
    *
    * The [imageSmoothing] is setted to [false] as default. You can turn it on by setting it to [true].
    */
@@ -251,9 +249,9 @@ class Display
   }
   /**
    * Method that writes/draws a [text] into the [Display].
-   * 
+   *
    * **Warning**: You don't need to use this method directly, you can use the [Font.drawText] instead.
-   * 
+   *
    * This method will draw the requested [text] into the [Display] using the provided [Font].
    * You should set the [position] that this text should be drawn, it's [alignment], it's [color]
    * and it's [size] in pixels.
@@ -265,7 +263,7 @@ class Display
       size      = ( size      != null ) ? size      : font.size;
       color     = ( color     != null ) ? color     : font.color;
       alignment = ( alignment != null ) ? alignment : font.alignment;
-      
+
       _canvas.context2D.save();
       _canvas.context2D.font      = "${size}px ${font.family}";
       _canvas.context2D.fillStyle = "rgba(${color.r},${color.g},${color.b},${color.a})";
@@ -276,6 +274,6 @@ class Display
   void filter( Filter filter )
   {
     ImageData data = filter.apply( _canvas.context2D.getImageData(0, 0, width, height) );
-    _canvas.context2D.putImageData( data, 0, 0 );    
+    _canvas.context2D.putImageData( data, 0, 0 );
   }
 }
