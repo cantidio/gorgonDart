@@ -14,6 +14,7 @@ void main()
     Spritepack empty;
     Spritepack chicoNormal;
     Spritepack chicoTile;
+    Spritepack chicoJSON;
 
     setUp((){
       List<Future<dynamic>> futures  = new List<Future<dynamic>>();
@@ -28,6 +29,9 @@ void main()
       }
       chicoTile = new Spritepack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D.zero());
       futures.add(chicoTile.onLoad);
+
+      chicoJSON = new Spritepack.fromJSON( "resources/chico/chico.json");
+      futures.add(chicoJSON.onLoad);
 
       return Future.wait(futures);
     });
@@ -50,6 +54,10 @@ void main()
 
     test( "Loading an existing spritepack with .fromTileSheet must load 20 sprites.", (){
       expect( chicoTile.length, equals(20) );
+    });
+
+    test( "Loading an existing spritepack with .fromJSON must load 20 sprites.", (){
+      expect( chicoJSON.length, equals(20) );
     });
 
     test( "Every manually added Sprite must be equal to a individual loaded sprite.", (){
@@ -85,5 +93,24 @@ void main()
         }
       }));
     });
+
+    test( "Every added Sprite trought the .fromJSON must be equal to the individual loaded sprites.", (){
+      List<Future<dynamic>> futures  = new List<Future<dynamic>>();
+      List<Sprite> sprs = new List<Sprite>();
+      for( int i = 1; i < 21; ++ i )
+      {
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        futures.add( spr.onLoad );
+        sprs.add( spr );
+      }
+      Future.wait(futures).then( expectAsync1( (_){
+        for( int i = 0; i < 20; ++i )
+        {
+          expect( chicoJSON["group"][i], equals(sprs[i]) );
+        }
+      }));
+    });
+
+
   });
 }
