@@ -42,7 +42,7 @@ class Spritepack
    *
    * **Warning** This method will always consider the image path given as a full path or relative to the invoker.
    *
-   * The [dynamic] [spritepack] must be like this:
+   * The [Map] [spritepack] must be like this:
    * dynamic [spritepack] = {
    *    "group1" :[
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image1.png" },
@@ -54,7 +54,7 @@ class Spritepack
    *    ]
    * };
    */
-  void _loadFromObj( Object spritepack, Completer completer )
+  void _loadFromObj( Map spritepack, Completer completer )
   {
     List<Future<Sprite>> spr_futures  = new List<Future<Sprite>>();
 
@@ -79,7 +79,7 @@ class Spritepack
    *
    * You can check the completion of this method with the getter [onLoad].
    *
-   * The [dynamic] [spritepack] must be like this:
+   * The [Map] [spritepack] must be like this:
    * dynamic [spritepack] = {
    *    "group1" :[
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image1.png" },
@@ -91,7 +91,7 @@ class Spritepack
    *    ]
    * };
    */
-  Spritepack.fromOBJ( dynamic spritepack )
+  Spritepack.fromOBJ( Map spritepack )
   {
     Completer completer = new Completer();
     _loadFromObj( spritepack, completer );
@@ -116,7 +116,6 @@ class Spritepack
       if( obj["spritepack"] != null )
       {
         obj["spritepack"].forEach((group, list){
-
           list.forEach((spr){
             if( !spr["image"].contains("data:image/") )
             {
@@ -156,7 +155,7 @@ class Spritepack
     img.onLoad.listen((e)
     {
       CanvasElement canvas = new CanvasElement( width: tileWidth, height: tileHeight );
-      Object spritepack = {};
+      Map spritepack = new Map();
       int tilesX = (img.width/tileWidth).ceil();
       int tilesY = (img.height/tileHeight).ceil();
 
