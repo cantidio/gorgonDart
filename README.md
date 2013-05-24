@@ -10,6 +10,11 @@ be done without prior notice to consumers of this package.
 
 Gorgon is a game development library for using with Dart.
 
+## Version
+
+Gorgon is using the Semantic Versioning for the construction of it's version number. For more info about it check it at
+[semver.org](http://semver.org/)
+
 ## License
 
 Gorgon is licensed under the zlib license. For conditions of distribution and use, see copyright notice in [`LICENSE.txt`](LICENSE.txt).
