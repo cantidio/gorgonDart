@@ -18,4 +18,4 @@ Gorgon is licensed under the zlib license. For conditions of distribution and us
 
 Font File used in the tests - [Transcends Games](http://openfontlibrary.org/en/font/transcends-games)
 
-Dalmo Pereira for creating the SpriteSheet used in the tests. 
+Dalmo Pereira for creating the SpriteSheet used in the tests - <dalmokb@gmail.com>
