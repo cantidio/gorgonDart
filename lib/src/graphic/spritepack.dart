@@ -37,7 +37,7 @@ class SpritePack
    *   { "name" : "name" , "group" : 2, "index" : 0, "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image4.png" }
    * ];
    */
-  void _loadFromObj( dynamic spritepack, Completer completer )
+  void _loadFromObj( List<Object> spritepack, Completer completer )
   {
     List<Future<Sprite>> spr_futures  = new List<Future<Sprite>>();
     for( dynamic spr in spritepack )
