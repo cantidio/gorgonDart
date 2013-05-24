@@ -28,7 +28,7 @@ class Spritepack
   }
 
   /**
-   * Method that describes the Sprite Object returning a [String].
+   * Method that describes the Spritepack Object returning a [String].
    */
   String toString() => "Spritepack(groups: $groups)";
 

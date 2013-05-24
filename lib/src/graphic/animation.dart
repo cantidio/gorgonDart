@@ -23,6 +23,11 @@ class Animation
   int get length => _frames.length;
 
   /**
+   * Method that describes the Animation Object returning a [String].
+   */
+  String toString() => "Animation(frames: $_frames)";
+
+  /**
    * Creates a [Animation].
    *
    * If the [looping] is [true], this animation will have loop, which will start at the frame [loopFrame]
@@ -48,9 +53,19 @@ class Animation
     this.looping      = ( animation["looping"]      != null ) ? animation["looping"]      : false;
     this.loopFrame    = ( animation["loopFrame"]    != null ) ? animation["loopFrame"]    : 0;
     this.repeatNumber = ( animation["repeatNumber"] != null ) ? animation["repeatNumber"] : -1;
+    int globalTime    = animation["time"];
 
-    if( frames != null )
-      _frames.addAll( animation["frames"] );
+    if( animation["frames"] != null )
+    {
+      AnimationFrame fr;
+      animation["frames"].forEach((frame){
+        fr = add(new AnimationFrame.fromMap(frame));
+        if( globalTime != null && fr.time == 0 )
+        {
+          fr.time = globalTime;
+        }
+      });
+    }
   }
 
   /**
