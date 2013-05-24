@@ -11,107 +11,101 @@ import 'package:gorgon/gorgon.dart';
 
 void main()
 {
-  test( "Sprite Empty", (){
-    Sprite empty = new Sprite();
+  group("Sprite",(){
+    Sprite empty;
+    Sprite normal;
+    Sprite flipH;
+    Sprite flipV;
+    Sprite flipHV;
+    Sprite rotateLeft;
+    Sprite rotateRight;
+    setUp((){
+      empty       = new Sprite();
+      normal      = new Sprite(imageSource: "resources/chico/chico_1.png");
+      flipH       = new Sprite(imageSource: "resources/chico/chico_1_fh.png",   offset: new Point2D(-79,0));
+      flipV       = new Sprite(imageSource: "resources/chico/chico_1_fv.png",   offset: new Point2D(0,-79));
+      flipHV      = new Sprite(imageSource: "resources/chico/chico_1_fhv.png",  offset: new Point2D(-79,-79));
+      rotateLeft  = new Sprite(imageSource: "resources/chico/chico_1_rl.png",   offset: new Point2D(0,-79));
+      rotateRight = new Sprite(imageSource: "resources/chico/chico_1_rr.png",   offset: new Point2D(-79,0));
 
-    expect( empty.width     , equals( 0 ) );
-    expect( empty.height    , equals( 0 ) );
-    expect( empty.offset.x  , equals( 0 ) );
-    expect( empty.offset.y  , equals( 0 ) );
-    expect( empty.image     , equals( Sprite.emptyImage ) );
-  });
-
-  test( "Sprite load with existent image returns a future with the Sprite", (){
-    Sprite logo = new Sprite();
-
-    logo.load("resources/logo.png").then( expectAsync1((e) { expect(e.image, isNot(equals(Sprite.emptyImage))); } ) );
-  });
-
-  test( "Sprite load with inexistent image returns an exception", (){
-    Sprite logo = new Sprite();
-
-    logo.load("resources/logo_inexistent.png").catchError( expectAsync1((e) {
-      expect( e.toString(), equals( new Exception("Image: resources/logo_inexistent.png could not be found.").toString() ) );
-    }));
-  });
-
-  test( "Sprite Operator ==", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png");
-    Sprite logo2 = new Sprite( imageSource: "resources/logo.png");
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ]).then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip horizontal", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point2D(-390.0, 0.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-    .then( (_) => logo1.flipH() )
-    .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip vertical", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point2D(0.0, -394.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-    .then( (_) => logo1.flipV() )
-    .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip vertical and horizontal", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point2D(-390.0, -394.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-    .then( (_) => logo1.flipHV() )
-    .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip generic with Mirroring.H", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fh.png"   , offset: new Point2D(-390.0, 0.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-    .then( (_) => logo1.flip( Mirroring.H ) )
-    .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip generic with Mirroring.V", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fv.png"   , offset: new Point2D(0.0, -394.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-      .then( (_) => logo1.flip( Mirroring.V ) )
-      .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite Flip generic with Mirroring.HV", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_fhv.png"  , offset: new Point2D(-390.0, -394.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-      .then( (_) => logo1.flip( Mirroring.HV ) )
-      .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
-  });
-
-  test( "Sprite RotateLeft", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_rl.png"   , offset: new Point2D(0.0, -390.0) );
-
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-      .then( (_) => logo1.rotateLeft() )
-      .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
+      return Future.wait([
+        normal.onLoad,
+        flipH.onLoad,
+        flipV.onLoad,
+        flipHV.onLoad,
+        rotateLeft.onLoad,
+        rotateRight.onLoad,
+      ]);
     });
 
-  test( "Sprite RotateRight", (){
-    Sprite logo1 = new Sprite( imageSource: "resources/logo.png"      , offset: new Point2D.zero() );
-    Sprite logo2 = new Sprite( imageSource: "resources/logo_rr.png"   , offset: new Point2D(-394.0, 0.0) );
 
-    Future.wait([ logo1.onLoad, logo2.onLoad ])
-    .then( (_) => logo1.rotateRight() )
-    .then( expectAsync1( (_) => expect( logo1, equals(logo2) ) ));
+    test( "Empty width is 0", (){
+      expect( empty.width     , equals( 0 ) );
+    });
+
+    test( "Empty height is 0", (){
+      expect( empty.height    , equals( 0 ) );
+    });
+
+    test( "Empty offset is new Point2D.zero()", (){
+      expect( empty.offset  , equals( new Point2D.zero() ) );
+    });
+
+    test( "Empty image is Sprite.emptyImage", (){
+      expect( empty.image     , equals( Sprite.emptyImage ) );
+    });
+
+    test( "load with existent image results in a Sprite with an image != from Sprite.emptyImage", (){
+      expect(normal.image, isNot(equals(Sprite.emptyImage)));
+    });
+
+    test( "load with inexistent image returns an exception", (){
+      empty.load("resources/logo_inexistent.png").catchError( expectAsync1((e) {
+        expect( e.toString(), equals( new Exception("Image: resources/logo_inexistent.png could not be found.").toString() ) );
+      }));
+    });
+
+    test( "Operator == must return true when comparing the same image.", (){
+      expect( normal, equals(normal));
+    });
+
+    test( "Operator == return true when comparing sprites with the same internal data.", (){
+      Sprite normal2 = new Sprite( imageSource: "resources/chico/chico_1.png");
+
+      normal2.onLoad.then( expectAsync1( (_) => expect( normal, equals(normal2) ) ));
+    });
+
+    test( "Flip horizontal.", (){
+      normal.flipH().then( expectAsync1( (_) => expect( normal, equals(flipH) ) ));
+    });
+
+    test( "Flip vertical.", (){
+      normal.flipV().then( expectAsync1( (_) => expect( normal, equals(flipV) ) ));
+    });
+
+    test( "Flip horizontal and vertical.", (){
+      normal.flipHV().then( expectAsync1( (_) => expect( normal, equals(flipHV) ) ));
+    });
+
+    test( "Flip generic with Mirroring.H", (){
+      normal.flip( Mirroring.H ).then( expectAsync1( (_) => expect( normal, equals(flipH) ) ));
+    });
+
+    test( "Flip generic with Mirroring.V", (){
+      normal.flip( Mirroring.V ).then( expectAsync1( (_) => expect( normal, equals(flipV) ) ));
+    });
+
+    test( "Flip generic with Mirroring.HV", (){
+      normal.flip( Mirroring.HV ).then( expectAsync1( (_) => expect( normal, equals(flipHV) ) ));
+    });
+
+    test( "Rotate Left", (){
+      normal.rotateLeft().then( expectAsync1( (_) => expect( normal, equals(rotateLeft) ) ));
+    });
+
+    test( "Rotate Right", (){
+      normal.rotateRight().then( expectAsync1( (_) => expect( normal, equals(rotateRight) ) ));
+    });
+
   });
-
 }
