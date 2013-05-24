@@ -87,7 +87,7 @@ class FilterSolbel extends Filter
 
       data.data[i]    = v;        // make the vertical gradient red
       data.data[i+1]  = h;        // make the horizontal gradient green
-      data.data[i+2]  = ((v+h)/4).toInt();  // and mix in some blue for aesthetics
+      data.data[i+2]  = (v+h)~/4;  // and mix in some blue for aesthetics
       data.data[i+3]  = 255;      // opaque alpha
     }
     return data;
