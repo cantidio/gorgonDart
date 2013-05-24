@@ -16,7 +16,6 @@ void main()
     SpritePack chicoTile;
 
     setUp((){
-      Completer completer = new Completer();
       List<Future<dynamic>> futures  = new List<Future<dynamic>>();
 
       empty       = new SpritePack();
@@ -30,9 +29,7 @@ void main()
       chicoTile = new SpritePack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D.zero());
       futures.add(chicoTile.onLoad);
 
-      Future.wait(futures).then((_) => completer.complete()).catchError((e){ completer.completeError(e); });
-
-      return completer.future;
+      return Future.wait(futures);
     });
 
     test( "Empty length is 0", (){
@@ -51,6 +48,38 @@ void main()
       expect( chicoTile.length, equals(20) );
     });
 
-  });
+    test( "Every manually added Sprite must be equal to a individual loaded sprite.", (){
+      List<Future<dynamic>> futures  = new List<Future<dynamic>>();
+      List<Sprite> sprs = new List<Sprite>();
+      for( int i = 1; i < 21; ++ i )
+      {
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        futures.add( spr.onLoad );
+        sprs.add( spr );
+      }
+      Future.wait(futures).then( expectAsync1( (_){
+        for( int i = 0; i < 20; ++i )
+        {
+          expect( chicoNormal[i], equals(sprs[i]) );
+        }
+      }));
+    });
 
+    test( "Every added Sprite trought the .fromTileSheet must be equal to the individual loaded sprites.", (){
+      List<Future<dynamic>> futures  = new List<Future<dynamic>>();
+      List<Sprite> sprs = new List<Sprite>();
+      for( int i = 1; i < 21; ++ i )
+      {
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        futures.add( spr.onLoad );
+        sprs.add( spr );
+      }
+      Future.wait(futures).then( expectAsync1( (_){
+        for( int i = 0; i < 20; ++i )
+        {
+          expect( chicoTile[i], equals(sprs[i]) );
+        }
+      }));
+    });
+  });
 }

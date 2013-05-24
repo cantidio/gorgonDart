@@ -28,6 +28,25 @@ main()
   sprite_test.main();
   spritepack_test.main();
   pollForDone(testCases);
+
+  /*Element content = new Element.tag("div");
+  document.body.append(content);
+  Display display = new Display(content);
+
+  SpritePack spr = new SpritePack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D(32,64));
+  int f = 0;
+  spr.onLoad.then((_){
+    /*Timer timer = new Timer.periodic( const Duration(milliseconds: 10), (_) {
+      display.clear();
+      spr[f].draw(new Point2D(50,10));
+      f++;
+      if(f>=spr.length)f=0;
+    });*/
+    for( int i = 0; i < spr.length; ++i )
+    {
+      document.body.append(spr[i].image);
+    }
+  });*/
 }
 
 pollForDone(List tests) {
