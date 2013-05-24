@@ -11,22 +11,22 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   group("SpritePack",(){
-    SpritePack empty;
-    SpritePack chicoNormal;
-    SpritePack chicoTile;
+    Spritepack empty;
+    Spritepack chicoNormal;
+    Spritepack chicoTile;
 
     setUp((){
       List<Future<dynamic>> futures  = new List<Future<dynamic>>();
 
-      empty       = new SpritePack();
-      chicoNormal = new SpritePack();
+      empty       = new Spritepack();
+      chicoNormal = new Spritepack();
       for( int i = 1; i < 21; ++ i )
       {
         Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
         futures.add( spr.onLoad );
         chicoNormal.add( spr );
       }
-      chicoTile = new SpritePack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D.zero());
+      chicoTile = new Spritepack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D.zero());
       futures.add(chicoTile.onLoad);
 
       return Future.wait(futures);
@@ -37,7 +37,11 @@ void main()
     });
 
     test( "Empty accessing sprite at [0] throws RangeError.", (){
-      expect( () => empty[0], throwsRangeError );
+      expect( () => empty["0"][0], throwsRangeError );
+    });
+
+    test( "Accessing inexistent sprite groups return length = 0.", (){
+      expect( empty["unknown"].length, equals(0) );
     });
 
     test( "Adding 20 sprites manually in the spritepack should result in a .length = 20.", (){
@@ -60,7 +64,7 @@ void main()
       Future.wait(futures).then( expectAsync1( (_){
         for( int i = 0; i < 20; ++i )
         {
-          expect( chicoNormal[i], equals(sprs[i]) );
+          expect( chicoNormal[""][i], equals(sprs[i]) );
         }
       }));
     });
@@ -77,7 +81,7 @@ void main()
       Future.wait(futures).then( expectAsync1( (_){
         for( int i = 0; i < 20; ++i )
         {
-          expect( chicoTile[i], equals(sprs[i]) );
+          expect( chicoTile["0"][i], equals(sprs[i]) );
         }
       }));
     });

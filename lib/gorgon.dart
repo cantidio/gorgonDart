@@ -10,6 +10,7 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:json' as JSON;
 import 'dart:math';
+import 'dart:collection';
 
 part 'src/graphic/point2d.dart';
 part 'src/graphic/display.dart';

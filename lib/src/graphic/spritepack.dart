@@ -6,26 +6,34 @@ part of gorgon;
 /**
  * Class that represents a package of sprites.
  */
-class SpritePack
+class Spritepack
 {
+  HashMap<String, List<Sprite>> _groups = new HashMap<String, List<Sprite>>(); // The group map
+  Future<Spritepack>  _onLoad = new Completer().future; // The spritepack onLoad future.
+
   /// Object that represents an empty Sprite.
   static final Sprite emptySprite = new Sprite();
-  List<Sprite>        _sprites    = new List<Sprite>();     // The Sprite list
-  Future<SpritePack>  _onLoad     = new Completer().future; // The spritepack onLoad future.
 
-  /// The SpritePack onLoad future getter.
-  Future<SpritePack> get onLoad => _onLoad;
+  /// The [Spritepack] onLoad future getter.
+  Future<Spritepack> get onLoad => _onLoad;
 
-  /// The SpritePack length getter
-  int get length   => _sprites.length;
+  /// Returns a [List] of the available [groups] in the [Spritepack]
+  List<String> get groups => _groups.keys.toList(growable: false);
+
+  /// Returns the number of [Sprites] in the [Spritepack]
+  int get length {
+    int num = 0;
+    forEachGroup((K,V){ num += V.length; });
+    return num;
+  }
 
   /**
    * Method that describes the Sprite Object returning a [String].
    */
-  String toString() => "SpritePack(length: $length)";
+  String toString() => "Spritepack(groups: $groups)";
 
   /**
-   * Method that loads an [SpritePack] based in a [spritepack] object.
+   * Method that loads an [Spritepack] based in a [spritepack] object.
    *
    * **Warning** This method will always consider the image path given as a full path or relative to the invoker.
    *
@@ -46,18 +54,18 @@ class SpritePack
       sprite.offset.x = spr["xoffset"];
       sprite.offset.y = spr["yoffset"];
       spr_futures.add( sprite.load( spr["image"] ) );
-      this.add( sprite );
+      this.add( sprite, group: spr["group"].toString() );
     }
     Future.wait(spr_futures)
       .then((_) => completer.complete(this))
       .catchError((e){ completer.completeError(e); });
   }
   /**
-   * Method that creates an empty [SpritePack].
+   * Method that creates an empty [Spritepack].
    */
-  SpritePack();
+  Spritepack();
   /**
-   * Method that creates an [SpritePack] based in a [spritepack] object.
+   * Method that creates an [Spritepack] based in a [spritepack] object.
    *
    * **Warning** This method will always consider the image path given as a full path or relative to the invoker.
    *
@@ -71,21 +79,21 @@ class SpritePack
    *   { "name" : "name" , "group" : 2, "index" : 0, "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image4.png" }
    * ];
    */
-  SpritePack.fromOBJ( dynamic spritepack )
+  Spritepack.fromOBJ( dynamic spritepack )
   {
     Completer completer = new Completer();
     _loadFromObj( spritepack, completer );
     _onLoad = completer.future;
   }
   /**
-   * Method that creates a [SpritePack] from a json provided its[jsonUrl] as a [String].
+   * Method that creates a [Spritepack] from a json provided its[jsonUrl] as a [String].
    *
    * **Warning** This method will check if the image paths provided in the JSON are base64 data or an full URL, if not
    * then it will load the image files from the same place/folder the JSON file was loaded.
    *
    * You can check the completion of this method with the getter [onLoad]
    */
-  SpritePack.fromJSON( String jsonUrl )
+  Spritepack.fromJSON( String jsonUrl )
   {
     String baseUrl                    = jsonUrl.substring( 0, jsonUrl.lastIndexOf("/") + 1 );
     Completer completer               = new Completer();
@@ -111,7 +119,7 @@ class SpritePack
     _onLoad = completer.future;
   }
   /**
-   * Method that creates a [SpritePack] from a tilesheet image.
+   * Method that creates a [Spritepack] from a tilesheet image.
    *
    * This method will take an image in the [tileUrl] provided and separate it in a lot of other images.
    *
@@ -123,7 +131,7 @@ class SpritePack
    *
    * You can check the completion of this method with the getter [onLoad]
    */
-  SpritePack.fromTileSheet( String tileUrl, int tileWidth, int tileHeight, [Point2D offset] )
+  Spritepack.fromTileSheet( String tileUrl, int tileWidth, int tileHeight, [Point2D offset] )
   {
     Completer completer = new Completer();
     ImageElement   img  = new ImageElement();
@@ -165,14 +173,56 @@ class SpritePack
   }
 
   /**
-   * Method that adds a new [Sprite] into the [SpritePack].
+   * Method that adds a [Sprite] into the [Spritepack]
+   *
+   * You can tell assign a [group] to place the [Sprite] if none is assigned then it places the [Sprite] in a group [""].
+   *
+   * If you pass a [index], then the [Sprite] will be added in the assigned [group] in the requested [index].
+   *
+   * This method returns the reference to the added [Sprite].
    */
-  void add(Sprite sprite) => _sprites.add(sprite);
+  Sprite add(Sprite sprite, {String group: "", int index})
+  {
+    if( index != null )
+    {
+      this[group].insert(index, sprite);
+    }
+    else
+    {
+      this[group].add(sprite);
+    }
+    return sprite;
+  }
 
   /**
-   * Operator that retrieves the requested [i] [Sprite]  in the [SpritePack].
+   * Operator that returns a [Sprite] [List] of the requested [group].
    *
-   * @todo decide if when trying to get an inexistent sprite it should return an exception or an emptySprite.
+   * If the requested [group] do not exist, then an empty [List] will be created and assigned to that [group].
    */
-  operator [](int i) => _sprites[i];
+  List<Sprite> operator []( String group )
+  {
+    if( _groups[group] == null )
+    {
+      _groups[group] = new List<Sprite>();
+    }
+    return _groups[group];
+  }
+
+  /**
+   * Applies the function [f] to each [group] {[group], [spriteList]} of the [Spritepack].
+   */
+  void forEachGroup(void f( String group, List<Sprite> spriteList ) )
+  {
+    _groups.forEach(f);
+  }
+
+  /**
+   * Applies the function [f] to each [sprite] of all groups in the [Spritepack].
+   */
+  void forEachSprite(void f( Sprite sprite ) )
+  {
+    forEachGroup((g,l){
+      l.forEach(f);
+    });
+  }
 }

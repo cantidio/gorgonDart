@@ -19,6 +19,7 @@ void main()
     Sprite flipHV;
     Sprite rotateLeft;
     Sprite rotateRight;
+
     setUp((){
       empty       = new Sprite();
       normal      = new Sprite(imageSource: "resources/chico/chico_1.png");
