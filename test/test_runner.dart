@@ -33,7 +33,7 @@ main()
   document.body.append(content);
   Display display = new Display(content);
 
-  SpritePack spr = new SpritePack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D(32,64));
+  Spritepack spr = new Spritepack.fromJSON("resources/chico/chico.json");
   int f = 0;
   spr.onLoad.then((_){
     /*Timer timer = new Timer.periodic( const Duration(milliseconds: 10), (_) {
@@ -42,10 +42,7 @@ main()
       f++;
       if(f>=spr.length)f=0;
     });*/
-    for( int i = 0; i < spr.length; ++i )
-    {
-      document.body.append(spr[i].image);
-    }
+    spr.forEachSprite((sprite) => document.body.append(sprite.image) );
   });*/
 }
 
