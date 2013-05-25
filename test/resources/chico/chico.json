@@ -1,24 +1,49 @@
 {"spritepack":{
-   "group": [
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_1.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_2.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_3.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_4.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_5.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_6.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_7.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_8.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_9.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_10.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_11.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_12.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_13.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_14.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_15.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_16.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_17.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_18.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_19.png" },
-     { "xoffset" : 0, "yoffset" : 0, "image" : "chico_20.png" }
+   "stand":
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_1.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_2.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_3.png" }
+   ],
+   "walk":
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_4.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_5.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_6.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_7.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_8.png" }
+   ],
+   "attack" :
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_9.png"  },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_10.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_11.png" }
+   ],
+   "land":
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_12.png" }
+   ],
+   "jump" :
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_13.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_14.png" }
+   ],
+   "fall":
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_15.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_16.png" }
+   ],
+   "hurt" :
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_17.png" }
+   ],
+   "hurt_air":
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_18.png" }
+   ],
+   "dying" :
+   [
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_19.png" },
+     { "xoffset" : -32, "yoffset" : -64, "image" : "chico_20.png" }
    ]
 }}

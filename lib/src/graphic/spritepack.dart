@@ -8,7 +8,7 @@ part of gorgon;
  */
 class Spritepack
 {
-  HashMap<String, List<Sprite>> _groups = new HashMap<String, List<Sprite>>(); // The group map
+  Map<String, List<Sprite>> _groups = new Map<String, List<Sprite>>(); // The group map
   Future<Spritepack>  _onLoad = new Completer().future; // The spritepack onLoad future.
 
   /// Object that represents an empty Sprite.

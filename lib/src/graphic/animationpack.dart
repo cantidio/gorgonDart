@@ -15,7 +15,7 @@ class Animationpack
   int get length => _animations.length;
 
   /// Returns a [List] of the available [Animation]s in the [Spritepack].
-  List<String> get animatios => _animations.keys.toList(growable: false);
+  List<String> get animations => _animations.keys.toList(growable: false);
 
   /**
    * Method that describes the Animationpack Object returning a [String].

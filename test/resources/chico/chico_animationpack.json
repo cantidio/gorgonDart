@@ -4,10 +4,10 @@
       "loopFrame":    0,
       "repeatNumber": -1,
       "frames": [
-        { "group": "0", "index": 0, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 },
-        { "group": "0", "index": 1, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "H", "angle": 0 },
-        { "group": "0", "index": 2, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 },
-        { "group": "0", "index": 1, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 }
+        { "group": "stand", "index": 0, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 },
+        { "group": "stand", "index": 1, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 },
+        { "group": "stand", "index": 2, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 },
+        { "group": "stand", "index": 1, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "angle": 0 }
       ]
     },
     "walk": {
@@ -16,14 +16,14 @@
       "repeatNumber": -1,
       "time":         6,
       "frames": [
-        { "group": "0", "index": 3 },
-        { "group": "0", "index": 4 },
-        { "group": "0", "index": 5 },
-        { "group": "0", "index": 6 },
-        { "group": "0", "index": 7 },
-        { "group": "0", "index": 6 },
-        { "group": "0", "index": 5 },
-        { "group": "0", "index": 4 }
+        { "group": "walk", "index": 0 },
+        { "group": "walk", "index": 1 },
+        { "group": "walk", "index": 2 },
+        { "group": "walk", "index": 3 },
+        { "group": "walk", "index": 4 },
+        { "group": "walk", "index": 3 },
+        { "group": "walk", "index": 2 },
+        { "group": "walk", "index": 1 }
       ]
     }
 }}

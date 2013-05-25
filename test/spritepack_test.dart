@@ -11,6 +11,7 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   group("SpritePack",(){
+    Point2D offset;
     Spritepack empty;
     Spritepack chicoNormal;
     Spritepack chicoTile;
@@ -18,16 +19,16 @@ void main()
 
     setUp((){
       List<Future<dynamic>> futures  = new List<Future<dynamic>>();
-
+      offset      = new Point2D(-32,-64);
       empty       = new Spritepack();
       chicoNormal = new Spritepack();
       for( int i = 1; i < 21; ++ i )
       {
-        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: offset);
         futures.add( spr.onLoad );
         chicoNormal.add( spr );
       }
-      chicoTile = new Spritepack.fromTileSheet("resources/chico/chico.png", 79, 79, new Point2D.zero());
+      chicoTile = new Spritepack.fromTileSheet("resources/chico/chico.png", 79, 79, offset);
       futures.add(chicoTile.onLoad);
 
       chicoJSON = new Spritepack.fromJSON( "resources/chico/chico.json");
@@ -65,15 +66,12 @@ void main()
       List<Sprite> sprs = new List<Sprite>();
       for( int i = 1; i < 21; ++ i )
       {
-        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: offset);
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
       Future.wait(futures).then( expectAsync1( (_){
-        for( int i = 0; i < 20; ++i )
-        {
-          expect( chicoNormal[""][i], equals(sprs[i]) );
-        }
+        chicoNormal.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
       }));
     });
 
@@ -82,15 +80,12 @@ void main()
       List<Sprite> sprs = new List<Sprite>();
       for( int i = 1; i < 21; ++ i )
       {
-        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: offset);
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
       Future.wait(futures).then( expectAsync1( (_){
-        for( int i = 0; i < 20; ++i )
-        {
-          expect( chicoTile["0"][i], equals(sprs[i]) );
-        }
+        chicoTile.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
       }));
     });
 
@@ -99,15 +94,12 @@ void main()
       List<Sprite> sprs = new List<Sprite>();
       for( int i = 1; i < 21; ++ i )
       {
-        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: new Point2D.zero());
+        Sprite spr = new Sprite(imageSource:"resources/chico/chico_$i.png", offset: offset);
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
       Future.wait(futures).then( expectAsync1( (_){
-        for( int i = 0; i < 20; ++i )
-        {
-          expect( chicoJSON["group"][i], equals(sprs[i]) );
-        }
+        chicoJSON.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
       }));
     });
 
