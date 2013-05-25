@@ -55,6 +55,20 @@ class Mirroring
     }
   }
   /**
+   * Operator that does the bitwise Xor operation between two [Mirroring] Objects and returns
+   * the correct [Mirroring].
+   */
+  operator ^( Mirroring other )
+  {
+    for( int i = values.length-1; i >= 0; --i )
+    {
+      if( values[i].value == (value ^ other.value) )
+      {
+        return values[i];
+      }
+    }
+  }
+  /**
    * Operator that does the bitwise | operation between two [Mirroring] Objects and returns
    * the correct [Mirroring].
    */

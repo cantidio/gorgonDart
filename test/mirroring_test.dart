@@ -129,4 +129,38 @@ void main()
         expect( Mirroring.VH    & Mirroring.H    , equals( Mirroring.H    ) );
         expect( Mirroring.VH    & Mirroring.V    , equals( Mirroring.V    ) );
   });
+
+  test
+  (
+      "Mirroring Operator ^", (){
+
+        expect( Mirroring.None  ^ Mirroring.None , equals( Mirroring.None ) );
+        expect( Mirroring.H     ^ Mirroring.H    , equals( Mirroring.None ) );
+        expect( Mirroring.V     ^ Mirroring.V    , equals( Mirroring.None ) );
+        expect( Mirroring.HV    ^ Mirroring.HV   , equals( Mirroring.None ) );
+        expect( Mirroring.VH    ^ Mirroring.VH   , equals( Mirroring.None ) );
+
+        expect( Mirroring.None  ^ Mirroring.H    , equals( Mirroring.H  ) );
+        expect( Mirroring.None  ^ Mirroring.V    , equals( Mirroring.V  ) );
+        expect( Mirroring.None  ^ Mirroring.HV   , equals( Mirroring.HV ) );
+        expect( Mirroring.None  ^ Mirroring.VH   , equals( Mirroring.VH ) );
+
+        expect( Mirroring.H     ^ Mirroring.None , equals( Mirroring.H  ) );
+        expect( Mirroring.V     ^ Mirroring.None , equals( Mirroring.V  ) );
+        expect( Mirroring.HV    ^ Mirroring.None , equals( Mirroring.HV ) );
+        expect( Mirroring.VH    ^ Mirroring.None , equals( Mirroring.VH ) );
+
+        expect( Mirroring.H     ^ Mirroring.V    , equals( Mirroring.HV ) );
+        expect( Mirroring.H     ^ Mirroring.HV   , equals( Mirroring.V  ) );
+        expect( Mirroring.H     ^ Mirroring.VH   , equals( Mirroring.V  ) );
+
+        expect( Mirroring.V     ^ Mirroring.H    , equals( Mirroring.HV ) );
+        expect( Mirroring.V     ^ Mirroring.HV   , equals( Mirroring.H  ) );
+        expect( Mirroring.V     ^ Mirroring.VH   , equals( Mirroring.H  ) );
+
+        expect( Mirroring.HV    ^ Mirroring.H    , equals( Mirroring.V  ) );
+        expect( Mirroring.HV    ^ Mirroring.V    , equals( Mirroring.H  ) );
+        expect( Mirroring.VH    ^ Mirroring.H    , equals( Mirroring.V  ) );
+        expect( Mirroring.VH    ^ Mirroring.V    , equals( Mirroring.H  ) );
+  });
 }
