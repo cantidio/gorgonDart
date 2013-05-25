@@ -3,7 +3,7 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
-class AnimationFrame
+class Frame
 {
   String group;
   int index;
@@ -17,7 +17,7 @@ class AnimationFrame
    */
   String toString() => "AnimationFrame(group: $group, index: $index, time: $time, angle: $angle, offset: $offset, mirroring: $mirroring)";
 
-  AnimationFrame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int angle })
+  Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int angle })
   {
     this.time       = ( time      != null ) ? time      : 0;
     this.group      = ( group     != null ) ? group     : "";
@@ -27,7 +27,7 @@ class AnimationFrame
     this.mirroring  = ( mirroring != null ) ? mirroring : Mirroring.None;
   }
 
-  AnimationFrame.fromMap( Map frame )
+  Frame.fromMap( Map frame )
   {
     this.time       = ( frame["time"]      != null ) ? frame["time"]      : 0;
     this.group      = ( frame["group"]     != null ) ? frame["group"]     : "";

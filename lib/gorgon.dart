@@ -20,7 +20,7 @@ part 'src/graphic/mirroring.dart';
 part 'src/graphic/color.dart';
 part 'src/graphic/sprite.dart';
 part 'src/graphic/spritepack.dart';
-part 'src/graphic/animation_frame.dart';
+part 'src/graphic/frame.dart';
 part 'src/graphic/animation.dart';
 part 'src/graphic/animation_handler.dart';
 part 'src/graphic/animationpack.dart';

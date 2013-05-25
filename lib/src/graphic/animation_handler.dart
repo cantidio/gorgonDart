@@ -82,7 +82,7 @@ class AnimationHandler
     if( _animationpack != null )
     {
       Animation      animation   = _animationpack[animationOn];
-      AnimationFrame frame       = animation[frameOn];
+      Frame frame       = animation[frameOn];
 
       _isPlaying = true;
 
@@ -127,8 +127,8 @@ class AnimationHandler
   /**
    * This method checks if the internal [Animationpack] and [Spritepack].
    *
-   * This method will check if every [Animation] and [AnimationFrame] in the [Animationpack]
-   * corresponds to a valid entry. It will correlate the [AnimationFrame] group and index to the
+   * This method will check if every [Animation] and [Frame] in the [Animationpack]
+   * corresponds to a valid entry. It will correlate the [Frame] group and index to the
    * [Spritepack] group and [Sprite] index.
    *
    * **Warning** If any strange behavior is detected this method will return an exception.
@@ -143,7 +143,7 @@ class AnimationHandler
 
       for( int i = 0; i < animation.length; ++i )
       {
-        AnimationFrame frame = animation[i];
+        Frame frame = animation[i];
 
         if( _spritepack[frame.group] == null || _spritepack[frame.group].length == 0 )
           throw new Exception("sprite group[${frame.group}] requested by animation[$animationKey] at frame[$i] is empty.");
@@ -161,7 +161,7 @@ class AnimationHandler
   {
     if( _animationpack != null && _spritepack != null )
     {
-      AnimationFrame frame = _animationpack[_animationOn][_frameOn];
+      Frame frame = _animationpack[_animationOn][_frameOn];
 
       _spritepack[frame.group][frame.index].draw
       (

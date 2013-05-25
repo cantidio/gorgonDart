@@ -17,7 +17,7 @@ class Animation
   /// Frame Index that the animation loops
   int repeatNumber;
 
-  List<AnimationFrame> _frames = new List<AnimationFrame>();
+  List<Frame> _frames = new List<Frame>();
 
   /// Returns the number of frames in the animation
   int get length => _frames.length;
@@ -35,7 +35,7 @@ class Animation
    *
    * If you wish this animation for loop indefinitely set the [repeatNumber] to -1.
    */
-  Animation({ bool looping: false, int loopFrame: 0, int repeatNumber: -1, List<AnimationFrame> frames })
+  Animation({ bool looping: false, int loopFrame: 0, int repeatNumber: -1, List<Frame> frames })
   {
     this.looping      = looping;
     this.loopFrame    = loopFrame;
@@ -57,9 +57,9 @@ class Animation
 
     if( animation["frames"] != null )
     {
-      AnimationFrame fr;
+      Frame fr;
       animation["frames"].forEach((frame){
-        fr = add(new AnimationFrame.fromMap(frame));
+        fr = add(new Frame.fromMap(frame));
         if( globalTime != null && fr.time == 0 )
         {
           fr.time = globalTime;
@@ -73,7 +73,7 @@ class Animation
    *
    * You can tell at which position it should be added by setting the [index].
    */
-  AnimationFrame add(AnimationFrame frame, [ int index ])
+  Frame add(Frame frame, [ int index ])
   {
     if( index != null )
     {
@@ -89,38 +89,38 @@ class Animation
   /**
    * Method that removes the [AnimationFrame] [frame] from the [Animation].
    *
-   * This method will return the [AnimationFrame] removed.
+   * This method will return the [Frame] removed.
    */
-  AnimationFrame remove( AnimationFrame frame )
+  Frame remove( Frame frame )
   {
     _frames.remove(frame);
     return frame;
   }
 
   /**
-   * Method that removes a [AnimationFrame] at [index] from the [Animation].
+   * Method that removes a [Frame] at [index] from the [Animation].
    *
-   * This method will return the [AnimationFrame] removed.
+   * This method will return the [Frame] removed.
    */
-  AnimationFrame removeAt( int index )
+  Frame removeAt( int index )
   {
-    AnimationFrame frame = _frames[index];
+    Frame frame = _frames[index];
     _frames.removeAt(index);
     return frame;
   }
 
   /**
-   * Operator that returns a [AnimationFrame] at the [index] position in the [Animation].
+   * Operator that returns a [Frame] at the [index] position in the [Animation].
    */
-  AnimationFrame operator[](int index )
+  Frame operator[](int index )
   {
     return _frames[index];
   }
 
   /**
-   * Applies the function [f] to each [AnimationFrame] {[AnimationFrame]} of the [Animation].
+   * Applies the function [f] to each [Frame] {[Frame]} of the [Animation].
    */
-  void forEachFrame( void f(AnimationFrame frame) )
+  void forEachFrame( void f(Frame frame) )
   {
     _frames.forEach(f);
   }
