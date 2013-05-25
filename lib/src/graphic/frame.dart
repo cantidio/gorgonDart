@@ -10,19 +10,19 @@ class Frame
   int time;
   Point2D offset;
   Mirroring mirroring;
-  int angle;
+  int rotation;
 
   /**
    * Method that describes the AnimationFrame Object returning a [String].
    */
-  String toString() => "AnimationFrame(group: $group, index: $index, time: $time, angle: $angle, offset: $offset, mirroring: $mirroring)";
+  String toString() => "AnimationFrame(group: $group, index: $index, time: $time, rotation: $rotation, offset: $offset, mirroring: $mirroring)";
 
-  Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int angle })
+  Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int rotation })
   {
     this.time       = ( time      != null ) ? time      : 0;
     this.group      = ( group     != null ) ? group     : "";
     this.index      = ( index     != null ) ? index     : 0;
-    this.angle      = ( angle     != null ) ? angle     : 0;
+    this.rotation   = ( rotation  != null ) ? rotation  : 0;
     this.offset     = ( offset    != null ) ? offset    : new Point2D.zero();
     this.mirroring  = ( mirroring != null ) ? mirroring : Mirroring.None;
   }
@@ -32,8 +32,12 @@ class Frame
     this.time       = ( frame["time"]      != null ) ? frame["time"]      : 0;
     this.group      = ( frame["group"]     != null ) ? frame["group"]     : "";
     this.index      = ( frame["index"]     != null ) ? frame["index"]     : 0;
-    this.angle      = ( frame["angle"]     != null ) ? frame["angle"]     : 0;
-    this.offset     = ( frame["offset"]    != null ) ? frame["offset"]    : new Point2D.zero();
+    this.rotation   = ( frame["rotation"]  != null ) ? frame["rotation"]  : 0;
+    this.offset     = new Point2D
+    (
+      ( frame["xoffset"] != null ) ? frame["xoffset"] : 0,
+      ( frame["yoffset"] != null ) ? frame["yoffset"] : 0
+    );
 
     if( frame["mirroring"] != null )
     {

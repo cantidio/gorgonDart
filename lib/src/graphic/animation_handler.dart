@@ -168,7 +168,7 @@ class AnimationHandler
         position + frame.offset,
         alpha: alpha,
         mirroring: mirroring ^ frame.mirroring,
-        rotation: rotation + frame.angle,
+        rotation: rotation + frame.rotation,
         scale: scale
       );
     }
