@@ -116,4 +116,12 @@ class Animation
   {
     return _frames[index];
   }
+
+  /**
+   * Applies the function [f] to each [AnimationFrame] {[AnimationFrame]} of the [Animation].
+   */
+  void forEachFrame( void f(AnimationFrame frame) )
+  {
+    _frames.forEach(f);
+  }
 }
