@@ -11,10 +11,10 @@ class Animationpack
   /// The [Animationpack] onLoad future getter.
   Future<Animationpack> get onLoad => _onLoad;
 
-  /// The number of [Animation]s inside the [Animationpack]
+  /// The number of [Animation]s inside the [Animationpack].
   int get length => _animations.length;
 
-  /// Returns a [List] of the available [groups] in the [Spritepack]
+  /// Returns a [List] of the available [Animation]s in the [Spritepack].
   List<String> get animatios => _animations.keys.toList(growable: false);
 
   /**
@@ -77,7 +77,7 @@ class Animationpack
   }
 
   /**
-   * Applies the function [f] to each [Animation] {[name], [Animation]} of the [Spritepack].
+   * Applies the function [f] to each [Animation] {name, [Animation]} of the [Spritepack].
    */
   void forEach(void f( String name, Animation animation ) )
   {

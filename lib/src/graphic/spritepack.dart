@@ -20,7 +20,7 @@ class Spritepack
   /// Returns a [List] of the available [groups] in the [Spritepack]
   List<String> get groups => _groups.keys.toList(growable: false);
 
-  /// Returns the number of [Sprites] in the [Spritepack]
+  /// Returns the number of [Sprite]s in the [Spritepack]
   int get length {
     int num = 0;
     forEachGroup((K,V){ num += V.length; });
@@ -222,7 +222,7 @@ class Spritepack
   }
 
   /**
-   * Applies the function [f] to each [group] {[group], [spriteList]} of the [Spritepack].
+   * Applies the function [f] to each group {group, spriteList} of the [Spritepack].
    */
   void forEachGroup(void f( String group, List<Sprite> spriteList ) )
   {
@@ -230,7 +230,7 @@ class Spritepack
   }
 
   /**
-   * Applies the function [f] to each [sprite] of all groups in the [Spritepack].
+   * Applies the function [f] to each sprite of all groups in the [Spritepack].
    */
   void forEachSprite(void f( Sprite sprite ) )
   {

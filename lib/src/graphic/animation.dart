@@ -35,7 +35,7 @@ class Animation
    *
    * If you wish this animation for loop indefinitely set the [repeatNumber] to -1.
    */
-  Animation({ bool looping: false, int loopFrame: 0, int repeatNumber: -1, List<Frame> frames })
+  Animation({ bool looping: false, int loopFrame: 0, int repeatNumber: -1, List<AnimationFrame> frames })
   {
     this.looping      = looping;
     this.loopFrame    = loopFrame;
@@ -110,7 +110,7 @@ class Animation
   }
 
   /**
-   * [operator] that returns a [AnimationFrame] at the [index] position in the [Animation].
+   * Operator that returns a [AnimationFrame] at the [index] position in the [Animation].
    */
   AnimationFrame operator[](int index )
   {
