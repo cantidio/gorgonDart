@@ -16,6 +16,7 @@ import 'spritepack_test.dart'     as spritepack_test;
 import 'display_test.dart'        as display_test;
 import 'font_alignment_test.dart' as font_alignment_test;
 import 'font_test.dart'           as font_test;
+import 'frame_test.dart'          as frame_test;
 
 main()
 {
@@ -27,22 +28,39 @@ main()
   font_test.main();
   sprite_test.main();
   spritepack_test.main();
+  frame_test.main();
   pollForDone(testCases);
 
   /*Element content = new Element.tag("div");
   document.body.append(content);
-  Display display = new Display(content);
+  Display display = new Display(content, width:400,height:400);
+int ang = 0;
+int alpha = 255;
+num scale =1;
+int scaleMod = 1;
+
+int mirror=0;
 
   Spritepack spr = new Spritepack.fromJSON("resources/chico/chico.json");
+  Animationpack ani = new Animationpack.fromJSON("resources/chico/chico_animationpack.json");
+  AnimationHandler handler;
   int f = 0;
-  spr.onLoad.then((_){
-    /*Timer timer = new Timer.periodic( const Duration(milliseconds: 10), (_) {
+  Future.wait([spr.onLoad,ani.onLoad]).then((_){
+
+    handler = new AnimationHandler(spr, ani);
+    handler.sanityCheck();
+    handler.changeAnimation("walk");
+    Timer timer = new Timer.periodic( const Duration(milliseconds: 1000~/60), (_) {
       display.clear();
-      spr[f].draw(new Point2D(50,10));
-      f++;
-      if(f>=spr.length)f=0;
-    });*/
-    spr.forEachSprite((sprite) => document.body.append(sprite.image) );
+      handler.runStep();
+      handler.draw(new Point2D(150,100), rotation: ang++, alpha:alpha, scale:scale);
+      alpha-= 10;
+      if(alpha <=100) alpha = 255;
+
+      scale += scaleMod*0.01;
+      if( scale >= 2 || scale <= 0.25 ) scaleMod *= -1;
+
+    });
   });*/
 }
 
