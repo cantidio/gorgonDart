@@ -17,6 +17,7 @@ import 'display_test.dart'        as display_test;
 import 'font_alignment_test.dart' as font_alignment_test;
 import 'font_test.dart'           as font_test;
 import 'frame_test.dart'          as frame_test;
+import 'animation_test.dart'      as animation_test;
 
 main()
 {
@@ -29,6 +30,7 @@ main()
   sprite_test.main();
   spritepack_test.main();
   frame_test.main();
+  animation_test.main();
   pollForDone(testCases);
 
   /*Element content = new Element.tag("div");

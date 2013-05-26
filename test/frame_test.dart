@@ -2,7 +2,7 @@
  * Copyright (C) 2013 Cantidio Fontes
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
-library color_test;
+library frame_test;
 
 import "package:unittest/unittest.dart";
 import "package:gorgon/gorgon.dart";

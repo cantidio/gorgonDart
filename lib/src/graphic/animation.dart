@@ -8,6 +8,8 @@ part of gorgon;
  */
 class Animation
 {
+  List<Frame> _frames = new List<Frame>();  // the frame list
+
   /// True if this animation has a loop
   bool looping;
 
@@ -16,8 +18,6 @@ class Animation
 
   /// Frame Index that the animation loops
   int repeatNumber;
-
-  List<Frame> _frames = new List<Frame>();
 
   /// Returns the number of frames in the animation
   int get length => _frames.length;
