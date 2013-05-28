@@ -22,5 +22,5 @@ part 'src/graphic/sprite.dart';
 part 'src/graphic/spritepack.dart';
 part 'src/graphic/frame.dart';
 part 'src/graphic/animation.dart';
-part 'src/graphic/animation_handler.dart';
 part 'src/graphic/animationpack.dart';
+part 'src/graphic/animator.dart';

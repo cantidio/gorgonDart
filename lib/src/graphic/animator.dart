@@ -3,7 +3,10 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
-class AnimationHandler
+/**
+ * Class that represents a Handler that deals with Animation Control.
+ */
+class Animator
 {
   Spritepack _spritepack;
   Animationpack _animationpack;
@@ -33,7 +36,7 @@ class AnimationHandler
   bool    get isPaused    => _isPaused;
   bool    get isPlaying   => _isPlaying;
 
-  AnimationHandler( Spritepack spritepack, Animationpack animationpack )
+  Animator( Spritepack spritepack, Animationpack animationpack )
   {
     _spritepack     = spritepack;
     _animationpack  = animationpack;
@@ -166,10 +169,10 @@ class AnimationHandler
       _spritepack[frame.group][frame.index].draw
       (
         position + frame.offset,
-        alpha: alpha,
-        mirroring: mirroring ^ frame.mirroring,
-        rotation: rotation + frame.rotation,
-        scale: scale
+        alpha:      alpha,
+        mirroring:  mirroring ^ frame.mirroring,
+        rotation:   rotation + frame.rotation,
+        scale:      scale
       );
     }
   }
