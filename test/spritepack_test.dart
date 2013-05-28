@@ -61,6 +61,12 @@ void main()
       expect( chicoJSON.length, equals(20) );
     });
 
+    test("When Using the add method in an empty spritepack the spritepack.length must increase by 1.",(){
+      int before = empty.length;
+      empty.add(new Sprite(), group: "");
+      expect(empty.length, equals(before + 1));
+    });
+
     test( "Every manually added Sprite must be equal to a individual loaded sprite.", (){
       List<Future<dynamic>> futures  = new List<Future<dynamic>>();
       List<Sprite> sprs = new List<Sprite>();

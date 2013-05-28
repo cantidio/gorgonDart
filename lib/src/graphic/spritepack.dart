@@ -208,6 +208,27 @@ class Spritepack
   }
 
   /**
+   * Method that removes a [Sprite] in a [group] from the [Spritepack].
+   *
+   * This method returns the removed [Sprite].
+   */
+  Sprite removeSprite( String group, Sprite sprite )
+  {
+    this[group].remove( sprite );
+    return sprite;
+  }
+
+  /**
+   * Method that removes an entire group of [Sprites] from the [Spritepack].
+   *
+   * This method returns the [Sprite] [List].
+   */
+  List<Sprite> removeGroup( String name )
+  {
+    return _groups.remove( name );
+  }
+
+  /**
    * Operator that returns a [Sprite] [List] of the requested [group].
    *
    * If the requested [group] do not exist, then an empty [List] will be created and assigned to that [group].

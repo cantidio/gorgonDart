@@ -22,10 +22,12 @@ class Animationpack
    */
   String toString() => "Animationpack(animations: $_animations)";
 
+  Animationpack();
+
   void _loadFromMap( Map animationpack, Completer completer )
   {
     animationpack.forEach((name,animation){
-      add(name, new Animation.fromMap(animation));
+      add( new Animation.fromMap(animation), name );
     });
     completer.complete(this);
   }
@@ -62,10 +64,26 @@ class Animationpack
    *
    * This method returns the reference to the added [Animation].
    */
-  Animation add( String name, Animation animation )
+  Animation add( Animation animation, String name )
   {
+    if( _animations[name] != null )
+    {
+      throw new Exception("The animationpack already has an animation named: '{$name}'");
+    }
     _animations[name] = animation;
     return animation;
+  }
+
+  /**
+   * Method that removes an [Animation] from the [Animationpack].
+   *
+   * You must pass the [key] of the [Animation] you want to remove.
+   *
+   * The [Animation] removed from the [Animationpack] is returned.
+   */
+  Animation remove(String key)
+  {
+    return _animations.remove(key);
   }
 
   /**
