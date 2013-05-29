@@ -19,6 +19,7 @@ import 'font_test.dart'           as font_test;
 import 'frame_test.dart'          as frame_test;
 import 'animation_test.dart'      as animation_test;
 import 'animationpack_test.dart'  as animationpack_test;
+import 'animator_test.dart'       as animator_test;
 
 main()
 {
@@ -33,6 +34,7 @@ main()
   frame_test.main();
   animation_test.main();
   animationpack_test.main();
+  animator_test.main();
   pollForDone(testCases);
 
   /*Element content = new Element.tag("div");

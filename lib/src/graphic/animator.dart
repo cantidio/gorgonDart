@@ -8,7 +8,7 @@ part of gorgon;
  */
 class Animator
 {
-  Spritepack _spritepack;
+  Spritepack    _spritepack;
   Animationpack _animationpack;
 
   /// The index of the animation playing
@@ -47,14 +47,21 @@ class Animator
   {
     _isPaused       = false;
     _isPlaying      = true;
-    _animationOn    = _animationpack.animations.first;
+    _animationOn    = (_animationpack.animations.length > 0 ) ? _animationpack.animations[0] : null;
     _frameOn        = 0;
     _timeOn         = 0;
     _loopOn         = 0;
   }
 
-  void pause()  => _isPaused = true;
-  void resume() => _isPaused = false;
+  void pause()
+  {
+    _isPaused = true;
+  }
+
+  void resume()
+  {
+    _isPaused = false;
+  }
 
   void changeAnimation(String animation, [bool force])
   {
@@ -93,7 +100,7 @@ class Animator
       {
         ++_timeOn;
 
-        if( frame.time < _timeOn ) //frame time is over
+        if( frame.time <= _timeOn ) //frame time is over
         {
           _timeOn = 0;
           ++_frameOn;
