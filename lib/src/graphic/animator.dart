@@ -36,6 +36,11 @@ class Animator
   bool    get isPaused    => _isPaused;
   bool    get isPlaying   => _isPlaying;
 
+  /**
+   * Method that describes the Animation Object returning a [String].
+   */
+  String toString() => "Animator(animationOn: $animationOn, frameOn: $frameOn, timeOn: $timeOn, loopOn: $loopOn, isPaused: $isPaused)";
+
   Animator( Spritepack spritepack, Animationpack animationpack )
   {
     _spritepack     = spritepack;
@@ -63,7 +68,7 @@ class Animator
     _isPaused = false;
   }
 
-  void changeAnimation(String animation, [bool force])
+  void changeAnimation(String animation, [bool force=false])
   {
     if(_animationpack != null)
     {
@@ -100,7 +105,7 @@ class Animator
       {
         ++_timeOn;
 
-        if( frame.time <= _timeOn ) //frame time is over
+        if( frame.time < _timeOn ) //frame time is over
         {
           _timeOn = 0;
           ++_frameOn;
@@ -122,7 +127,7 @@ class Animator
           else  //finish for good
           {
             --_frameOn;
-            _timeOn     = 0;
+            _timeOn     = frame.time;
             _isPlaying  = false;
           }
         }
