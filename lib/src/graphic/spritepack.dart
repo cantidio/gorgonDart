@@ -43,7 +43,7 @@ class Spritepack
    * **Warning** This method will always consider the image path given as a full path or relative to the invoker.
    *
    * The [Map] [spritepack] must be like this:
-   * dynamic [spritepack] = {
+   * [Map] [spritepack] = {
    *    "group1" :[
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image1.png" },
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image2.png" },

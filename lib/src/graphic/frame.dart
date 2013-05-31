@@ -3,13 +3,27 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
+/**
+ * Class that represents an [Animation] Frame.
+ */
 class Frame
 {
+  /// The group of [Sprite] of the [Frame].
   String group;
+
+  /// The index of the [Sprite] of the index.
   int index;
+
+  /// The time that the [Frame] should be displayed.
   int time;
+
+  /// The offset of the [Frame].
   Point2D offset;
+
+  /// The mirroring of the [Frame].
   Mirroring mirroring;
+
+  /// The rotation of the [Frame].
   int rotation;
 
   /**
@@ -17,6 +31,16 @@ class Frame
    */
   String toString() => "AnimationFrame(group: $group, index: $index, time: $time, rotation: $rotation, offset: $offset, mirroring: $mirroring)";
 
+  /**
+   * Creates a Frame with the desired attributes.
+   *
+   * You can set the [group] of the [Frame]. Which is the [group] of the desired [Sprite] in the [Spritepack].
+   * You can set the [index] of the [Frame]. Which is the index of the [Sprite] in the [group] of the [Spritepack].
+   * You can set the [time] of the [Frame]. Which is how many times the frame must be drawn.
+   * You can set the [offset] of the [Frame]. Which is an additional offset that will be applied to the [Sprite].
+   * You can set the [mirroring] of the [Frame].
+   * You can set the [rotation] of the [Frame].
+   */
   Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int rotation })
   {
     this.time       = ( time      != null ) ? time      : 0;
@@ -27,6 +51,20 @@ class Frame
     this.mirroring  = ( mirroring != null ) ? mirroring : Mirroring.None;
   }
 
+  /**
+   * Creates a [Frame] from a [frame] [Map].
+   *
+   * The [Map] [Frame] must be like this:
+   * [Map] [frame] = {
+   *    "group":      "sprite_group",
+   *    "index":      0,
+   *    "time":       0,
+   *    "rotation":   0,
+   *    "xoffset":    0,
+   *    "yoffset":    0,
+   *    "mirroring": "Normal"
+   * };
+   */
   Frame.fromMap( Map frame )
   {
     this.time       = ( frame["time"]      != null ) ? frame["time"]      : 0;
