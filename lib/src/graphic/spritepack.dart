@@ -54,7 +54,7 @@ class Spritepack
    *    ]
    * };
    */
-  void _loadFromObj( Map spritepack, Completer completer )
+  void _loadFromMap( Map spritepack, Completer completer )
   {
     List<Future<Sprite>> spr_futures  = new List<Future<Sprite>>();
 
@@ -80,7 +80,7 @@ class Spritepack
    * You can check the completion of this method with the getter [onLoad].
    *
    * The [Map] [spritepack] must be like this:
-   * dynamic [spritepack] = {
+   * [Map] [spritepack] = {
    *    "group1" :[
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image1.png" },
    *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image2.png" },
@@ -91,10 +91,10 @@ class Spritepack
    *    ]
    * };
    */
-  Spritepack.fromOBJ( Map spritepack )
+  Spritepack.fromMap( Map spritepack )
   {
     Completer completer = new Completer();
-    _loadFromObj( spritepack, completer );
+    _loadFromMap( spritepack, completer );
     _onLoad = completer.future;
   }
   /**
@@ -126,7 +126,7 @@ class Spritepack
             }
           });
         });
-        _loadFromObj( obj["spritepack"], completer );
+        _loadFromMap( obj["spritepack"], completer );
       }
     });
 
@@ -173,7 +173,7 @@ class Spritepack
           });
         }
       }
-      _loadFromObj( spritepack, completer );
+      _loadFromMap( spritepack, completer );
     });
 
     img.onError.listen((e)

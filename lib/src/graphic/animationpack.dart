@@ -3,6 +3,9 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
+/**
+ * Class that represents an [Animation] package.
+ */
 class Animationpack
 {
   HashMap<String, Animation> _animations = new HashMap<String, Animation>(); // The group map
@@ -22,8 +25,6 @@ class Animationpack
    */
   String toString() => "Animationpack(animations: $_animations)";
 
-  Animationpack();
-
   void _loadFromMap( Map animationpack, Completer completer )
   {
     animationpack.forEach((name,animation){
@@ -32,6 +33,34 @@ class Animationpack
     completer.complete(this);
   }
 
+  /**
+   * Creates an empty [Animationpack] Object.
+   */
+  Animationpack();
+
+  /**
+   * Creates an [Animationpack] based in a [animationpack] [Map].
+   *
+   * The [Map] [animationpack] must be like this:
+   * [Map] [animationpack] = {
+   *    "animation_name" :{
+   *      "looping":      true,
+   *      "loopFrame":    0,
+   *      "repeatNumber": -1,
+   *      "time":         6,
+   *      "frames": [
+   *        { "group": "sprite_group", "index": 0, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "rotation": 0 },
+   *        { "group": "sprite_group", "index": 1, "xoffset": 0, "yoffset":0, "mirroring": "H"},
+   *        { "group": "sprite_group", "index": 2,  "time": 5, "mirroring": "V", "rotation": 0 },
+   *        { "group": "sprite_group", "index": 3, "mirroring": "HV" },
+   *      ]
+   *    },
+   *    "other_animation": {
+   *      ...
+   *      ...
+   *    }
+   * };
+   */
   Animationpack.fromMap( Map animationpack )
   {
     Completer completer = new Completer();
@@ -39,6 +68,11 @@ class Animationpack
     _onLoad = completer.future;
   }
 
+  /**
+   * Creates an [Animationpack] from a JSON provided it's [jsonUrl] as a [String].
+   *
+   * You can check the completion of this method with the getter [onLoad]
+   */
   Animationpack.fromJSON( String jsonUrl )
   {
     Completer completer = new Completer();
