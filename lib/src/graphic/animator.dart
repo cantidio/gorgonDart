@@ -41,33 +41,54 @@ class Animator
    */
   String toString() => "Animator(animationOn: $animationOn, frameOn: $frameOn, timeOn: $timeOn, loopOn: $loopOn, isPaused: $isPaused)";
 
+  /**
+   * Creates a [Animator] using a [Spritepack] and an [Animationpack].
+   */
   Animator( Spritepack spritepack, Animationpack animationpack )
   {
     _spritepack     = spritepack;
     _animationpack  = animationpack;
+    _animationOn    = (_animationpack.animations.length > 0 ) ? _animationpack.animations[0] : null;
     reset();
   }
 
+  /**
+   * Method that resets the [Animation] that is being played.
+   */
   void reset()
   {
     _isPaused       = false;
     _isPlaying      = true;
-    _animationOn    = (_animationpack.animations.length > 0 ) ? _animationpack.animations[0] : null;
     _frameOn        = 0;
     _timeOn         = 0;
     _loopOn         = 0;
   }
 
+  /**
+   * Method that pauses the [Animation] that is being played.
+   */
   void pause()
   {
     _isPaused = true;
   }
 
+  /**
+   * Method that resumes the [Animation] that is being played.
+   * If it is paused.
+   */
   void resume()
   {
     _isPaused = false;
   }
 
+  /**
+   * Method that changes the [Animation].
+   *
+   * You must pass the name of the desired [animation].
+   *
+   * If the animations is alread playing, then this method
+   * won't do anything unless you set [force] to [true].
+   */
   void changeAnimation(String animation, [bool force=false])
   {
     if(_animationpack != null)
@@ -91,13 +112,16 @@ class Animator
     }
   }
 
+  /**
+   * Method that runs one step of the current [Animation].
+   */
   void runStep()
   {
     if( isPaused ) return;
     if( _animationpack != null )
     {
-      Animation      animation   = _animationpack[animationOn];
-      Frame frame       = animation[frameOn];
+      Animation animation   = _animationpack[animationOn];
+      Frame     frame       = animation[frameOn];
 
       _isPlaying = true;
 
@@ -172,6 +196,13 @@ class Animator
     });
   }
 
+  /**
+   * Method that draws the current [Animation] in the [Display.target].
+   *
+   * This method will draws the [Animation] in the [position] provided of [Display] using the [Display.draw] method.
+   *
+   * You can provide the desired [alpha], [mirroring], [rotation] and [scale] if needed.
+   */
   void draw( Point2D position, { alpha: 255 ,Mirroring mirroring: Mirroring.None, num rotation: 0, num scale: 1})
   {
     if( _animationpack != null && _spritepack != null )

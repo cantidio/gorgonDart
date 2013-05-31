@@ -293,7 +293,7 @@ class Sprite
    *
    * This method will draws the [Sprite] in the [position] provided of [Display] using the [Display.draw] method.
    *
-   * You can provide the desired [mirroring], [rotation] and [scale] if needed.
+   * You can provide the desired [alpha], [mirroring], [rotation] and [scale] if needed.
    */
   void draw( Point2D position, { alpha: 255 ,Mirroring mirroring: Mirroring.None, num rotation: 0, num scale: 1} )
   {
