@@ -24,3 +24,5 @@ part 'src/graphic/frame.dart';
 part 'src/graphic/animation.dart';
 part 'src/graphic/animationpack.dart';
 part 'src/graphic/animator.dart';
+
+part 'src/audio/sound.dart';

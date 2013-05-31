@@ -37,37 +37,19 @@ main()
   animator_test.main();
   pollForDone(testCases);
 
-  /*Element content = new Element.tag("div");
-  document.body.append(content);
-  Display display = new Display(content, width:400,height:400);
-int ang = 0;
-int alpha = 255;
-num scale =1;
-int scaleMod = 1;
+  /*int i = 0;
+  Sound sound = new Sound( soundUrl: "resources/chico/attack.wav");
+  sound.onLoad.then((s) {
 
-int mirror=0;
-
-  Spritepack spr = new Spritepack.fromJSON("resources/chico/chico.json");
-  Animationpack ani = new Animationpack.fromJSON("resources/chico/chico_animationpack.json");
-  AnimationHandler handler;
-  int f = 0;
-  Future.wait([spr.onLoad,ani.onLoad]).then((_){
-
-    handler = new AnimationHandler(spr, ani);
-    handler.sanityCheck();
-    handler.changeAnimation("walk");
-    Timer timer = new Timer.periodic( const Duration(milliseconds: 1000~/60), (_) {
-      display.clear();
-      handler.runStep();
-      handler.draw(new Point2D(150,100), rotation: ang++, alpha:alpha, scale:scale);
-      alpha-= 10;
-      if(alpha <=100) alpha = 255;
-
-      scale += scaleMod*0.01;
-      if( scale >= 2 || scale <= 0.25 ) scaleMod *= -1;
-
+    Timer timer;
+    timer = new Timer.periodic( const Duration(milliseconds: 10000~/60), (_) {
+      print("play");
+      s.play();
+      ++i;
+      if( i > 5 )
+        timer.cancel();
     });
-  });*/
+ });*/
 }
 
 pollForDone(List tests) {
