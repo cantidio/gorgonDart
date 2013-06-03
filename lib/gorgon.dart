@@ -11,6 +11,7 @@ import 'dart:async';
 import 'dart:json' as JSON;
 import 'dart:math';
 import 'dart:collection';
+import 'dart:web_audio';
 
 part 'src/graphic/point2d.dart';
 part 'src/graphic/display.dart';
@@ -25,4 +26,5 @@ part 'src/graphic/animation.dart';
 part 'src/graphic/animationpack.dart';
 part 'src/graphic/animator.dart';
 
+part 'src/audio/sound_instance.dart';
 part 'src/audio/sound.dart';
