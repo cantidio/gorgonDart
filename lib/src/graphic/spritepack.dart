@@ -119,7 +119,7 @@ class Spritepack
           list.forEach((spr){
             if( !spr["image"].contains("data:image/") )
             {
-              if( new Uri(spr["image"]).domain == "" )
+              if( Uri.parse(spr["image"]).host == "" )
               {
                 spr["image"] = baseUrl + spr["image"];
               }
