@@ -3,41 +3,49 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 part of gorgon;
+/**
+ * Class that represents a Sound.
+ */
 class Sound
 {
-  static AudioContext _context = new AudioContext();
-  AudioBuffer _source;
+  /// The Audio Channel throught this sound plays.
+  AudioChannel _channel;
 
-  AudioElement _element;
+  /// The Sound internal buffer.
+  AudioBuffer _buffer;
 
+  /// The onLoad Future.
   Future<Sound> _onLoad = new Completer().future;
 
+  /// Returns the Future that is triggered when  the sound is loaded.
   Future<Sound> get onLoad => _onLoad;
 
-  /*double get duration     => _element.duration;
-  double get currentTime  => _element.currentTime;
-  double get volume       => _element.volume;
-  bool   get isPaused     => _element.paused;
-*/
+  /// Returns a [double] representing the [duration], in seconds of the Loaded [Sound].
+  double get duration     => _buffer.duration;
 
-  Sound({ String soundUrl })
+  /// Returns a [double] representing the [gain] of the Loaded [Sound].
+  double get gain         => _buffer.gain;
+
+  /// Sets the [gain] of the Loaded [Sound].
+  set gain( double gain ) => _buffer.gain = gain;
+
+  /**
+   * Creates a [Sound] that will play thought an [AudioChannel].
+   */
+  Sound({ String soundUrl, AudioChannel channel })
   {
-    /*_element          = new AudioElement();
-    _element.autoplay = false;
-    _element.preload  = "auto";
-
-    AudioContext audio = new AudioContext();
-    */
-
-    //document.body.append(_element);
-    /*
-     * Research before going any further:
-     * http://www.html5rocks.com/en/tutorials/webaudio/games/
-     * http://www.html5rocks.com/en/tutorials/webaudio/intro/
-     * */
-    load( soundUrl );
+    _channel = ( channel != null ) ? channel : new AudioSystem().targetChannel;
+    if( soundUrl != null )
+    {
+      load( soundUrl );
+    }
   }
 
+  /**
+   * Loads a [Sound] file throught it's Url provided by the [soundUrl].
+   *
+   * Returns a [Future<Sound>] that can be checked for this method completion.
+   */
   Future<Sound> load( String soundUrl )
   {
     Completer completer   = new Completer();
@@ -46,13 +54,12 @@ class Sound
 
     request.open( "GET", soundUrl, async: true );
     request.onLoad.listen((_){
-      /** @todo Check why this crashes when running in the DartVM.*/
-      _context.decodeAudioData
+      _channel._context.decodeAudioData
       (
         request.response,
         (buffer)
         {
-          _source = buffer;
+          _buffer = buffer;
           completer.complete( this );
         },
         (error)
@@ -73,13 +80,11 @@ class Sound
     return _onLoad;
   }
 
-  SoundInstance play()
+  /**
+   * Plays the [Sound] generating an [AudioInstance].
+   */
+  AudioInstance play({ bool looping: false })
   {
-    AudioBufferSourceNode source = _context.createBufferSource();
-    source.buffer = _source;
-    source.connect( _context.destination, 0, 0 );
-    source.start(0);
-    return new SoundInstance._(source);
+    return _channel._play(this, looping);
   }
-  //int
 }

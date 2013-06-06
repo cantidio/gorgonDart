@@ -37,16 +37,18 @@ main()
   animator_test.main();
   pollForDone(testCases);
 
-  /*int i = 0;
+  /*AudioSystem system = new AudioSystem();
+  system.targetChannel.gain = 1.0;
+
   Sound sound = new Sound( soundUrl: "resources/chico/attack.wav");
   sound.onLoad.then((s) {
 
     Timer timer;
-    timer = new Timer.periodic( const Duration(milliseconds: 10000~/60), (_) {
-      print("play");
+    timer = new Timer.periodic( const Duration(milliseconds: 10000~/70), (_) {
       s.play();
-      ++i;
-      if( i > 5 )
+      system.targetChannel.gain -= 0.03;
+
+      if( system.targetChannel.gain <= 0 )
         timer.cancel();
     });
  });*/

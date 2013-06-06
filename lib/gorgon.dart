@@ -26,5 +26,9 @@ part 'src/graphic/animation.dart';
 part 'src/graphic/animationpack.dart';
 part 'src/graphic/animator.dart';
 
-part 'src/audio/sound_instance.dart';
+part 'src/audio/audio_instance.dart';
 part 'src/audio/sound.dart';
+part 'src/audio/audio_channel.dart';
+part 'src/audio/audio_system.dart';
+
+
