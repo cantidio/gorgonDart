@@ -119,7 +119,6 @@ class AudioChannel
    */
   void setAsTarget()
   {
-    AudioSystem system = new AudioSystem();
-    system._targetChannel = this;
+    AudioSystem._targetChannel = this;
   }
 }
