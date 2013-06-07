@@ -27,7 +27,7 @@ class Sound
   double get gain         => _buffer.gain;
 
   /// Sets the [gain] of the Loaded [Sound].
-  set gain( double gain ) => _buffer.gain = gain;
+  void set gain( double gain ) { _buffer.gain = gain; }
 
   /**
    * Creates a [Sound] that will play thought an [AudioChannel].

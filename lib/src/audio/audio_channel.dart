@@ -10,6 +10,9 @@ class AudioChannel
   /// The gain node.
   GainNode _gain;
 
+  /// The gain if the [AudioChannel] is muted, null otherwise.
+  double _muteGain;
+
   /// The list of playing instances.
   List<AudioInstance> _instances = new List<AudioInstance>();
 
@@ -18,6 +21,24 @@ class AudioChannel
 
   /// Sets the gain in this [AudioChannel].
   void set gain(double gain) { _gain.gain.value = gain; }
+
+  /// Returns true if the [AudioChannel] is muted.
+  bool get mute => _muteGain != null;
+
+  /// Mutes/unmute the [AudioChannel].
+  void set mute( bool mute )
+  {
+    if( mute && _muteGain == null )
+    {
+      _muteGain = gain;
+      gain      = 0.0;
+    }
+    else if( !mute && _muteGain != null )
+    {
+      gain      = _muteGain;
+      _muteGain = null;
+    }
+  }
 
   /**
    * Creates an [AudioChannel].
@@ -82,7 +103,7 @@ class AudioChannel
   /**
    * Method that plays a [Sound] generating an [AudioInstance] of it.
    */
-  AudioInstance _play(Sound sound, bool looping )
+  AudioInstance _play( Sound sound, bool looping )
   {
     AudioBufferSourceNode source = _context.createBufferSource();
     source.buffer = sound._buffer;
