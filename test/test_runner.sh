@@ -3,7 +3,7 @@
 #
 #!/bin/bash -e
 
-analysis=$(dart_analyzer lib/*.dart lib/src/*/*.dart)
+analysis=$(dartanalyzer lib/*.dart lib/src/*/*.dart)
 echo -e "$analysis"
 if [[ "$results" != "" ]]
   then exit 1
