@@ -1,7 +1,7 @@
 name: gorgon
 version: 0.13.1
 author: Cantidio Oliveira Fontes
-description: A game development lib.
+description: Have you ever wanted to create 2D games to be played in your browser, but stuck with crazy canvas and WebGL functions? Now you can create your 2D Games without caring about canvas or other html5 techcologies. Gorgon is a simple game development library, which you can create fast and easy 2D games.
 homepage: https://github.com/cantidio/gorgonDart
 dependencies:
   async: any
