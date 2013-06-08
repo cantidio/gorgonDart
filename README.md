@@ -1,4 +1,4 @@
-gorgonDart
+Gorgon for Dart
 ==========
 
 *IMPORTANT NOTICE:* This lib is still under development. Any changes will
