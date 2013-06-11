@@ -11,7 +11,7 @@ fi
 
 # run a set of Dart Unit tests
 
-results=$(DumpRenderTree test/test_runner.html)
+results=$(content_shell --dump-render-tree test/test_runner.html)
 echo -e "$results"
 
 # check to see if DumpRenderTree tests
