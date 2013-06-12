@@ -20,11 +20,14 @@ class Sound
   /// Returns the Future that is triggered when  the sound is loaded.
   Future<Sound> get onLoad => _onLoad;
 
+  /// Returns the [AudioChannel] of this [Sound].
+  AudioChannel get channel => _channel;
+
   /// Returns a [double] representing the [duration], in seconds of the Loaded [Sound].
-  double get duration     => _buffer.duration;
+  double get duration     => (_buffer != null) ? _buffer.duration : 0.0;
 
   /// Returns a [double] representing the [gain] of the Loaded [Sound].
-  double get gain         => _buffer.gain;
+  double get gain         => (_buffer != null) ? _buffer.gain : 0.0;
 
   /// Sets the [gain] of the Loaded [Sound].
   void set gain( double gain ) { _buffer.gain = gain; }
