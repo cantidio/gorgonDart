@@ -1,4 +1,4 @@
-Gorgon for Dart
+Gorgon for Dart - New Arch Hash
 ==========
 
 *IMPORTANT NOTICE:* This lib is still under development. Any changes will
