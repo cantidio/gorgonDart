@@ -47,7 +47,7 @@ class AudioChannel
   {
     _context  = new AudioContext();
     _gain     = _context.createGain();
-    _gain.connect(_context.destination, 0, 0 );
+    _gain.connectNode(_context.destination, 0, 0 );
   }
 
   /**
@@ -109,7 +109,7 @@ class AudioChannel
     source.buffer = sound._buffer;
     source.loop   = looping;
 
-    source.connect( _gain, 0, 0 );
+    source.connectNode( _gain, 0, 0 );
     source.start(0);
     return _createInstance( source );
   }

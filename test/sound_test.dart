@@ -2,7 +2,7 @@
  * Copyright (C) 2013 Cantidio Fontes
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
-library sprite_test;
+library sound_test;
 
 import 'dart:async';
 import "package:unittest/unittest.dart";

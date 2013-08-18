@@ -57,15 +57,13 @@ class Sound
 
     request.open( "GET", soundUrl, async: true );
     request.onLoad.listen((_){
-      _channel._context.decodeAudioData
-      (
-        request.response,
+      _channel._context.decodeAudioData( request.response ).then(
         (buffer)
         {
           _buffer = buffer;
           completer.complete( this );
         },
-        (error)
+        onError: (error)
         {
           completer.completeError(new Exception("Sound: Error when decoding $soundUrl."));
         });
