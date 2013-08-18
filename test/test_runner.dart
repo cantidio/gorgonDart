@@ -25,7 +25,7 @@ import 'sound_test.dart'       as sound_test;
 
 main()
 {
-  /*point2d_test.main();
+  point2d_test.main();
   mirroring_test.main();
   color_test.main();
   display_test.main();
@@ -36,8 +36,7 @@ main()
   frame_test.main();
   animation_test.main();
   animationpack_test.main();
-  animator_test.main();*/
-
+  animator_test.main();
   sound_test.main();
   pollForDone(testCases);
 
