@@ -31,6 +31,14 @@ void main()
       expect( sound.gain, equals( 0.0 ) );
     });
 
+    test( "Try to load an inexistent sound returns an exception",(){
+      String file = "this_sound_do_not_exist.wav";
+      Sound sound = new Sound();
+      sound.load( file ).catchError( expectAsync1((e) {
+        expect( e.toString(), equals( new Exception("Sound: Error when decoding $file.").toString() ) );
+      }));
+    });
+
 
   });
 }
