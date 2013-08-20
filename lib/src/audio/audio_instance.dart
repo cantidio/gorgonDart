@@ -39,7 +39,7 @@ class AudioInstance
    */
   void play()
   {
-    if( ! isPlaying )
+    if( !isPlaying )
     {
       _source.start(0);
     }
