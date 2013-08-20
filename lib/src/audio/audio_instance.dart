@@ -17,6 +17,9 @@ class AudioInstance
   /// Sets the [gain] of this [AudioInstance].
   void set gain( double gain ){ _source.gain.value = gain; }
 
+  /// Returns [true] if the [AudioInstance] is scheduled to be played.
+  bool get isScheduled => _source.playbackState == AudioBufferSourceNode.SCHEDULED_STATE;
+
   /// Returns [true] if the [AudioInstance] is playing.
   bool get isPlaying =>   _source.playbackState == AudioBufferSourceNode.PLAYING_STATE;
 

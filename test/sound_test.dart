@@ -15,11 +15,14 @@ void main()
     Sound empty;
     Sound normal;
 
-
     setUp((){
-      empty = new Sound();
-      normal = new Sound();
+      empty  = new Sound();
+      normal = new Sound(soundUrl: "resources/chico/attack.wav");
+      return Future.wait([
+        normal.onLoad
+      ]);
     });
+
     test("Empty constructor, channel is AudioSystem.targetChannel",(){
 
       Sound sound = new Sound();
@@ -38,6 +41,11 @@ void main()
       expect( sound.gain, equals( 0.0 ) );
     });
 
+    test("When setting the gain, it must return the corrected setted value.",(){
+      normal.gain = 0.5;
+      expect( normal.gain, 0.5);
+    });
+
     test( "Try to load an inexistent sound returns an exception",(){
       String file = "this_sound_do_not_exist.wav";
       Sound sound = new Sound();
@@ -52,6 +60,16 @@ void main()
       sound.load( file )
         .then( expectAsync1( (e){} ) )
         .catchError( protectAsync1( (e) => expect(true, isFalse, reason: "Should not be reached.") ) );
+    });
+
+    test( "When playing a sound, must return an valid AudioInstance.", (){
+      AudioInstance instance = normal.play();
+      expect( instance, isNotNull );
+    });
+
+    test( "When playing a sound, must return an AudioInstance that is playing or scheduled to be played.", (){
+      AudioInstance instance = normal.play();
+      expect( instance.isPlaying || instance.isScheduled, isTrue );
     });
 
   });
