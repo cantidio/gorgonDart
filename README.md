@@ -38,7 +38,7 @@ import 'package:gorgon/gorgon.dart';
 
 1\. Graphic Module
 
-1\.1\. Creating a Display and Drawing an simple Sprite.
+1\.1\. Creating a Display and Drawing a simple Sprite.
 ```dart
 import 'package:gorgon/gorgon.dart';
 main() {
@@ -122,8 +122,7 @@ main() {
   Spritepack spritepack = new Spritepack.fromJSON( "yourspritepack.json");
 }
 ```
-
-Json example
+Json example:
 ```json
 {"spritepack":{
   "group-1":
@@ -156,6 +155,107 @@ main() {
     // In tile sheets, every row is a group, and can be accessed by it's number.
     spritepack[0][0].draw( new Point2D( 160, 128 ) );
     spritepack[1][0].draw( new Point2D( 160, 128 ) );
+  });
+}
+```
+
+1\.7\. Creating a simple animation from a Map.
+```dart
+import 'package:gorgon/gorgon.dart';
+main() {
+  // Create an animationpack from a dart Map
+  Animation animation = new Animation.fromMap({
+    "looping":      true,
+    "loopFrame":    0,
+    "repeatNumber": -1,
+    "time":         6,
+    "frames": [
+       { "group": "walk", "index": 0 },
+       { "group": "walk", "index": 1 }
+     ]
+  });
+}
+```
+
+1\.8\. Creating a simple animationpack from a Map.
+```dart
+import 'package:gorgon/gorgon.dart';
+main() {
+  // Create an animationpack from a dart Map
+  Animationpack animation = new Animation.fromMap({
+    "animation-1": {
+      "looping":      true,
+      "loopFrame":    0,
+      "repeatNumber": -1,
+      "time":         6,
+      "frames": [
+         { "group": "walk", "index": 0 },
+         { "group": "walk", "index": 1 },
+         { "group": "walk", "index": 2 },
+         { "group": "walk", "index": 3 },
+         { "group": "walk", "index": 4 },
+         { "group": "walk", "index": 3 },
+         { "group": "walk", "index": 2 },
+         { "group": "walk", "index": 1 }
+       ]
+    }
+  });
+}
+```
+
+1\.9\. Load a animationpack from a JSON.
+```dart
+import 'package:gorgon/gorgon.dart';
+main() {
+  // Create an animationpack from a dart Map
+  Animationpack animationpack = new Animation.fromJSON( "animationpack.json" );
+  animationpack.onLoad.then((_){
+    // do something here
+  });
+}
+```
+Json example:
+```json
+{"animationpack":{
+  "animation-1": {
+    "looping":      true,
+    "loopFrame":    0,
+    "repeatNumber": -1,
+    "frames": [
+      { "group": "stand", "index": 0, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "rotation": 0 },
+      { "group": "stand", "index": 1, "xoffset": 0, "yoffset":0, "time": 5, "mirroring": "None", "rotation": 0 }
+    ]
+  }
+}}
+```
+
+1\.10\. Creating an Animator from a Spritepack and an Animationpack.
+```dart
+import 'package:gorgon/gorgon.dart';
+main() {
+  Display display = new Display( query("#My display holder"), width: 320, height: 240 );
+  Spritepack spritepack = new Spritepack.fromJSON( "yourspritepack.json");
+  Animationpack animationpack = new Animation.fromJSON( "animationpack.json" );
+
+  //wait for your resources to download
+
+  Futures.wait([ spritepack.onLoad, animationpack.onLoad ]).then((){
+    // Create a animator that will bind your animationpack to your spritepack
+    Animator animator = new Animator( spritepack, animationpack );
+    // After binding your spritepack and your animationpack you can run a sanityCheck.
+    animator.sanityCheck();
+
+    // Now you can change animations and run them.
+    animator.changeAnimation("animation-1");
+    int ang = 0;
+    // Run this 60 times per second
+    Timer timer = new Timer.periodic( const Duration(milliseconds: 1000~/60), (_) {
+      display.clear();
+      // The method runStep will run only one step of the animation.
+      animator.runStep();
+      // The method draw will draw the correct sprite for each animation frame.
+      animator.draw( new Point2D(150,100), rotation: ang++ );
+    });
   });
 }
 ```
