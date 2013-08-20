@@ -21,7 +21,9 @@ import 'animation_test.dart'      as animation_test;
 import 'animationpack_test.dart'  as animationpack_test;
 import 'animator_test.dart'       as animator_test;
 
-import 'sound_test.dart'       as sound_test;
+import 'sound_test.dart'          as sound_test;
+import 'audio_channel_test.dart'  as audio_channel_test;
+import 'audio_system_test.dart'   as audio_system_test;
 
 main()
 {
@@ -37,7 +39,10 @@ main()
   animation_test.main();
   animationpack_test.main();
   animator_test.main();
+  audio_system_test.main();
+  audio_channel_test.main();
   sound_test.main();
+
   pollForDone(testCases);
 
   /*AudioSystem system = new AudioSystem();

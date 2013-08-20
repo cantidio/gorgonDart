@@ -5,8 +5,7 @@
 library sound_test;
 
 import 'dart:async';
-import "package:unittest/unittest.dart";
-
+import 'package:unittest/unittest.dart';
 import 'package:gorgon/gorgon.dart';
 
 void main()
@@ -63,12 +62,12 @@ void main()
     });
 
     test( "When playing a sound, must return an valid AudioInstance.", (){
-      AudioInstance instance = normal.play();
+      AudioInstance instance = empty.play();
       expect( instance, isNotNull );
     });
 
     test( "When playing a sound, must return an AudioInstance that is playing or scheduled to be played.", (){
-      AudioInstance instance = normal.play();
+      AudioInstance instance = empty.play();
       expect( instance.isPlaying || instance.isScheduled, isTrue );
     });
 

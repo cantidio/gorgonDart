@@ -6,7 +6,7 @@ class AudioSystem
 {
   static AudioSystem _singleton;
 
-  static AudioChannel _targetChannel = new AudioChannel._();
+  static AudioChannel _targetChannel;
 
   Map<String,AudioChannel> _channels = new Map<String,AudioChannel>();
 
@@ -23,7 +23,8 @@ class AudioSystem
    */
   AudioSystem._()
   {
-    _channels["default"]  = _targetChannel;
+    _channels["default"]  = new AudioChannel._();
+    _channels["default"].setAsTarget();
   }
 
   /**

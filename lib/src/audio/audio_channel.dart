@@ -16,6 +16,9 @@ class AudioChannel
   /// The list of playing instances.
   List<AudioInstance> _instances = new List<AudioInstance>();
 
+  /// Returns the number of [AudioInstance]s currently being used by this [AudioChannel].
+  int get instances => _instances.length;
+
   /// Returns the gain in this [AudioChannel].
   double get gain => _gain.gain.value;
 
