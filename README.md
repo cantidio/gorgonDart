@@ -146,8 +146,7 @@ main() {
   // Create your display inside a DOM element.
   Display display = new Display( query("#My display holder"), width: 320, height: 240 );
 
-  // Create a Spritepack from a tile sheet.
-  // Create a Sprite where each tile has 32px of width and 32px of height.
+  // Create a Spritepaxk where each tile has 32px of width and 32px of height.
   Spritepack spritepack = new Spritepack.fromTileSheet( "tilesheet.png", 32, 32 );
 
   // Wait for the spritepack to load.
@@ -238,7 +237,6 @@ main() {
   Animationpack animationpack = new Animation.fromJSON( "animationpack.json" );
 
   //wait for your resources to download
-
   Futures.wait([ spritepack.onLoad, animationpack.onLoad ]).then((){
     // Create a animator that will bind your animationpack to your spritepack
     Animator animator = new Animator( spritepack, animationpack );

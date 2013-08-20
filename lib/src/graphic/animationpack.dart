@@ -98,8 +98,9 @@ class Animationpack
    *
    * This method returns the reference to the added [Animation].
    */
-  Animation add( Animation animation, String name )
+  Animation add( Animation animation, var name )
   {
+    name = name.toString();
     if( _animations[name] != null )
     {
       throw new Exception("The animationpack already has an animation named: '{$name}'");
@@ -115,17 +116,17 @@ class Animationpack
    *
    * The [Animation] removed from the [Animationpack] is returned.
    */
-  Animation remove(String key)
+  Animation remove( var key )
   {
-    return _animations.remove(key);
+    return _animations.remove( key.toString() );
   }
 
   /**
    * Operator that returns a [Animation] of the requested [name].
    */
-  Animation operator []( String name )
+  Animation operator []( var name )
   {
-    return _animations[name];
+    return _animations[ name.toString() ];
   }
 
   /**
