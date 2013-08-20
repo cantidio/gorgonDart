@@ -12,7 +12,14 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   group("Sound",(){
+    Sound empty;
+    Sound normal;
 
+
+    setUp((){
+      empty = new Sound();
+      normal = new Sound();
+    });
     test("Empty constructor, channel is AudioSystem.targetChannel",(){
 
       Sound sound = new Sound();
@@ -39,6 +46,13 @@ void main()
       }));
     });
 
+    test( "When Loading a normal sound must call the future.",(){
+      String file = "resources/chico/attack.wav";
+      Sound sound = new Sound();
+      sound.load( file )
+        .then( expectAsync1( (e){} ) )
+        .catchError( protectAsync1( (e) => expect(true, isFalse, reason: "Should not be reached.") ) );
+    });
 
   });
 }
