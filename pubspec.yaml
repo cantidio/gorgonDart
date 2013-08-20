@@ -3,6 +3,8 @@ version: 0.13.3
 author: Cantidio Oliveira Fontes <aniquilatorbloody@gmail.com>
 description: Have you ever wanted to create 2D games to be played in your browser, but stuck with crazy canvas and WebGL functions? Now you can create your 2D Games without caring about canvas or other html5 technologies. Gorgon is a simple game development library, which you can create your own 2D games in a fast and easy way.
 homepage: https://github.com/cantidio/gorgonDart
+environment:
+  sdk: '>=0.6.19'
 dependencies:
   async: '>=0.1.7 <=0.1.7+201306072346'
   browser: '>=0.5.6 <=0.5.15'

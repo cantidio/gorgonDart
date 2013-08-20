@@ -194,8 +194,9 @@ class Spritepack
    *
    * This method returns the reference to the added [Sprite].
    */
-  Sprite add(Sprite sprite, {String group: "", int index})
+  Sprite add(Sprite sprite, { var group: "", int index })
   {
+    group = group.toString();
     if( index != null )
     {
       this[group].insert(index, sprite);
@@ -223,9 +224,9 @@ class Spritepack
    *
    * This method returns the [Sprite] [List].
    */
-  List<Sprite> removeGroup( String name )
+  List<Sprite> removeGroup( var groupName )
   {
-    return _groups.remove( name );
+    return _groups.remove( groupName.toString() );
   }
 
   /**
@@ -233,8 +234,9 @@ class Spritepack
    *
    * If the requested [group] do not exist, then an empty [List] will be created and assigned to that [group].
    */
-  List<Sprite> operator []( String group )
+  List<Sprite> operator []( var group )
   {
+    group = group.toString();
     if( _groups[group] == null )
     {
       _groups[group] = new List<Sprite>();
