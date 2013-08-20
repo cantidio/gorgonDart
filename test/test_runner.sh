@@ -26,7 +26,7 @@ fi
 mkdir ./docs
 dartdoc --out=./docs ./lib/gorgon.dart
 cd docs
-#tar -cvf ../gorgon_docs.tar * 
+#tar -cvf ../gorgon_docs.tar *
 zip -r ../gorgon_docs *
 
 exit 0
