@@ -30,3 +30,6 @@ part 'src/audio/audio_instance.dart';
 part 'src/audio/sound.dart';
 part 'src/audio/audio_channel.dart';
 part 'src/audio/audio_system.dart';
+
+part 'src/input/key.dart';
+part 'src/input/keyboard.dart';
