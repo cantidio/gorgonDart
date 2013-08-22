@@ -26,6 +26,8 @@ import 'sound_test.dart'          as sound_test;
 import 'audio_channel_test.dart'  as audio_channel_test;
 import 'audio_system_test.dart'   as audio_system_test;
 
+import 'keyboard_test.dart'       as keyboard_test;
+
 main()
 {
   point2d_test.main();
@@ -44,6 +46,8 @@ main()
   audio_channel_test.main();
   audio_instance_test.main();
   sound_test.main();
+
+  keyboard_test.main();
 
   pollForDone(testCases);
 
