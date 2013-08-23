@@ -19,6 +19,12 @@ void main()
     });
 
     test("When a key is pressed the KeyPress event must be called",(){
+      keyboard.onKeyDown( expectAsync1( (_){}, count: 1 ));
+
+      window.dispatchEvent(new KeyboardEvent("keydown") );
+    });
+
+    test("When a key is released the Keyup event must be called",(){
       keyboard.onKeyUp( expectAsync1( (_){}, count: 1 ));
 
       window.dispatchEvent(new KeyboardEvent("keyup") );
