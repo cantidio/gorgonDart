@@ -13,6 +13,9 @@ class Keyboard
   List _keyDownCallback;
   List _keyUpCallback;
 
+  /// Returns all keycodes being pressed.
+  List<int> get pressedKeys => _keyBuffer.keys.toList(growable: false);
+
   /**
    * Keyboard constructor.
    */
@@ -74,20 +77,20 @@ class Keyboard
   {
     if( _keyBuffer[event.keyCode] != true )
     {
+      _keyBuffer[event.keyCode] = true;
       _keyDownCallback.forEach((e) => e(event.keyCode));
     }
-    _keyBuffer[event.keyCode] = true;
   }
   /**
    * Method called everytime a Key is released
    */
   void _onKeyUp( event )
   {
-    if( _keyBuffer[event.keyCode] != false )
+    if( _keyBuffer[event.keyCode] != null )
     {
+      _keyBuffer.remove( event.keyCode );
       _keyUpCallback.forEach((e) => e(event.keyCode));
     }
-    _keyBuffer[event.keyCode] = false;
   }
 
 }

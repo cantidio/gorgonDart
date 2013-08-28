@@ -18,6 +18,10 @@ void main()
       keyboard = new Keyboard();
     });
 
+    test("When a keyboard is created, no one key must be pressed.",(){
+      expect(keyboard.pressedKeys.length, 0);
+    });
+
     test("When a key is pressed the KeyPress event must be called",(){
       keyboard.onKeyDown( expectAsync1( (_){}, count: 1 ));
 
@@ -25,9 +29,10 @@ void main()
     });
 
     test("When a key is released the Keyup event must be called",(){
+      keyboard.onKeyDown( (_) => window.dispatchEvent(new KeyboardEvent("keyup") ));
       keyboard.onKeyUp( expectAsync1( (_){}, count: 1 ));
 
-      window.dispatchEvent(new KeyboardEvent("keyup") );
+      window.dispatchEvent(new KeyboardEvent("keydown") );
     });
 
   });
