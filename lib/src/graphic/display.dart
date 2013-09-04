@@ -163,6 +163,14 @@ class Display
   }
 
   /**
+   * Method that requests the display to be shown in fullscreen
+   */
+  void requestFullScreen()
+  {
+    _canvas.requestFullScreen();
+  }
+
+  /**
    * Method that set the [Display] as target for further drawings operations.
    *
    * If this method was never called then the [target] [Display] will be the first created display.
