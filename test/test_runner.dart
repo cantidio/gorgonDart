@@ -46,12 +46,19 @@ main()
   audio_channel_test.main();
   audio_instance_test.main();
   sound_test.main();
-
   keyboard_test.main();
 
   pollForDone(testCases);
 
-  /*AudioSystem system = new AudioSystem();
+  /*Keyboard a = new Keyboard();
+  a.onKeyDown.listen((e) {
+    if( a[KeyCode.A] && a[KeyCode.B] )
+    {
+      print("A + B");
+    }
+  });
+
+  AudioSystem system = new AudioSystem();
   system.targetChannel.gain = 1.0;
 
   Sound sound = new Sound( soundUrl: "resources/chico/attack.wav");

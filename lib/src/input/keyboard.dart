@@ -12,7 +12,13 @@ class Keyboard
   Map<int,bool> _keyBuffer;
   List _keyDownCallback;
   List _keyUpCallback;
+  Stream<int> _onKeyDownStream;
+  Stream<int> _onKeyUpStream;
 
+  /// Returns the [Stream] of KeyDown
+  Stream<int> get onKeyDown => _onKeyDownStream;
+  /// Returns the [Stream] of KeyUp
+  Stream<int> get onKeyUp   => _onKeyUpStream;
   /// Returns all keycodes being pressed.
   List<int> get pressedKeys => _keyBuffer.keys.toList(growable: false);
 
@@ -21,9 +27,7 @@ class Keyboard
    */
   Keyboard()
   {
-    _keyBuffer       = new Map<int,bool>();
-    _keyDownCallback = new List();
-    _keyUpCallback   = new List();
+    _keyBuffer = new Map<int,bool>();
     _registerEvents();
   }
 
@@ -33,22 +37,6 @@ class Keyboard
   void clearKeyBuffer()
   {
     _keyBuffer.clear();
-  }
-
-  /**
-   * Method that register a [callback] that will be called when a key is Up.
-   */
-  void onKeyUp( callback )
-  {
-    _keyUpCallback.add( callback );
-  }
-
-  /**
-   * Method that register a [callback] that will be called when a key is Down.
-   */
-  void onKeyDown( callback )
-  {
-    _keyDownCallback.add( callback );
   }
 
   /**
@@ -64,10 +52,10 @@ class Keyboard
    */
   void _registerEvents()
   {
-    window.onKeyDown.listen((event) => _onKeyDown( event ) );
-    window.onKeyUp.listen  ((event) => _onKeyUp  ( event ) );
-    //window.onFocus
-    //window.onBlur
+    _onKeyDownStream = window.onKeyDown.map((event) => event.keyCode);
+    _onKeyUpStream   = window.onKeyUp.map  ((event) => event.keyCode);
+    onKeyDown.listen((event) => _onKeyDown( event ) );
+    onKeyUp.listen  ((event) => _onKeyUp  ( event ) );
   }
 
   /**
@@ -75,10 +63,9 @@ class Keyboard
    */
   void _onKeyDown( event )
   {
-    if( _keyBuffer[event.keyCode] != true )
+    if( _keyBuffer[event] != true )
     {
-      _keyBuffer[event.keyCode] = true;
-      _keyDownCallback.forEach((e) => e(event.keyCode));
+      _keyBuffer[event] = true;
     }
   }
   /**
@@ -86,10 +73,9 @@ class Keyboard
    */
   void _onKeyUp( event )
   {
-    if( _keyBuffer[event.keyCode] != null )
+    if( _keyBuffer[event] != null )
     {
-      _keyBuffer.remove( event.keyCode );
-      _keyUpCallback.forEach((e) => e(event.keyCode));
+      _keyBuffer.remove( event );
     }
   }
 
