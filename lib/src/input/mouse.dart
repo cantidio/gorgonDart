@@ -13,8 +13,12 @@ class Mouse
   List _keyDownCallback;
   List _keyUpCallback;
   List _onMoveCallback;
-  Point2D _mousePosition;
 
+  Point2D _position;
+  Stream<Point2D> _onMoveStream;
+
+  Stream<Point2D> get onMove => _onMoveStream;
+  Point2D get position => _position;
 
   /// Returns all keycodes being pressed.
   List<int> get pressedButtons => _keyBuffer.keys.toList(growable: false);
@@ -26,18 +30,15 @@ class Mouse
   {
     _mousePosition   = new Point2D.zero();
     _buttonBuffer    = new Map<int,bool>();
-    _keyDownCallback = new List();
-    _keyUpCallback   = new List();
-    _onMoveCallback  = new List();
     _registerEvents();
   }
 
   /**
    * Method that clears the key buffer.
    */
-  void clearKeyBuffer()
+  void onMove( callback )
   {
-    _keyBuffer.clear();
+    _onMoveCallback.add( callback );
   }
 
   /**
@@ -69,19 +70,20 @@ class Mouse
    */
   void _registerEvents()
   {
-    window.onMouseMove.listen ((event) => _onMove      ( event ) );
-    window.onMouseWheel.listen((event) => _onWheel     ( event ) );
-    window.onMouseDown.listen ((event) => _onButtonDown( event ) );
-    window.onMouseUp.listen   ((event) => _onButtonUp  ( event ) );
+    _onMoveStream = window.onMouseMove.map((event) => new Point2D( event.clientX, event.clientY ));
+    onMove.listen((event) => _onMove( event ) );
+
+    //window.onMouseWheel.listen((event) => _onWheel     ( event ) );
+    //window.onMouseDown.listen ((event) => _onButtonDown( event ) );
+    //window.onMouseUp.listen   ((event) => _onButtonUp  ( event ) );
   }
 
+  /**
+   * Method callec everytime the mouse moves
+   */
   void _onMove( MouseEvent event )
   {
-    Point2D newPos = new Point2D( event.clientX, event.clientY );
-    if( newPos != _mousePosition )
-    {
-      _mousePosition = newPos;
-    }
+    _mousePosition = new Point2D( event.clientX, event.clientY );
   }
 
   /**
