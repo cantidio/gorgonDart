@@ -9,60 +9,36 @@ part of gorgon;
  */
 class Mouse
 {
-  Map<int,bool> _buttonBuffer;
-  List _keyDownCallback;
-  List _keyUpCallback;
-  List _onMoveCallback;
-
-  Point2D _position;
+  Point2D         _position;
   Stream<Point2D> _onMoveStream;
+  Stream<int>     _onButtonDownStream;
+  Stream<int>     _onButtonUpStream;
+  Map<int,bool>   _buttonBuffer;
 
-  Stream<Point2D> get onMove => _onMoveStream;
-  Point2D get position => _position;
+  Point2D         get position      => _position;
+  Stream<Point2D> get onMove        => _onMoveStream;
+  Stream<int>     get onButtonDown  => _onButtonDownStream;
+  Stream<int>     get onButtonUp    => _onButtonUpStream;
 
   /// Returns all keycodes being pressed.
-  List<int> get pressedButtons => _keyBuffer.keys.toList(growable: false);
+  List<int> get pressedButtons => _buttonBuffer.keys.toList(growable: false);
 
   /**
    * [Mouse] constructor.
    */
   Mouse()
   {
-    _mousePosition   = new Point2D.zero();
-    _buttonBuffer    = new Map<int,bool>();
+    _position     = new Point2D.zero();
+    _buttonBuffer = new Map<int,bool>();
     _registerEvents();
   }
 
   /**
-   * Method that clears the key buffer.
+   * Operator that returns [true] if the [button] is pressed [false] otherwise.
    */
-  void onMove( callback )
+  bool operator []( int button )
   {
-    _onMoveCallback.add( callback );
-  }
-
-  /**
-   * Method that register a [callback] that will be called when a key is Up.
-   */
-  void onKeyUp( callback )
-  {
-    _keyUpCallback.add( callback );
-  }
-
-  /**
-   * Method that register a [callback] that will be called when a key is Down.
-   */
-  void onKeyDown( callback )
-  {
-    _keyDownCallback.add( callback );
-  }
-
-  /**
-   * Operator that returns [true] if the [key] isß pressed [false] otherwise.
-   */
-  bool operator []( int key )
-  {
-    return _keyBuffer[key] != null ? _keyBuffer[key] : false;
+    return _buttonBuffer[button] != null ? _buttonBuffer[button] : false;
   }
 
   /**
@@ -70,42 +46,41 @@ class Mouse
    */
   void _registerEvents()
   {
-    _onMoveStream = window.onMouseMove.map((event) => new Point2D( event.clientX, event.clientY ));
-    onMove.listen((event) => _onMove( event ) );
+    _onButtonDownStream = window.onMouseDown.map((event) => event.button );
+    _onButtonUpStream   = window.onMouseUp.map  ((event) => event.button );
+    _onMoveStream       = window.onMouseMove.map((event) => new Point2D( event.clientX, event.clientY ));
 
-    //window.onMouseWheel.listen((event) => _onWheel     ( event ) );
-    //window.onMouseDown.listen ((event) => _onButtonDown( event ) );
-    //window.onMouseUp.listen   ((event) => _onButtonUp  ( event ) );
+    onButtonDown.listen ((event) => _onButtonDown ( event ));
+    onButtonUp.listen   ((event) => _onButtonUp   ( event ));
+    onMove.listen       ((event) => _onMove       ( event ));
   }
 
   /**
    * Method callec everytime the mouse moves
    */
-  void _onMove( MouseEvent event )
+  void _onMove( Point2D position )
   {
-    _mousePosition = new Point2D( event.clientX, event.clientY );
+    _position = position;
   }
 
   /**
-   * Method called everytime a Button is pressed down.
+   * Method called everytime a [button] is pressed down.
    */
-  void _onButtonDown( MouseEvent event )
+  void _onButtonDown( int button )
   {
-    if( _buttonBuffer[event.button] != true )
+    if( _buttonBuffer[button] != true )
     {
-      _buttonBuffer[event.button] = true;
-      _buttonDownCallback.forEach((e) => e(event.button));
+      _buttonBuffer[button] = true;
     }
   }
   /**
-   * Method called everytime a Button is released
+   * Method called everytime a [button] is released
    */
-  void _onKeyUp( MouseEvent event )
+  void _onButtonUp( int button )
   {
-    if( _buttonBuffer[event.button] != null )
+    if( _buttonBuffer[button] != null )
     {
-      _buttonBuffer.remove( event.button );
-      _buttonUpCallback.forEach((e) => e(event.button));
+      _buttonBuffer.remove( button );
     }
   }
 
