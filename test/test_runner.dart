@@ -27,6 +27,7 @@ import 'audio_channel_test.dart'  as audio_channel_test;
 import 'audio_system_test.dart'   as audio_system_test;
 
 import 'keyboard_test.dart'       as keyboard_test;
+import 'mouse_test.dart'          as mouse_test;
 
 main()
 {
@@ -47,8 +48,10 @@ main()
   audio_instance_test.main();
   sound_test.main();
   keyboard_test.main();
+  mouse_test.main();
 
   pollForDone(testCases);
+
 
   /*Keyboard a = new Keyboard();
   a.onKeyDown.listen((e) {
