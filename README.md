@@ -8,7 +8,7 @@ be done without prior notice to consumers of this package.
 
 [Last Build Documentation](https://drone.io/github.com/cantidio/gorgonDart/files/gorgon_docs.zip)
 
-Gorgon is a game development library for using with Dart.
+Gorgon is a game development library for Dart.
 
 ## Getting Started
 
