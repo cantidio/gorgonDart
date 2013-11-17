@@ -4,7 +4,6 @@
  */
 library audio_channel_test;
 
-import 'dart:async';
 import 'package:unittest/unittest.dart';
 import 'package:gorgon/gorgon.dart';
 

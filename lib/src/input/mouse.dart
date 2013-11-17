@@ -48,7 +48,7 @@ class Mouse
   {
     _onButtonDownStream = window.onMouseDown.map((event) => event.button );
     _onButtonUpStream   = window.onMouseUp.map  ((event) => event.button );
-    _onMoveStream       = window.onMouseMove.map((event) => new Point2D( event.clientX, event.clientY ));
+    _onMoveStream       = window.onMouseMove.map((event) => new Point2D( event.client.x, event.client.y ));
 
     onButtonDown.listen ((event) => _onButtonDown ( event ));
     onButtonUp.listen   ((event) => _onButtonUp   ( event ));

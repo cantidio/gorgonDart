@@ -77,7 +77,7 @@ class Animationpack
   {
     Completer completer = new Completer();
     HttpRequest.getString(jsonUrl).then((response) {
-      Map pack = JSON.parse(response);
+      Map pack = JSON.decode(response);
 
       if( pack["animationpack"] != null )
       {

@@ -167,7 +167,7 @@ class Display
    */
   void requestFullScreen()
   {
-    _canvas.requestFullScreen(0);
+    _canvas.requestFullscreen();
   }
 
   /**

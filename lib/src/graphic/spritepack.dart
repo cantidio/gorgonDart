@@ -112,7 +112,7 @@ class Spritepack
     List<Future<Sprite>> spr_futures  = new List<Future<Sprite>>();
 
     HttpRequest.getString(jsonUrl).then((response) {
-      dynamic obj = JSON.parse(response);
+      dynamic obj = JSON.decode(response);
       if( obj["spritepack"] != null )
       {
         obj["spritepack"].forEach((group, list){
