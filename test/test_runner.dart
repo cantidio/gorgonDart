@@ -45,7 +45,7 @@ main()
   audio_system_test.main();
 //  audio_channel_test.main();
 //  audio_instance_test.main();
-//  sound_test.main();
+  sound_test.main();
   keyboard_test.main();
   mouse_test.main();
 }
