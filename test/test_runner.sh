@@ -12,5 +12,5 @@ if [[ $? -ne 0 ]]; then
 fi
 
 #content_shell --dump-render-tree test_runner.html
-results=$(content_shell --args --dump-render-tree test_runner.html 2>&1)
+results=$(content_shell --args --dump-render-tree test/test_runner.html 2>&1)
 echo -e "$results"
