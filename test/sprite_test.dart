@@ -6,6 +6,7 @@ library sprite_test;
 
 import 'dart:async';
 import "package:unittest/unittest.dart";
+import 'package:mock/mock.dart';
 
 import 'package:gorgon/gorgon.dart';
 
@@ -72,40 +73,39 @@ void main()
 
     test( "Operator == return true when comparing sprites with the same internal data.", (){
       Sprite normal2 = new Sprite( imageSource: "resources/chico/chico_1.png");
-
-      normal2.onLoad.then( expectAsync1( (_) => expect( normal, equals(normal2) ) ));
+      return normal2.onLoad.then((_) => expect( normal, equals(normal2)) );
     });
 
     test( "Flip horizontal.", (){
-      normal.flipH().then( expectAsync1( (_) => expect( normal, equals(flipH) ) ));
+      return normal.flipH().then((_) => expect( normal, equals(flipH) ) );
     });
 
     test( "Flip vertical.", (){
-      normal.flipV().then( expectAsync1( (_) => expect( normal, equals(flipV) ) ));
+      return normal.flipV().then((_) => expect( normal, equals(flipV) ) );
     });
 
     test( "Flip horizontal and vertical.", (){
-      normal.flipHV().then( expectAsync1( (_) => expect( normal, equals(flipHV) ) ));
+      return normal.flipHV().then( (_) => expect( normal, equals(flipHV) ) );
     });
 
     test( "Flip generic with Mirroring.H", (){
-      normal.flip( Mirroring.H ).then( expectAsync1( (_) => expect( normal, equals(flipH) ) ));
+      return normal.flip( Mirroring.H ).then( (_) => expect( normal, equals(flipH) ) );
     });
 
     test( "Flip generic with Mirroring.V", (){
-      normal.flip( Mirroring.V ).then( expectAsync1( (_) => expect( normal, equals(flipV) ) ));
+      return normal.flip( Mirroring.V ).then( (_) => expect( normal, equals(flipV) ) );
     });
 
     test( "Flip generic with Mirroring.HV", (){
-      normal.flip( Mirroring.HV ).then( expectAsync1( (_) => expect( normal, equals(flipHV) ) ));
+      return normal.flip( Mirroring.HV ).then( (_) => expect( normal, equals(flipHV) ) );
     });
 
     test( "Rotate Left", (){
-      normal.rotateLeft().then( expectAsync1( (_) => expect( normal, equals(rotateLeft) ) ));
+      return normal.rotateLeft().then( (_) => expect( normal, equals(rotateLeft) ) );
     });
 
     test( "Rotate Right", (){
-      normal.rotateRight().then( expectAsync1( (_) => expect( normal, equals(rotateRight) ) ));
+      return normal.rotateRight().then( (_) => expect( normal, equals(rotateRight) ) );
     });
 
   });
