@@ -11,4 +11,6 @@ if [[ $? -ne 0 ]]; then
   PATH=$cs_path:$PATH
 fi
 
-content_shell --dump-render-tree test_runner.html
+#content_shell --dump-render-tree test_runner.html
+results=$(content_shell --args --dump-render-tree test_runner.html 2>&1)
+echo -e "$results"
