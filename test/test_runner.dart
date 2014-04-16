@@ -3,6 +3,7 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 import 'package:unittest/unittest.dart';
+import 'package:unittest/html_enhanced_config.dart';
 import 'dart:async';
 
 import 'point2d_test.dart'        as point2d_test;
@@ -28,6 +29,7 @@ import 'mouse_test.dart'          as mouse_test;
 
 main()
 {
+  useHtmlEnhancedConfiguration();
   point2d_test.main();
   mirroring_test.main();
   color_test.main();
@@ -41,46 +43,9 @@ main()
   animationpack_test.main();
   animator_test.main();
   audio_system_test.main();
-  audio_channel_test.main();
-  audio_instance_test.main();
-  sound_test.main();
+//  audio_channel_test.main();
+//  audio_instance_test.main();
+//  sound_test.main();
   keyboard_test.main();
   mouse_test.main();
-
-  //pollForDone(testCases);
-
-
-  /*Keyboard a = new Keyboard();
-  a.onKeyDown.listen((e) {
-    if( a[KeyCode.A] && a[KeyCode.B] )
-    {
-      print("A + B");
-    }
-  });
-
-  AudioSystem system = new AudioSystem();
-  system.targetChannel.gain = 1.0;
-
-  Sound sound = new Sound( soundUrl: "resources/chico/attack.wav");
-  sound.onLoad.then((s) {
-
-    Timer timer;
-    timer = new Timer.periodic( const Duration(milliseconds: 10000~/70), (_) {
-      s.play();
-      system.targetChannel.gain -= 0.03;
-
-      if( system.targetChannel.gain <= 0 )
-        timer.cancel();
-    });
- });*/
-}
-
-pollForDone(List tests) {
-  if (tests.every((t)=> t.isComplete)) {
-    window.postMessage('done', window.location.href);
-    return;
-  }
-
-  var wait = new Duration(milliseconds: 100);
-  new Timer(wait, ()=> pollForDone(tests));
 }
