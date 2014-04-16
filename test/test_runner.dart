@@ -3,11 +3,7 @@
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
 import 'package:unittest/unittest.dart';
-import 'package:unittest/html_config.dart';
-import 'dart:html';
 import 'dart:async';
-//import 'package:gorgon/gorgon.dart';
-//import 'dart:math';
 
 import 'point2d_test.dart'        as point2d_test;
 import 'mirroring_test.dart'      as mirroring_test;
@@ -32,7 +28,6 @@ import 'mouse_test.dart'          as mouse_test;
 
 main()
 {
-  useHtmlConfiguration();
   point2d_test.main();
   mirroring_test.main();
   color_test.main();
