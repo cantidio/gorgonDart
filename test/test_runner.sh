@@ -3,12 +3,6 @@
 #
 #!/bin/bash -e
 
-analysis=$(dartanalyzer lib/*.dart lib/src/*/*.dart)
-echo -e "$analysis"
-if [[ "$results" != "" ]]
-  then exit 1
-fi
-
 # run a set of Dart Unit tests
 which content_shell
 if [[ $? -ne 0 ]]; then
@@ -18,7 +12,7 @@ if [[ $? -ne 0 ]]; then
   cs_path=$(ls -d drt-*)
   PATH=$cs_path:$PATH
 fi
-results=$(content_shell --dump-render-tree test/test_runner.html)
+results=$(content_shell --dump-render-tree test/test_runner.html 2>&1)
 echo -e "$results"
 
 # check to see if DumpRenderTree tests
@@ -30,10 +24,10 @@ fi
 
 # generate documentation, for this to work zip must be installed
 
-mkdir ./docs
-dartdoc --out=./docs ./lib/gorgon.dart
-cd docs
+#mkdir ./docs
+#dartdoc --out=./docs ./lib/gorgon.dart
+#cd docs
 #tar -cvf ../gorgon_docs.tar *
-zip -r ../gorgon_docs *
+#zip -r ../gorgon_docs *
 
 exit 0
