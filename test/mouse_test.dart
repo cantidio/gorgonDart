@@ -23,21 +23,27 @@ void main()
     });
 
     test("When a Button is pressed, the stream onButtonDown must trigger.",(){
-      mouse.onButtonDown.listen( expectAsync1( (_){}, count: 1 ));
+      Completer on_down= new Completer();
+      mouse.onButtonDown.listen( (_) => on_down.complete() );
 
       window.dispatchEvent( new MouseEvent("mousedown") );
+      return on_down.future;
     });
 
     test("When a button is released, the stream onButtonUp must trigger.",(){
-      mouse.onButtonUp.listen( expectAsync1( (_){}, count: 1 ));
+      Completer on_up = new Completer();
+      mouse.onButtonUp.listen( (_) => on_up.complete() );
 
       window.dispatchEvent( new MouseEvent("mouseup") );
+      return on_up.future;
     });
 
     test("When the mouse moves, the stream onMove must trigger.",(){
-      mouse.onMove.listen( expectAsync1( (_){}, count: 1 ));
+      Completer on_move = new Completer();
+      mouse.onMove.listen( (_) => on_move.complete() );
 
       window.dispatchEvent( new MouseEvent("mousemove") );
+      return on_move.future;
     });
 
   });

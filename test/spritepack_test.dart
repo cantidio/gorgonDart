@@ -76,9 +76,9 @@ void main()
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
-      Future.wait(futures).then( expectAsync1( (_){
+      return Future.wait(futures).then( (_){
         chicoNormal.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
-      }));
+      });
     });
 
     test( "Every added Sprite trought the .fromTileSheet must be equal to the individual loaded sprites.", (){
@@ -90,9 +90,9 @@ void main()
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
-      Future.wait(futures).then( expectAsync1( (_){
+      return Future.wait(futures).then( (_){
         chicoTile.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
-      }));
+      });
     });
 
     test( "Every added Sprite trought the .fromJSON must be equal to the individual loaded sprites.", (){
@@ -104,9 +104,9 @@ void main()
         futures.add( spr.onLoad );
         sprs.add( spr );
       }
-      Future.wait(futures).then( expectAsync1( (_){
+      return Future.wait(futures).then( (_){
         chicoJSON.forEachSprite((sprite) => expect( sprs.contains(sprite), isTrue ));
-      }));
+      });
     });
 
   });

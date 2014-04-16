@@ -23,15 +23,19 @@ void main()
     });
 
     test("When a key is pressed the KeyPress event must be called",(){
-      keyboard.onKeyDown.listen( expectAsync1( (_){}, count: 1 ));
+      Completer on_down= new Completer();
+      keyboard.onKeyDown.listen( (_) => on_down.complete() );
 
       window.dispatchEvent( new KeyboardEvent("keydown") );
+      return on_down.future;
     });
 
     test("When a key is released the Keyup event must be called",(){
-      keyboard.onKeyUp.listen( expectAsync1( (_){}, count: 1 ));
+      Completer on_up= new Completer();
+      keyboard.onKeyUp.listen( (_) => on_up.complete() );
 
       window.dispatchEvent( new KeyboardEvent("keyup") );
+      return on_up.future;
     });
 
   });
