@@ -11,6 +11,9 @@ class Sound
   /// The Audio Channel throught this sound plays.
   AudioChannel _channel;
 
+  /// The gain node.
+  GainNode _gain;
+
   /// The Sound internal buffer.
   AudioBuffer _buffer;
 
@@ -27,10 +30,18 @@ class Sound
   double get duration     => (_buffer != null) ? _buffer.duration : 0.0;
 
   /// Returns a [double] representing the [gain] of the Loaded [Sound].
-  double get gain         => (_buffer != null) ? _buffer.gain : 0.0;
+  double get gain         => _gain.gain.value;
 
   /// Sets the [gain] of the Loaded [Sound].
-  void set gain( double gain ) { _buffer.gain = gain; }
+  void set gain( double gain ) {
+    _gain.gain.value = gain;
+    if(_gain.gain.value > 1.0) {
+      _gain.gain.value = 1.0;
+    }
+    else if(_gain.gain.value < 0.0) {
+      _gain.gain.value = 0.0;
+    }
+  }
 
   /**
    * Creates a [Sound] that will play thought an [AudioChannel].
@@ -38,6 +49,9 @@ class Sound
   Sound({ String soundUrl, AudioChannel channel })
   {
     _channel = ( channel != null ) ? channel : new AudioSystem().targetChannel;
+    _gain     = _channel._context.createGain();
+    _gain.connectNode(_channel._gain, 0, 0 );
+
     if( soundUrl != null )
     {
       load( soundUrl );

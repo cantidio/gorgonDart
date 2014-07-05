@@ -23,7 +23,15 @@ class AudioChannel
   double get gain => _gain.gain.value;
 
   /// Sets the gain in this [AudioChannel].
-  void set gain(double gain) { _gain.gain.value = gain; }
+  void set gain( double gain ) {
+    _gain.gain.value = gain;
+    if(_gain.gain.value > 1.0) {
+      _gain.gain.value = 1.0;
+    }
+    else if(_gain.gain.value < 0.0) {
+      _gain.gain.value = 0.0;
+    }
+  }
 
   /// Returns true if the [AudioChannel] is muted.
   bool get mute => _muteGain != null;
@@ -89,9 +97,9 @@ class AudioChannel
    *
    * This Method will create the [AudioInstance] and insert it in the  instances List.
    */
-  AudioInstance _createInstance( AudioBufferSourceNode source )
+  AudioInstance _createInstance( AudioBufferSourceNode source, GainNode gain )
   {
-    AudioInstance instance = new AudioInstance._fromSource(source);
+    AudioInstance instance = new AudioInstance._fromSource(source, gain);
     _instances.add( instance );
 
     int max = 100;
@@ -112,9 +120,9 @@ class AudioChannel
     source.buffer = sound._buffer;
     source.loop   = looping;
 
-    source.connectNode( _gain, 0, 0 );
-    source.start(0);
-    return _createInstance( source );
+    source.connectNode( sound._gain, 0, 0 );
+    source.start();
+    return _createInstance( source, sound._gain );
   }
 
   /**

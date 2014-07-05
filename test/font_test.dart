@@ -49,52 +49,52 @@ void main()
       String file = "resources/TranscendsGames.otf";
       int child   = document.head.children.length;
 
-      font2.load( file ).then( expectAsync1((_) {
-        expect( document.head.children.length, equals( child+1 ) );
-      }));
+      return font2.load( file ).then( (_) =>
+        expect( document.head.children.length, equals( child+1 ) )
+      );
     });
 
     test( "loading an existent font, must create a element of the type STYLE in the document.head",(){
       String file = "resources/TranscendsGames.otf";
       int child   = document.head.children.length;
 
-      font2.load( file ).then( expectAsync1((_) {
-        expect( document.head.children[child].tagName, equals( "STYLE" ) );
-      }));
+      return font2.load( file ).then( (_) =>
+        expect( document.head.children[child].tagName, equals( "STYLE" ) )
+      );
     });
 
     test( "loading an existent font, must create a element of the type @font-face inside the STYLE created",(){
       String file = "resources/TranscendsGames.otf";
       int child   = document.head.children.length;
 
-      font2.load( file ).then( expectAsync1((_) {
-        expect( document.head.children[child].nodes[0].toString().substring(0,10), equals( "@font-face" ) );
-      }));
+      return font2.load( file ).then( (_) =>
+        expect( document.head.children[child].nodes[0].toString().substring(0,10), equals( "@font-face" ) )
+      );
     });
 
     test( "loading an existent font, must create a element of the type @font-face with the family expected",(){
       String file = "resources/TranscendsGames.otf";
       int child   = document.head.children.length;
 
-      font2.load( file ).then( expectAsync1((_) {
-        expect( document.head.children[child].nodes[0].toString().substring(26,26+font2.family.length), equals( font2.family ) );
-      }));
+      return font2.load( file ).then( (_) =>
+        expect( document.head.children[child].nodes[0].toString().substring(26,26+font2.family.length), equals( font2.family ) )
+      );
     });
 
     test( "Try to load an inexistent font returns an exception",(){
       String file = "this_font_donot_exist.ttf";
-      font2.load( file ).catchError( expectAsync1((e) {
-        expect( e.toString(), equals( new Exception("Timeout loading font: "+file ).toString() ) );
-      }));
+      return font2.load( file ).catchError( (e) =>
+        expect( e.toString(), equals( new Exception("Timeout loading font: "+file ).toString() ) )
+      );
     });
 
     test( "Try to load an inexistent font, should not leave a style element in the document.head.",(){
       String file = "this_font_donot_exist.ttf";
       int child   = document.head.children.length;
 
-      font2.load( file ).catchError( expectAsync1((e) {
-        expect( document.head.children.length, equals( child ) );
-      }));
+      return font2.load( file ).catchError( (e) =>
+        expect( document.head.children.length, equals( child ) )
+      );
     });
 
   });

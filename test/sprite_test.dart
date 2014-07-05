@@ -6,8 +6,6 @@ library sprite_test;
 
 import 'dart:async';
 import "package:unittest/unittest.dart";
-import 'package:mock/mock.dart';
-
 import 'package:gorgon/gorgon.dart';
 
 void main()
@@ -62,9 +60,9 @@ void main()
     });
 
     test( "load with inexistent image returns an exception", (){
-      empty.load("resources/logo_inexistent.png").catchError( expectAsync1((e) {
-        expect( e.toString(), equals( new Exception("Image: resources/logo_inexistent.png could not be found.").toString() ) );
-      }));
+      return empty.load("resources/logo_inexistent.png").catchError( (e) =>
+        expect( e.toString(), equals( new Exception("Image: resources/logo_inexistent.png could not be found.").toString() ) )
+      );
     });
 
     test( "Operator == must return true when comparing the same image.", (){

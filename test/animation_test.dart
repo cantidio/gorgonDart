@@ -115,7 +115,11 @@ void main()
     });
 
     test("Using the forEach must call the desired function for each frame in the animation.",(){
-      normal.forEachFrame( expectAsync1((d){}, count: 2) );
+      var frames = [normal[1],normal[0]];
+      normal.forEachFrame( (f){
+        expect(f,equals(frames.removeLast()));
+      } );
+      expect(frames.length, equals(0));
     });
 
     test("When Using the add method in an empty animation the animation.length must increase by 1.",(){

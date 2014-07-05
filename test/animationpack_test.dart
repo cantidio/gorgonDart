@@ -106,7 +106,13 @@ void main()
     });
 
     test("Using the forEach must call the desired function for each Animation in the Animationpack.",(){
-      json.forEach( expectAsync2((k,v){}, count: 2) );
+      var keys = ["walk","stand"];
+      var anims = [json["walk"], json["stand"]];
+      json.forEach( (k,v){
+        expect(k, equals(keys.removeLast()));
+        expect(v, equals(anims.removeLast()));
+        });
+      expect(keys.length, equals(0));
     });
 
 

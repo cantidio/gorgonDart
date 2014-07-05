@@ -9,11 +9,11 @@ import 'dart:core';
 import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
-//import 'dart:json' as JSON;
 import 'dart:math';
 import 'dart:collection';
 import 'dart:web_audio';
 
+// Graphic module
 part 'src/graphic/point2d.dart';
 part 'src/graphic/display.dart';
 part 'src/graphic/font_alignment.dart';
@@ -27,10 +27,12 @@ part 'src/graphic/animation.dart';
 part 'src/graphic/animationpack.dart';
 part 'src/graphic/animator.dart';
 
+// Audio module
 part 'src/audio/audio_instance.dart';
 part 'src/audio/sound.dart';
 part 'src/audio/audio_channel.dart';
 part 'src/audio/audio_system.dart';
 
+// Input module
 part 'src/input/keyboard.dart';
 part 'src/input/mouse.dart';

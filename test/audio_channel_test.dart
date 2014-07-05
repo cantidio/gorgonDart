@@ -10,7 +10,7 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   AudioChannel channel1;
-  group("AudioChannel",(){
+  group("audio: AudioChannel",(){
     Sound sound;
     AudioChannel channel1;
     AudioChannel channel2;

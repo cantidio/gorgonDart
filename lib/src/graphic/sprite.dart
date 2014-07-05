@@ -231,6 +231,7 @@ class Sprite
       case Mirroring.H:   return flipH();
       case Mirroring.V:   return flipV();
       case Mirroring.HV:  return flipHV();
+      default: throw new ArgumentError("Mirroring: '#{mirroring}' unknown.");
     }
   }
   /**

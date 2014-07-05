@@ -2,9 +2,7 @@
  * Copyright (C) 2013 Cantidio Fontes
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
-import 'package:unittest/unittest.dart';
 import 'package:unittest/html_enhanced_config.dart';
-import 'dart:async';
 
 import 'point2d_test.dart'        as point2d_test;
 import 'mirroring_test.dart'      as mirroring_test;
@@ -18,12 +16,10 @@ import 'frame_test.dart'          as frame_test;
 import 'animation_test.dart'      as animation_test;
 import 'animationpack_test.dart'  as animationpack_test;
 import 'animator_test.dart'       as animator_test;
-
-/*import 'audio_instance_test.dart' as audio_instance_test;
+import 'audio_instance_test.dart' as audio_instance_test;
 import 'sound_test.dart'          as sound_test;
 import 'audio_channel_test.dart'  as audio_channel_test;
-import 'audio_system_test.dart'   as audio_system_test;*/
-
+import 'audio_system_test.dart'   as audio_system_test;
 import 'keyboard_test.dart'       as keyboard_test;
 import 'mouse_test.dart'          as mouse_test;
 
@@ -42,22 +38,10 @@ main()
   animation_test.main();
   animationpack_test.main();
   animator_test.main();
-//  audio_system_test.main();
-//  audio_channel_test.main();
-//  audio_instance_test.main();
-//  sound_test.main();
+  audio_system_test.main();
+  audio_channel_test.main();
+  audio_instance_test.main();
+  sound_test.main();
   keyboard_test.main();
   mouse_test.main();
-  
-  pollForDone(testCases);
-}
-
-pollForDone(List tests) {
-  if (tests.every((t)=> t.isComplete)) {
-    window.postMessage('done', window.location.href);
-    return;
-  }
-
-  var wait = new Duration(milliseconds: 100);
-  new Timer(wait, ()=> pollForDone(tests));
 }
