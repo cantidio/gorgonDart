@@ -2,8 +2,6 @@
  * Copyright (C) 2013 Cantidio Fontes
  * For conditions of distribution and use, see copyright notice in LICENSE.txt
  */
-import 'package:unittest/html_enhanced_config.dart';
-
 import 'point2d_test.dart'        as point2d_test;
 import 'mirroring_test.dart'      as mirroring_test;
 import 'color_test.dart'          as color_test;
@@ -25,7 +23,6 @@ import 'mouse_test.dart'          as mouse_test;
 
 main()
 {
-  useHtmlEnhancedConfiguration();
   point2d_test.main();
   mirroring_test.main();
   color_test.main();
