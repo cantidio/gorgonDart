@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/cantidio/gorgondart.png?label=ready&title=Ready)](https://waffle.io/cantidio/gorgondart)
 Gorgon for Dart
 ==========
 
