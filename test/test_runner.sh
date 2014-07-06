@@ -10,4 +10,13 @@ if [[ $? -ne 0 ]]; then
   cs_path=$(ls -d drt-*)
   PATH=$cs_path:$PATH
 fi
-content_shell --dump-render-tree test/test_runner.html
+results=$(content_shell --dump-render-tree test/test_runner.html)
+echo -e "$results"
+
+if [[ "$results" == *"FAIL"* ]] then
+  exit 1
+fi
+
+if [[ "$results" == *"Exception: "* ]] then
+  exit 1
+fi
