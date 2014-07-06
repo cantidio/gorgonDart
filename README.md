@@ -5,6 +5,7 @@ Gorgon for Dart
 be done without prior notice to consumers of this package.
 
 [![Build Status](https://drone.io/github.com/cantidio/gorgonDart/status.png)](https://drone.io/github.com/cantidio/gorgonDart/latest)
+[![Stories in Ready](https://badge.waffle.io/cantidio/gorgonDart.png?label=ready)](http://waffle.io/cantidio/gorgonDart)
 
 [Last Build Documentation](https://drone.io/github.com/cantidio/gorgonDart/files/gorgon_docs.zip)
 
