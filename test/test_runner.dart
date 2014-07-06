@@ -16,10 +16,7 @@ import 'frame_test.dart'          as frame_test;
 import 'animation_test.dart'      as animation_test;
 import 'animationpack_test.dart'  as animationpack_test;
 import 'animator_test.dart'       as animator_test;
-import 'audio_instance_test.dart' as audio_instance_test;
-import 'sound_test.dart'          as sound_test;
-import 'audio_channel_test.dart'  as audio_channel_test;
-import 'audio_system_test.dart'   as audio_system_test;
+import 'audio/audio.dart' as audio;
 import 'keyboard_test.dart'       as keyboard_test;
 import 'mouse_test.dart'          as mouse_test;
 
@@ -38,10 +35,8 @@ main()
   animation_test.main();
   animationpack_test.main();
   animator_test.main();
-  audio_system_test.main();
-  audio_channel_test.main();
-  audio_instance_test.main();
-  sound_test.main();
+
+  audio.main();
   keyboard_test.main();
   mouse_test.main();
 }

@@ -10,7 +10,7 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   AudioSystem system;
-  group("audio: AudioSystem",(){
+  group("AudioSystem",(){
 
     test("Every instance of the AudioSystem must be the same.", (){
       AudioSystem system1 = new AudioSystem();

@@ -10,7 +10,7 @@ import 'package:gorgon/gorgon.dart';
 void main()
 {
   AudioSystem system;
-  group("audio: AudioInstance",(){
+  group("AudioInstance",(){
     AudioInstance instance;
 
     setUp((){
