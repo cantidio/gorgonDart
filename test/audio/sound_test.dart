@@ -48,16 +48,13 @@ void main()
     test( "Try to load an inexistent sound returns an exception",(){
       String file = "this_sound_do_not_exist.wav";
       Sound sound = new Sound();
-      return sound.load( file ).catchError( (e) {
-        expect( e.toString(), equals( new Exception("Sound: Error when decoding $file.").toString() ) );
-      });
+      expect(sound.load( file ), throws);
     });
 
     test( "When Loading a normal sound must call the future.",(){
       String file = "resources/chico/attack.wav";
       Sound sound = new Sound();
-      return sound.load( file )
-        .catchError( (e) => expect(true, isFalse, reason: "Should not be reached.") );
+      return sound.load(file).then((s)=> expect(s, equals(sound)));
     });
 
     test( "When playing a sound, must return an valid AudioInstance.", (){
@@ -66,8 +63,8 @@ void main()
     });
 
     test( "When playing a sound, must return an AudioInstance that is playing or scheduled to be played.", (){
-      AudioInstance instance = empty.play();
-      //expect( instance.isPlaying || instance.isScheduled, isTrue );
+      AudioInstance instance = normal.play();
+      expect( instance.isPlaying, isTrue );
     });
 
   });
