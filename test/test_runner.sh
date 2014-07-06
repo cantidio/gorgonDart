@@ -13,6 +13,6 @@ fi
 
 #content_shell --dump-render-tree test_runner.html
 results=$(content_shell --dump-render-tree test/test_runner.html)
-s= $?
+s=$?
 echo "code: $s"
 echo -e "$results"
