@@ -12,5 +12,7 @@ if [[ $? -ne 0 ]]; then
 fi
 
 #content_shell --dump-render-tree test_runner.html
-results=$(content_shell --dump-render-tree test_runner.html)
+results=$(content_shell --dump-render-tree test/test_runner.html)
+s = $?
+echo "code: $s"
 echo -e "$results"
