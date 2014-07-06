@@ -13,10 +13,8 @@ fi
 results=$(content_shell --dump-render-tree test/test_runner.html)
 echo -e "$results"
 
-if [[ "$results" == *"FAIL"* ]] then
+if [[ "$results" == *"FAIL"* ]]; then
   exit 1
-fi
-
-if [[ "$results" == *"Exception: "* ]] then
+elif [[ "$results" == *"Exception: "* ]]; then
   exit 1
 fi
