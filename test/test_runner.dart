@@ -6,14 +6,12 @@ import 'package:unittest/html_config.dart';
 
 import 'graphic/test.dart'       as graphic;
 import 'audio/test.dart'         as audio;
-import 'keyboard_test.dart'       as keyboard_test;
-import 'mouse_test.dart'          as mouse_test;
+import 'input/test.dart'       as input;
 
 main()
 {
   useHtmlConfiguration();
   graphic.main();
   audio.main();
-  keyboard_test.main();
-  mouse_test.main();
+  input.main();
 }
