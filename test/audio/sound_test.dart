@@ -42,7 +42,7 @@ void main()
 
     test("When setting the gain, it must return the corrected setted value.",(){
       normal.gain = 0.5;
-      expect( normal.gain, 1.5);
+      expect( normal.gain, 0.5);
     });
 
     test( "Try to load an inexistent sound returns an exception",(){
