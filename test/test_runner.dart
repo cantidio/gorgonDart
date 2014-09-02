@@ -4,9 +4,9 @@
  */
 import 'package:unittest/html_config.dart';
 
-import 'graphic/test.dart'       as graphic;
-import 'audio/test.dart'         as audio;
-import 'input/test.dart'       as input;
+import 'graphic/test.dart'  as graphic;
+import 'audio/test.dart'    as audio;
+import 'input/test.dart'    as input;
 
 main()
 {
