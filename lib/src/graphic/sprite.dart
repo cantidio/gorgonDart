@@ -232,13 +232,37 @@ class Sprite
     }
   }
   /**
+   * Method that returns the [ImageData] of the [Sprite] by it's current bounds.
+   */
+  ImageData getImageData(){
+    CanvasElement canvas = new CanvasElement( width: width, height: height );
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
+    return canvas.context2D.getImageData(0, 0, width, height);
+  }
+  /**
    * Operator that checks if the content of 2 [Sprite]s are the same.
    *
    * **Warning** This operator will check every image pixel.
    */
   operator == (Sprite other)
   {
-    return ( width == other.width && height == other.height && offset == other.offset && image == other.image);
+    if( width == other.width && height == other.height && offset == other.offset)
+    {
+      ImageData data1 = getImageData();
+      ImageData data2 = other.getImageData();
+      if( data1.data.length == data2.data.length )
+      {
+        for(int i=0; i < data1.data.length; ++i)
+        {
+          if(data1.data[i] != data2.data[i])
+          {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+    return false;
   }
 
   void trim()
