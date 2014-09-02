@@ -223,35 +223,37 @@ class Display
     {
       _canvas.context2D.save();
       _canvas.context2D.globalAlpha = alpha/255.0;
+      _canvas.context2D.translate( position.x , position.y );
 
       switch( mirroring )
       {
         case Mirroring.H:
-            _canvas.context2D.translate( position.x , position.y );
             _canvas.context2D.scale( -scale, scale );
             _canvas.context2D.rotate( -rotation * PI / 180 );
           break;
 
         case Mirroring.V:
-            _canvas.context2D.translate( position.x , position.y );
             _canvas.context2D.scale( scale, -scale );
             _canvas.context2D.rotate( -rotation * PI / 180 );
           break;
 
         case Mirroring.HV:
-          _canvas.context2D.translate( position.x , position.y );
           _canvas.context2D.scale( -scale, -scale );
           _canvas.context2D.rotate( rotation * PI / 180 );
           break;
 
         case Mirroring.None:
-            _canvas.context2D.translate( position.x , position.y );
             _canvas.context2D.scale( scale, scale );
             _canvas.context2D.rotate( rotation * PI / 180 );
           break;
       }
       _canvas.context2D.translate( sprite.offset.x , sprite.offset.y );
-      _canvas.context2D.drawImage( sprite.image, 0, 0 );
+      _canvas.context2D.drawImageToRect(
+        sprite.image,
+        new Rectangle(0, 0, sprite.width, sprite.height),
+        sourceRect: new Rectangle(sprite._bounds.left, sprite._bounds.top, sprite.width, sprite.height)
+      );
+
       _canvas.context2D.restore();
     }
   }

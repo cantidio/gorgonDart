@@ -63,7 +63,14 @@ class Spritepack
         Sprite sprite   = new Sprite();
         sprite.offset.x = spr["xoffset"];
         sprite.offset.y = spr["yoffset"];
-        sprite.load(spr["image"]);
+
+        if(spr["data"] != null) {
+          Rectangle bounds = new Rectangle(spr["xstart"],spr["ystart"],spr["width"],spr["height"]);
+          sprite.loadImageData(spr["data"], bounds);
+        }
+        else{
+          sprite.load(spr["image"]);
+        }
 
         spr_futures.add( this.add( sprite, group: group ).onLoad );
       });
@@ -154,7 +161,6 @@ class Spritepack
     offset = ( offset != null ) ? offset : new Point2D( (tileWidth/2).ceil(), (tileHeight/2).ceil() );
     img.onLoad.listen((e)
     {
-      CanvasElement canvas = new CanvasElement( width: tileWidth, height: tileHeight );
       Map spritepack = new Map();
       int tilesX = (img.width/tileWidth).ceil();
       int tilesY = (img.height/tileHeight).ceil();
@@ -164,12 +170,14 @@ class Spritepack
         spritepack["$i"] = new List<Object>();
         for( int j = 0; j < tilesX; ++j )
         {
-          canvas.context2D.clearRect( 0, 0, canvas.width, canvas.height );
-          canvas.context2D.drawImage( img, -j*tileWidth, -i*tileHeight );
           spritepack["$i"].add({
             "xoffset":  offset.x,
             "yoffset":  offset.y,
-            "image":    canvas.toDataUrl('image/png')
+            "xstart":   j*tileWidth,
+            "ystart":   i*tileHeight,
+            "width":    tileWidth,
+            "height":   tileHeight,
+            "data":     img
           });
         }
       }
@@ -182,6 +190,47 @@ class Spritepack
     });
 
     img.src = tileUrl;
+    _onLoad = completer.future;
+  }
+
+  /**
+   *  The [Map] [spritepack] must be like this:
+   * [Map] [spritepack] = {
+   *    "group1" :[
+   *        { "xstart": 0, "ystart":0, "width": 32, "height": 92, "xoffset" : 0, "yoffset" : 0 },
+   *        { "xstart": 0, "ystart":0, "width": 32, "height": 92, "xoffset" : 0, "yoffset" : 0 },
+   *    ],
+   *    "group2" :[
+   *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image3.png" },
+   *        { "xoffset" : 0, "yoffset" : 0, "image" : "fullpath/image4.png" }
+   *    ]
+   * };
+   */
+  Spritepack.fromSpriteSheet( String imageUrl, Map spritesheet )
+  {
+    Completer completer = new Completer();
+    ImageElement   img  = new ImageElement();
+    List<Future<Sprite>> spr_futures  = new List<Future<Sprite>>();
+
+    img.onLoad.listen((e)
+    {
+      Map spritepack = new Map();
+      spritesheet.forEach((group, list){
+        spritepack[group] = new List<Object>();
+        list.forEach((spr){
+          spr["data"]=img;
+          spritepack[group].add(spr);
+        });
+      });
+      _loadFromMap( spritepack, completer );
+    });
+
+    img.onError.listen((e)
+    {
+      completer.completeError(new Exception("SpriteSheet: $imageUrl could not be found."));
+    });
+
+    img.src = imageUrl;
     _onLoad = completer.future;
   }
 
