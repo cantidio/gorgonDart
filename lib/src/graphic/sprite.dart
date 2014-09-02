@@ -9,11 +9,10 @@ part of gorgon;
 class Sprite
 {
   ImageElement    _image;                           // The sprite element.
-  ImageData       _data;                            // The ImageData of the sprite
-  Map             _colorMap = new Map();            // The ColorMap of the sprite
   Future<Sprite>  _onLoad = new Completer().future; // The sprite onLoad future.
   int             _width;                           // The sprite initial width.
   int             _height;                          // The sprite initial height.
+  Rectangle       _bounds;                          // The boundaries of the sprite
 
   /// Object that represents an emptyImage
   static final ImageElement emptyImage = new ImageElement();
@@ -25,10 +24,10 @@ class Sprite
   Future<Sprite> get onLoad => _onLoad;
 
   /// The Sprite width getter.
-  int get width   => _width;
+  int get width   => _bounds.width;
 
   /// The Sprite height getter.
-  int get height  => _height;
+  int get height  => _bounds.height;
 
   /// The Sprite image getter.
   ImageElement get image => _image;
@@ -43,23 +42,12 @@ class Sprite
    * This method checks if the provided image is null or not.
    * If it is null then it will attribute the internal [_image] to the [Sprite.emptyImage].
    */
-  void _setImage( ImageElement image )
+  void _setImage( ImageElement image, [Rectangle bounds=null] )
   {
     if( image != null )
     {
       this._image   = image;
-      this._width   = image.width;
-      this._height  = image.height;
-
-      if( _width > 0 && _height > 0 )
-      {
-        CanvasElement canvas = new CanvasElement( width: width, height: height );
-
-        canvas.context2D.drawImage( _image, 0, 0 );
-        this._data = canvas.context2D.getImageData(0, 0, width, height);
-
-        _colorMap.clear();
-      }
+      this._bounds = (bounds!=null) ? bounds : new Rectangle(0,0,image.width,image.height);
     }
     else
     {
@@ -105,6 +93,14 @@ class Sprite
     this.offset   = ( offset != null ) ? offset : new Point2D.zero();
     this._setImage( image );
   }
+
+  Future<Sprite> loadImageData(ImageElement data, Rectangle src){
+    Completer completer = new Completer();
+    _setImage(data,src);
+    this._onLoad  = completer.future;
+    completer.complete( this );
+    return this._onLoad;
+  }
   /**
    * Loads the sprite with the image given [imageSource], which must be an [String]
    * containing the url of the image or the base64 image source.
@@ -144,7 +140,8 @@ class Sprite
     CanvasElement canvas = new CanvasElement(width: height, height: width);
     canvas.context2D.translate( height, 0 );
     canvas.context2D.rotate( 90 * PI / 180 );
-    canvas.context2D.drawImage( _image, 0, 0 );
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
+
 
     num    y = offset.y;
     offset.y = offset.x;
@@ -162,7 +159,7 @@ class Sprite
     CanvasElement canvas = new CanvasElement(width: height, height: width);
     canvas.context2D.translate( 0, width );
     canvas.context2D.rotate( -90 * PI / 180 );
-    canvas.context2D.drawImage( _image, 0, 0 );
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
 
     num x    = offset.x;
     offset.x = offset.y;
@@ -180,7 +177,7 @@ class Sprite
     CanvasElement canvas = new CanvasElement(width: width, height: height);
     canvas.context2D.translate(width, 0);
     canvas.context2D.scale(-1, 1);
-    canvas.context2D.drawImage(_image, 0, 0);
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
 
     offset.x = -(width + offset.x);
 
@@ -196,7 +193,7 @@ class Sprite
     CanvasElement canvas = new CanvasElement(width: width, height: height);
     canvas.context2D.translate(0, height);
     canvas.context2D.scale(1, -1);
-    canvas.context2D.drawImage(_image, 0, 0);
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
 
     offset.y = -(height + offset.y);
 
@@ -212,7 +209,7 @@ class Sprite
     CanvasElement canvas = new CanvasElement(width: width, height: height);
     canvas.context2D.translate(width, height);
     canvas.context2D.scale(-1, -1);
-    canvas.context2D.drawImage(_image, 0, 0);
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
 
     offset.x = -(width + offset.x);
     offset.y = -(height + offset.y);
@@ -235,30 +232,12 @@ class Sprite
     }
   }
   /**
-   * Operator that returns one [line] of [Color]s in a [List].
-   *
-   * **Note** This operator caches the data for further use.
-   *
-   * @todo verify why on 8bit images the values returned are different. In javascript are they different as well?
+   * Method that returns the [ImageData] of the [Sprite] by it's current bounds.
    */
-  List<Color> operator []( int line )
-  {
-    if( _colorMap[line] == null )
-    {
-      int begin = line * width * 4;
-      _colorMap[line] = new List<Color>();
-      for( int i = 0; i < width; ++i )
-      {
-        _colorMap[line].add( new Color(
-            r: _data.data[begin+0],
-            g: _data.data[begin+1],
-            b: _data.data[begin+2],
-            a: _data.data[begin+3]
-        ));
-        begin += 4;
-      }
-    }
-    return _colorMap[line];
+  ImageData getImageData(){
+    CanvasElement canvas = new CanvasElement( width: width, height: height );
+    canvas.context2D.drawImageToRect( _image, new Rectangle(0,0,width,height),sourceRect: _bounds);
+    return canvas.context2D.getImageData(0, 0, width, height);
   }
   /**
    * Operator that checks if the content of 2 [Sprite]s are the same.
@@ -267,19 +246,21 @@ class Sprite
    */
   operator == (Sprite other)
   {
-    if( width == other.width && height == other.height && offset == other.offset )
+    if( width == other.width && height == other.height && offset == other.offset)
     {
-      for( int h = 0; h < height; ++h)
+      ImageData data1 = getImageData();
+      ImageData data2 = other.getImageData();
+      if( data1.data.length == data2.data.length )
       {
-        for( int w = 0; w < width; ++w)
+        for(int i=0; i < data1.data.length; ++i)
         {
-          if( this[h][w] != other[h][w])
+          if(data1.data[i] != data2.data[i])
           {
             return false;
           }
         }
+        return true;
       }
-      return true;
     }
     return false;
   }
