@@ -24,7 +24,7 @@ class Frame
   Mirroring mirroring;
 
   /// The rotation of the [Frame].
-  int rotation;
+  num rotation;
 
   /**
    * Method that describes the AnimationFrame Object returning a [String].
@@ -41,7 +41,7 @@ class Frame
    * You can set the [mirroring] of the [Frame].
    * You can set the [rotation] of the [Frame].
    */
-  Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, int rotation })
+  Frame({ String group, int index, int time, Point2D offset, Mirroring mirroring, num rotation })
   {
     this.time       = ( time      != null ) ? time      : 0;
     this.group      = ( group     != null ) ? group     : "";
