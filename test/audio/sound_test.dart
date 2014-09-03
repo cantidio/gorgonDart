@@ -4,7 +4,6 @@
  */
 library sound_test;
 
-import 'dart:async';
 import 'package:unittest/unittest.dart';
 import 'package:gorgon/gorgon.dart';
 
@@ -18,9 +17,7 @@ void main()
       empty  = new Sound();
       normal = new Sound(soundUrl: "resources/chico/attack.wav");
 
-      return Future.wait([
-        normal.onLoad
-      ]);
+      return normal.onLoad;
     });
 
     test("Empty constructor, channel is AudioSystem.targetChannel",(){
@@ -58,7 +55,7 @@ void main()
     });
 
     test( "When playing a sound, must return an valid AudioInstance.", (){
-      AudioInstance instance = empty.play();
+      AudioInstance instance = normal.play();
       expect( instance, isNotNull );
     });
 

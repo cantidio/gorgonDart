@@ -20,7 +20,8 @@ void main()
       system   = new AudioSystem();
       channel1 = new AudioChannel("Channel-1");
       channel2 = new AudioChannel("Channel-2");
-      sound    = new Sound(channel: channel1 );
+      sound    = new Sound(soundUrl: "resources/chico/attack.wav", channel: channel1);
+      return sound.onLoad;
     });
 
     test("When creating a AudioChannel it must be shown in the AudioSystem.",(){
