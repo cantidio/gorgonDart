@@ -277,7 +277,7 @@ class Sprite
    *
    * You can provide the desired [alpha], [mirroring], [rotation] and [scale] if needed.
    */
-  void draw( Point2D position, { alpha: 255 ,Mirroring mirroring: Mirroring.None, num rotation: 0, num scale: 1} )
+  void draw( Point2D position, { double alpha: 1.0, Mirroring mirroring: Mirroring.None, num rotation: 0, num scale: 1 } )
   {
     if( Display.target != null )
     {

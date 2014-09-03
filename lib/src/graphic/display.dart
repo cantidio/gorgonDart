@@ -215,14 +215,14 @@ class Display
    *
    * The [rotation] as a [num] which will tell if the sprite must be drawn using rotation or not.
    *
-   * The [scale] as a [num] which will define the [sprite] scale to be used when drawing. The default is: 1;
+   * The [scale] as a [num] which will define the [sprite] scale to be used when drawing. The default is: 1.0.
    */
-  void draw( Sprite sprite, Point2D position, Mirroring mirroring, num rotation, num scale, int alpha )
+  void draw( Sprite sprite, Point2D position, Mirroring mirroring, num rotation, num scale, double alpha )
   {
     if( sprite != null )
     {
       _canvas.context2D.save();
-      _canvas.context2D.globalAlpha = alpha/255.0;
+      _canvas.context2D.globalAlpha = alpha;
       _canvas.context2D.translate( position.x , position.y );
 
       switch( mirroring )
@@ -281,6 +281,7 @@ class Display
       _canvas.context2D.restore();
     }
   }
+
   void filter( Filter filter )
   {
     ImageData data = filter.apply( _canvas.context2D.getImageData(0, 0, width, height) );

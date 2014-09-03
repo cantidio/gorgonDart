@@ -11,7 +11,7 @@ class Color
   int _r;
   int _g;
   int _b;
-  int _a;
+  double _a;
 
   /// The red component getter.
   int get r => _r;
@@ -23,7 +23,7 @@ class Color
   int get b => _b;
 
   /// The alpha component getter.
-  int get a => _a;
+  double get a => _a;
 
   /// The red component setter.
   set r(int r) => _r = (r >= 0) ? (r <= 255 ) ? r : 255 : 0;
@@ -35,7 +35,7 @@ class Color
   set b(int b) => _b = (b >= 0) ? (b <= 255 ) ? b : 255 : 0;
 
   /// The alpha component setter.
-  set a(int a) => _a = (a >= 0) ? (a <= 255 ) ? a : 255 : 0;
+  set a(double a) => _a = (a >= 0) ? (a <= 1.0 ) ? a : 1.0 : 0.0;
 
   /**
    * Method that describes the Color Object returning a [String].
@@ -49,9 +49,9 @@ class Color
    * For setting the red component you should set the[r] param as an [int]
    * For setting the green component you should set the[g] param as an [int]
    * For setting the blue component you should set the[b] param as an [int]
-   * For setting the alpha component you should set the[a] param as an [int]
+   * For setting the alpha component you should set the[a] param. 1.0 to 0.0
    */
-  Color({ int r:0, int g:0, int b:0, int a: 255 })
+  Color({ int r:0, int g:0, int b:0, double a: 1.0 })
   {
     this.r = r;
     this.g = g;
