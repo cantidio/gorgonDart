@@ -19,7 +19,7 @@ Get the last gorgon version in pub:
 
 ```yaml
 dependencies:
-  gorgon: '>=0.13.5 '
+  gorgon: '>=0.14.0'
 ```
 Or always get the last version in the git repository( **may have broken code** ):
 
