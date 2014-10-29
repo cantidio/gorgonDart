@@ -121,7 +121,7 @@ class AudioChannel
     source.loop   = looping;
 
     source.connectNode( sound._gain, 0, 0 );
-    source.start();
+    source.start(0);
     return _createInstance( source, sound._gain );
   }
 
