@@ -25,6 +25,9 @@ class Color
   /// The alpha component getter.
   double get a => _a;
 
+  /// HTML RGBA color.
+  String get rgba => "rgba($r,$g,$b,$a)";
+
   /// The red component setter.
   set r(int r) => _r = (r >= 0) ? (r <= 255 ) ? r : 255 : 0;
 
@@ -45,7 +48,7 @@ class Color
   /**
    * Constructor
    *
-   * You should pass the components you whish to set.
+   * You should pass the components you wish to set.
    * For setting the red component you should set the[r] param as an [int]
    * For setting the green component you should set the[g] param as an [int]
    * For setting the blue component you should set the[b] param as an [int]
@@ -63,7 +66,7 @@ class Color
    */
   operator +(Color other) => new Color( r: r + other.r, g: g + other.g, b: b + other.b, a: a + other.a );
   /**
-   * Operator that substracts one [Color] from the [other] [Color].
+   * Operator that subtracts one [Color] from the [other] [Color].
    */
   operator -(Color other) => new Color( r: r - other.r, g: g - other.g, b: b - other.b, a: a - other.a );
   /**

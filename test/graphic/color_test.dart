@@ -153,6 +153,12 @@ void main()
     expect( alpha.a, equals( 1.0 ) );
   });
 
+  test("Color getter rgba returns an HTML rgba color String", () {
+    Color color = new Color(r:10, g:20, b:30, a:0.5);
+    
+    expect(color.rgba, equals('rgba(10,20,30,0.5)'));
+  });
+
   test( "Color Operator ==", (){
     Color colorA = new Color( r:50, g:100, b: 150, a: 0.7 );
     Color colorB = new Color( r:50, g:100, b: 150, a: 0.7 );
