@@ -155,7 +155,7 @@ void main()
 
   test("Color getter rgba returns an HTML rgba color String", () {
     Color color = new Color(r:10, g:20, b:30, a:0.5);
-    
+
     expect(color.rgba, equals('rgba(10,20,30,0.5)'));
   });
 
