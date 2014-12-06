@@ -282,6 +282,15 @@ class Display
     }
   }
 
+  void drawLine(Point2D origin, Point2D destiny, Color color) {
+    _canvas.context2D.save();
+    _canvas.context2D.moveTo(origin.x, origin.y);
+    _canvas.context2D.lineTo(destiny.x, destiny.y);
+    _canvas.context2D.strokeStyle = color.rgba;
+    _canvas.context2D.stroke();
+    _canvas.context2D.restore();
+  }
+
   void filter( Filter filter )
   {
     ImageData data = filter.apply( _canvas.context2D.getImageData(0, 0, width, height) );
